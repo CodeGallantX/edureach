@@ -47,6 +47,7 @@ const LoginForm = () => {
     if (isValid) {
       setIsSubmitting(true); // Show spinner
       setTimeout(() => {
+        console.log(formData)
         navigate("/auth/verification"); // Navigate after a delay
         setIsSubmitting(false); // Hide spinner
       }, 2000); // Simulate a 2-second delay

@@ -88,6 +88,7 @@ const SignUpForm = () => {
     if (isFormValid) {
       setIsSubmitting(true); // Show loader
       setTimeout(() => {
+        console.log(formData)
         navigate("/auth/verification");
         setIsSubmitting(false); // Hide loader after navigation
       }, 2000); // Simulate a 2-second delay for form submission
@@ -229,12 +230,12 @@ const SignUpForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${isSubmitting ? "bg-gray-200 text-gray-200" : "bg-black cursor-not-allowed"}`}
+          className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${isSubmitting ? "bg-gray-200 text-gray-500" : "bg-blue cursor-not-allowed"}`}
           disabled={!isFormValid || isSubmitting}
         >
           {isSubmitting ? (
             <div className="flex items-center justify-center gap-2">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+              <div className={`animate-spin rounded-full h-6 w-6 border-b-2 ${isSubmitting ? "border-b-gray-400" : "border-b-white"}`}></div>
               <span>Creating your account...</span>
             </div>
           ) : (
