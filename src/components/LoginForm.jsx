@@ -114,7 +114,7 @@ const LoginForm = () => {
             />
             <label htmlFor="checkbox">Remember me</label>
           </fieldset>
-          <a href="/auth/forgot-password" className="text-orange-600">
+          <a href="/auth/forgot-password" className="text-orange">
             Forgot Password?
           </a>
         </div>
@@ -140,7 +140,7 @@ const LoginForm = () => {
       {/* Create Account Link */}
       <p className="text-center text-sm mt-6">
         Are you new here?{" "}
-        <a href="/auth/signup" className="text-orange-500">
+        <a href="/auth/signup" className="text-orange">
           Create Account
         </a>
       </p>

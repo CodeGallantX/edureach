@@ -246,7 +246,7 @@ const SignUpForm = () => {
       {/* Login Link */}
       <p className="text-center text-sm mt-6">
         Do you have an account already?{" "}
-        <a href="/auth/login" className="text-orange-500">
+        <a href="/auth/login" className="text-orange">
           Login Now
         </a>
       </p>
