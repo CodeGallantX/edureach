@@ -56,10 +56,10 @@ const LoginForm = () => {
 
   return (
     <div className="px-10 py-16 md:px-14 lg:px-20 w-full flex flex-col justify-start md:justify-center">
-      <FaChevronLeft
-        onClick={() => navigate(-1)}
-        className="block md:hidden font-bold text-3xl bg-gray-200 text-gray-600 p-2 rounded-full mb-6 cursor-pointer"
-      />
+      <div className="block md:hidden font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
+        <FaChevronLeft onClick={() => navigate(-1)} />
+        <span>Back</span>
+      </div>
       <h2 className="text-2xl font-bold">Welcome, Please Login</h2>
       <p className="text-gray-500 mt-1">Enter your credentials to access your account</p>
 

@@ -53,7 +53,7 @@ const OTPForm = () => {
 
   return (
     <div className="px-10 py-16 md:px-16 lg:px-20 justify-start md:justify-center">
-      <div className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer">
+      <div className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
         <FaChevronLeft onClick={() => navigate(-1)} />
         <span>Back</span>
       </div>
@@ -83,7 +83,7 @@ const OTPForm = () => {
         <button
           type="submit"
           className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${
-            isSubmitting || !isFormValid ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-blue"
+            isSubmitting || !isFormValid ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-blue"
           }`}
           disabled={!isFormValid || isSubmitting}
         >
@@ -91,7 +91,7 @@ const OTPForm = () => {
             <div className="flex items-center justify-center gap-2">
               <div
                 className={`animate-spin rounded-full h-6 w-6 border-b-2 ${
-                  isSubmitting ? "border-b-gray-400" : "border-b-white"
+                  isSubmitting ? "border-b-blue-900" : "border-b-white"
                 }`}
               ></div>
               <span>Validating...</span>
