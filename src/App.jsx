@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
-import SignUp from "./pages/signup";
-import Login from "./pages/login";
-import Verification from "./pages/verification";
-import ForgotPassword from "./pages/forgot-password";
-import ResetPassword from "./pages/reset-password";
+import SignUp from "./pages/auth/signup";
+import Login from "./pages/auth/login";
+import Verification from "./pages/auth/verification";
+import ForgotPassword from "./pages/auth/forgot-password";
+import ResetPassword from "./pages/auth/reset-password";
 
 const App = () => {
   return (

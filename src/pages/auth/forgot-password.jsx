@@ -1,5 +1,5 @@
-import ForgotPassword from "../components/auth/ForgotPassword"
-import SideIllustration from "../components/auth/SideIll"
+import ForgotPassword from "../../components/auth/ForgotPassword"
+import SideIllustration from "../../components/auth/SideIll"
 
 const App = () => {
   return (

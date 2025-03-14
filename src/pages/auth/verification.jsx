@@ -1,5 +1,5 @@
-import OTPForm from "../components/auth/OTPForm"
-import SideIllustration from "../components/auth/SideIll"
+import OTPForm from "../../components/auth/OTPForm"
+import SideIllustration from "../../components/auth/SideIll"
 
 const App = () => {
   return (
