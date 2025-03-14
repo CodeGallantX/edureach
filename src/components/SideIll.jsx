@@ -4,16 +4,23 @@ const SideIll = () => {
             <div className="w-full h-full">
                 <img src="/background.jpeg" alt="grainy background - EduReach" className="object-cover w-full h-full" />
             </div>
-            <div className="w-2/3 absolute flex flex-col items-start justify-center text-white top-20 gap-20 left-10">
+            <div className="w-3/4 absolute flex flex-col items-start justify-center text-white top-20 gap-20 left-12">
                 <div>
                     <img src="/logo.png" alt="EduReach logo" />
                 </div>
-                <div className="flex flex-col items-start justify-center gap-4">
+                <div className="flex flex-col items-start justify-center space-y-7">
                     <h1 className="text-5xl font-bold">Experience a new Learning Journey</h1>
                     <p className="text-lg">Unlock endless opportunities with expert-led courses, interactive learning, and career-boosting skills - all in one place.</p>
                 </div>
-                <div>
-                    <p></p>
+                <div className="bg-orange-400/50 p-6 rounded-xl space-y-3">
+                    <p>EduReach transformed my career! The structured courses and real-world projects gave me the confidence and skills to land my dream job. I went from a beginner to a professional in just few months!</p>
+                    <div className="flex flex-row items-center justify-start gap-4">
+                        <img src="/ariana-grande.png" alt="." />
+                        <div className="space-y-0.5">
+                            <h4 className="text-sm">Ariana Grande</h4>
+                            <p className="text-xs">Visual Designer, Google</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
