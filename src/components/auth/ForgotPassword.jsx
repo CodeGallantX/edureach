@@ -2,16 +2,16 @@ import { useState } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
-const OTPForm = () => {
+const ForgotPassword = () => {
   const [formData, setFormData] = useState({
-    otp: "",
+    email: "",
   });
 
   const [errors, setErrors] = useState({
-    otp: "",
+    email: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false); // For loader/spinner
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -27,58 +27,60 @@ const OTPForm = () => {
   };
 
   // Modified isFormValid check
-  const isFormValid = formData.otp.length === 6 && !errors.otp; // Check for 6 digits and no error
+  const isFormValid = formData.email && !errors.email; // Check for email and no error
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Check for errors before submitting
     const newErrors = {
-      otp: formData.otp ? "" : "One Time Passcode is required",
+      email: formData.email ? "" : "Email address is required",
     };
 
     setErrors(newErrors);
 
-    if (formData.otp === "123456") {
+    if (isFormValid) { // Only submit if the form is valid.
       setIsSubmitting(true);
       setTimeout(() => {
-        console.log("OTP Validated:", formData);
-        navigate("/dashboard");
+        console.log("Email Address:", formData);
+        // Simulate checking if email exists. Replace with your actual logic
+        if (formData.email === "test@example.com") { // example email for testing.
+          navigate("/auth/reset-password"); //replace with your success page.
+        } else {
+          setErrors({ ...errors, email: "No account registered with this email." }); // correct error message
+        }
         setIsSubmitting(false);
       }, 2000);
-    } else {
-      setErrors({ ...errors, otp: "Incorrect OTP" });
     }
   };
 
   return (
     <div className="px-10 py-16 md:px-16 lg:px-20 justify-start md:justify-center">
-      <div className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
-        <FaChevronLeft onClick={() => navigate(-1)} />
+      <div
+        onClick={() => navigate(-1)}
+        className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20"
+      >
+        <FaChevronLeft />
         <span>Back</span>
       </div>
-      <h2 className="text-3xl font-bold">Verification</h2>
-      <p className="text-gray-500">Enter the OTP sent to the phone number you provided</p>
+      <h2 className="text-3xl font-bold">Reset Password</h2>
+      <p className="text-gray-500">Enter the email you registered with and we'll send instructions to recover your account</p>
 
       <form className="mt-6 w-full flex flex-col space-y-4" onSubmit={handleSubmit}>
         <fieldset className="space-y-1 flex flex-col items-start justify-start">
-          <label htmlFor="otp">OTP</label>
+          <label htmlFor="email">Email</label>
           <input
-            type="number"
-            name="otp"
-            id="otp"
-            value={formData.otp}
+            type="email"
+            name="email"
+            id="email"
+            value={formData.email}
             onChange={handleChange}
-            placeholder="Enter OTP"
+            placeholder="Enter email"
             className="w-full rounded-md border border-gray-500/50 text-sm py-3 px-3 outline-none focus:border-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 ease-in-out"
             required
           />
-          {errors.otp && <p className="text-red-500 text-sm mt-1">{errors.otp}</p>}
+          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </fieldset>
-
-        <p className="text-left text-sm mt-6">
-          Didn't receive an OTP? <a href="#" className="text-orange">Resend OTP</a>
-        </p>
 
         <button
           type="submit"
@@ -91,13 +93,13 @@ const OTPForm = () => {
             <div className="flex items-center justify-center gap-2">
               <div
                 className={`animate-spin rounded-full h-6 w-6 border-b-2 ${
-                  isSubmitting ? "border-b-blue-900" : "border-b-white"
+                  isSubmitting ? "border-b-blue" : "border-b-white"
                 }`}
               ></div>
-              <span>Validating...</span>
+              <span>Sending Email...</span>
             </div>
           ) : (
-            "Validate OTP"
+            "Send Email"
           )}
         </button>
       </form>
@@ -105,4 +107,4 @@ const OTPForm = () => {
   );
 };
 
-export default OTPForm;
+export default ForgotPassword;
