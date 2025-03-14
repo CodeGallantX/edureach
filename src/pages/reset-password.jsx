@@ -1,5 +1,5 @@
-import ResetPassword from "../components/ResetPassword"
-import SideIllustration from "../components/SideIll"
+import ResetPassword from "../components/auth/ResetPassword"
+import SideIllustration from "../components/auth/SideIll"
 
 const App = () => {
   return (

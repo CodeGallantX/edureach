@@ -1,5 +1,5 @@
-import LoginForm from "../components/LoginForm"
-import SideIllustration from "../components/SideIll"
+import LoginForm from "../components/auth/LoginForm"
+import SideIllustration from "../components/auth/SideIll"
 
 const App = () => {
   return (
