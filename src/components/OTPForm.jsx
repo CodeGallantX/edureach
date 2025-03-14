@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { FaChevronLeft, FaEye, FaEyeSlash } from "react-icons/fa6";
+import { FaChevronLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
-const SignUpForm = () => {
+const OTPForm = () => {
   const [formData, setFormData] = useState({
     otp: "",
-    
   });
-
-  
 
   const [errors, setErrors] = useState({
     otp: "",
@@ -22,40 +19,45 @@ const SignUpForm = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
+    // Update errors on change
+    setErrors({ ...errors, [name]: value ? "" : `${name.charAt(0).toUpperCase() + name.slice(1)} is required` });
+  };
 
-  const isFormValid =
-    formData.otp
+  // Move isFormValid inside the component to use updated state
+  const isFormValid = formData.otp && !errors.otp; // Check for otp and no error
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Check for errors before submitting
     const newErrors = {
-      fullName: formData.fullName ? "" : "One Time Passcode is required",
+      otp: formData.otp ? "" : "One Time Passcode is required",
     };
 
     setErrors(newErrors);
 
-    if (isFormValid) {
+    if (formData.otp === "123456") { //use dummy otp.
       setIsSubmitting(true); // Show loader
       setTimeout(() => {
-        console.log(formData)
+        console.log("OTP Validated:", formData);
         navigate("/dashboard");
         setIsSubmitting(false); // Hide loader after navigation
       }, 2000); // Simulate a 2-second delay for form submission
+    } else {
+      setErrors({...errors, otp: "Incorrect OTP"});
     }
   };
 
   return (
-    <div className="px-10 py-16 md:px-16 lg:px-20 w-full flex flex-col justify-start md:justify-center">
-        <div className="block md:hidden font-bold text-3xl border border-black p-2 rounded-md mb-6 cursor-pointer">
-      <FaChevronLeft
-        onClick={() => navigate(-1)}
-        />
+    <div className="px-10 py-16 md:px-16 lg:px-20  justify-start md:justify-center">
+      <div className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer">
+        <FaChevronLeft onClick={() => navigate(-1)} />
         <span>Back</span>
-        </div>
-      <h2 className="text-2xl font-bold">Verification</h2>
-      <p className="text-gray-500">Enter the OTP sent to the phone number you provided</p>
+      </div>
+      <h2 className="text-3xl font-bold">Verification</h2>
+      <p className="text-gray-500">
+        Enter the OTP sent to the phone number you provided
+      </p>
 
       <form className="mt-6 w-full flex flex-col space-y-4" onSubmit={handleSubmit}>
         {/* OTP Field */}
@@ -73,24 +75,30 @@ const SignUpForm = () => {
           />
           {errors.otp && <p className="text-red-500 text-sm mt-1">{errors.otp}</p>}
         </fieldset>
-      
-      {/* Resend OTP Link */}
-      <p className="text-center text-sm mt-6">
-        Didn&apos;t recieve an OTP{" "}
-        <a href="#" className="text-orange">
-          Resend OTP
-        </a>
-      </p>
+
+        {/* Resend OTP Link */}
+        <p className="text-left text-sm mt-6">
+          Didn&apos;t receive an OTP?{" "}
+          <a href="#" className="text-orange">
+            Resend OTP
+          </a>
+        </p>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${isSubmitting ? "bg-gray-200 text-gray-500" : "bg-blue cursor-not-allowed"}`}
+          className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${
+            isSubmitting ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-blue"
+          }`}
           disabled={!isFormValid || isSubmitting}
         >
           {isSubmitting ? (
             <div className="flex items-center justify-center gap-2">
-              <div className={`animate-spin rounded-full h-6 w-6 border-b-2 ${isSubmitting ? "border-b-gray-400" : "border-b-white"}`}></div>
+              <div
+                className={`animate-spin rounded-full h-6 w-6 border-b-2 ${
+                  isSubmitting ? "border-b-gray-400" : "border-b-white"
+                }`}
+              ></div>
               <span>Validating...</span>
             </div>
           ) : (
@@ -98,9 +106,8 @@ const SignUpForm = () => {
           )}
         </button>
       </form>
-
     </div>
   );
 };
 
-export default SignUpForm;
+export default OTPForm;
