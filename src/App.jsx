@@ -5,6 +5,7 @@ import Login from "./pages/auth/login";
 import Verification from "./pages/auth/verification";
 import ForgotPassword from "./pages/auth/forgot-password";
 import ResetPassword from "./pages/auth/reset-password";
+import Dashboard from "./pages/dashboard/dashboard";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/auth/verification" element={<Verification />}/>
       <Route path="/auth/forgot-password" element={<ForgotPassword />}/>
       <Route path="/auth/reset-password" element={<ResetPassword />}/>
+      <Route path="/dashboard" element={<Dashboard />}/>
     </Routes>
   )
 }
