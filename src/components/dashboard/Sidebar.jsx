@@ -1,5 +1,6 @@
-import { FaHouse, FaUser, FaBook, FaChartBar, FaBell, FaGear } from "react-icons/fa6";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
+import { FaHouse, FaUser, FaBook, FaChartBar, FaBell, FaGear, FaFolder } from "react-icons/fa6";
+import { FaSignOutAlt  } from "react-icons/fa";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const navLinks = [
   {
@@ -9,7 +10,7 @@ const navLinks = [
   },
   {
     name: "All Courses",
-    icon: <FaUser />,
+    icon: <FaChartBar />,
     path: "/courses",
   },
   {
@@ -19,7 +20,7 @@ const navLinks = [
   },
   {
     name: "My Learning",
-    icon: <FaChartBar />,
+    icon: <FaFolder  />,
     path: "/my-learning",
   },
   {
@@ -67,7 +68,7 @@ const Sidebar = () => {
             className="gap-3 py-2 px-4 text-left rounded-md transition-colors duration-200 w-full text-gray-700"
             onClick={() => navigate("/auth/login")}
           >
-            {/* <FaDoorClosed / */}
+            <FaSignOutAlt className="inline-block mr-2 text-xl" />
             Log out
           </button>
     </aside>
