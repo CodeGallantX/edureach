@@ -49,7 +49,6 @@ const Sidebar = () => {
         className={`bg-gray-50 h-screen px-4 py-8 flex flex-col items-start gap-2 fixed top-0 left-0 z-40 transition-transform duration-300 ease-in-out w-64 md:relative md:translate-x-0 md:w-64
         ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
-        {/* Logo (Hidden on Mobile) */}
         <img src="/logo-white.png" alt="logo" className="mt-12 md:mt-0 mb-12" />
 
         {/* Navigation Links */}
