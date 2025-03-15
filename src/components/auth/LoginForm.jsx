@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaChevronLeft, FaGoogle, FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa6";
+import { FaArrowLeft, FaGoogle, FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
@@ -15,8 +15,8 @@ const LoginForm = () => {
     checkbox: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false); // For spinner
-  const [passwordVisible, setPasswordVisible] = useState(false); // For password visibility
+  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [passwordVisible, setPasswordVisible] = useState(false); 
 
   const navigate = useNavigate();
 
@@ -45,12 +45,12 @@ const LoginForm = () => {
     const isValid = validateForm();
 
     if (isValid) {
-      setIsSubmitting(true); // Show spinner
+      setIsSubmitting(true);
       setTimeout(() => {
         console.log(formData)
-        navigate("/auth/verification"); // Navigate after a delay
-        setIsSubmitting(false); // Hide spinner
-      }, 2000); // Simulate a 2-second delay
+        navigate("/dashboard");
+        setIsSubmitting(false);
+      }, 2000); 
     }
   };
 
@@ -59,7 +59,7 @@ const LoginForm = () => {
       <div 
         onClick={() => navigate(-1)} 
       className="block md:hidden font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
-        <FaChevronLeft 
+        <FaArrowLeft 
         />
         <span>Back</span>
       </div>

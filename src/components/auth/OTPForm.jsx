@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaChevronLeft } from "react-icons/fa6";
+import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 const OTPForm = () => {
@@ -72,7 +72,7 @@ const OTPForm = () => {
   return (
     <div className="px-10 py-16 md:px-16 lg:px-20 justify-start md:justify-center">
       <div onClick={() => navigate(-1)} className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
-        <FaChevronLeft />
+        <FaArrowLeft />
         <span>Back</span>
       </div>
       <h2 className="text-3xl font-bold">Verification</h2>

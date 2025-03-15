@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaChevronLeft, FaEye, FaEyeSlash, FaXmark, FaCheck } from "react-icons/fa6";
+import { FaArrowLeft, FaEye, FaEyeSlash, FaXmark, FaCheck } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
@@ -81,7 +81,7 @@ const SignUpForm = () => {
       setIsSubmitting(true); 
       setTimeout(() => {
         console.log(formData);
-        navigate("/auth/verification");
+        navigate("/auth/login");
         setIsSubmitting(false); 
       }, 2000); 
     }
@@ -92,7 +92,7 @@ const SignUpForm = () => {
       <div 
         onClick={() => navigate(-1)} 
         className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
-        <FaChevronLeft />
+        <FaArrowLeft />
         <span>Back</span>
       </div>
       <h2 className="text-2xl font-bold">Create New Password</h2>

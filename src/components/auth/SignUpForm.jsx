@@ -27,7 +27,7 @@ const SignUpForm = () => {
     confirmPassword: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false); // For loader/spinner
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ const SignUpForm = () => {
       upper: /(?=.*[A-Z])/.test(password),
       lower: /(?=.*[a-z])/.test(password),
       number: /(?=.*\d)/.test(password),
-      special: /(?=.*[!@#$%*?&.])/.test(password), // Corrected special characters
+      special: /(?=.*[!@#$%*?&.])/.test(password),
     });
   };
 
@@ -78,7 +78,6 @@ const SignUpForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check for errors before submitting
     const newErrors = {
       fullName: formData.fullName ? "" : "Full Name is required",
       email: formData.email ? "" : "Email is required",
@@ -90,12 +89,12 @@ const SignUpForm = () => {
     setErrors(newErrors);
 
     if (isFormValid) {
-      setIsSubmitting(true); // Show loader
+      setIsSubmitting(true);
       setTimeout(() => {
         console.log(formData);
         navigate("/auth/verification");
-        setIsSubmitting(false); // Hide loader after navigation
-      }, 2000); // Simulate a 2-second delay for form submission
+        setIsSubmitting(false); 
+      }, 2000);
     }
   };
 

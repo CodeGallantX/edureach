@@ -3,7 +3,7 @@ const Header = () => {
   return (
     <header>
       <div>
-        <img src="/logo.png" alt="EduReach Logo" />
+        <img src="/logo-white.png" alt="EduReach Logo" />
       </div>
       <nav>
         <ul>
