@@ -1,26 +1,17 @@
-import {
-  FaHouse,
-  FaUser,
-  FaBook,
-  FaChartBar,
-  FaBell,
-  FaGear,
-  FaFolder,
-  FaBars,
-  FaXmark,
-} from "react-icons/fa6";
+import { FaBars, FaXmark } from "react-icons/fa6";
+import { PiHouseDuotone, PiSignOut, PiBooksDuotone, PiUserCircle, PiGearDuotone, PiFolderSimpleDuotone, PiBellDuotone, PiVideoDuotone } from "react-icons/pi";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 const navLinks = [
-  { name: "Dashboard", icon: <FaHouse />, path: "/dashboard" },
-  { name: "All Courses", icon: <FaChartBar />, path: "/courses" },
-  { name: "My Library", icon: <FaBook />, path: "/my-library" },
-  { name: "My Learning", icon: <FaFolder />, path: "/my-learning" },
-  { name: "Notifications", icon: <FaBell />, path: "/notifications" },
-  { name: "Profile", icon: <FaUser />, path: "/profile" },
-  { name: "Settings", icon: <FaGear />, path: "/settings" },
+  { name: "Dashboard", icon: <PiHouseDuotone />, path: "/dashboard" },
+  { name: "All Courses", icon: <PiVideoDuotone />, path: "/courses" },
+  { name: "My Library", icon: <PiBooksDuotone  />, path: "/my-library" },
+  { name: "My Learning", icon: <PiFolderSimpleDuotone />, path: "/my-learning" },
+  { name: "Notifications", icon: <PiBellDuotone />, path: "/notifications" },
+  { name: "Profile", icon: <PiUserCircle />, path: "/profile" },
+  { name: "Settings", icon: <PiGearDuotone />, path: "/settings" },
 ];
 
 const Sidebar = () => {
@@ -75,7 +66,7 @@ const Sidebar = () => {
           className="gap-3 py-2 px-4 text-left rounded-md transition-colors duration-200 w-full text-gray-700 hover:bg-gray-200"
           onClick={() => navigate("/auth/login")}
         >
-          <FaSignOutAlt className="inline-block mr-2 text-xl" />
+          <PiSignOut className="inline-block mr-2 text-xl" />
           Log out
         </button>
       </aside>
