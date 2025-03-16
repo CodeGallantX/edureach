@@ -1,6 +1,4 @@
-import { FaBars, FaXmark } from "react-icons/fa6";
-import { PiHouseDuotone, PiSignOut, PiBooksDuotone, PiUserCircle, PiGearDuotone, PiFolderSimpleDuotone, PiBellDuotone, PiVideoDuotone } from "react-icons/pi";
-import { FaSignOutAlt } from "react-icons/fa";
+import { PiList, PiX, PiHouseDuotone, PiSignOut, PiBooksDuotone, PiUserCircle, PiGearDuotone, PiFolderSimpleDuotone, PiBellDuotone, PiVideoDuotone } from "react-icons/pi";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
@@ -31,7 +29,7 @@ const Sidebar = () => {
           onClick={toggleMobileMenu}
           className="p-2 text-gray-700 bg-gray-200 rounded-md"
         >
-          {isMobileMenuOpen ? <FaXmark size={24} /> : <FaBars size={24} />}
+          {isMobileMenuOpen ? <PiX size={24} /> : <PiList size={24} />}
         </button>
       </div>
 
@@ -49,14 +47,14 @@ const Sidebar = () => {
             <a
               key={index}
               href={link.path}
-              className={`flex items-center gap-3 py-2 px-4 rounded-md transition-colors duration-200 w-full ${
+              className={`flex items-center gap-3 text-xl py-2 px-4 rounded-md transition-colors duration-200 w-full ${
                 isActive
                   ? "bg-blue text-white"
                   : "text-gray-700 hover:bg-gray-200"
               }`}
             >
               {link.icon}
-              <span>{link.name}</span>
+              <span className="text-base">{link.name}</span>
             </a>
           );
         })}

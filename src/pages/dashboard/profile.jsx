@@ -9,11 +9,11 @@ const page = {
 
 const App = () => {
     return (
-        <div className="grid grid-cols-12">
+        <div className="grid md:grid-cols-12">
             <div className="col-span-2">
                 <Sidebar />
             </div>
-            <div className="col-span-10 flex flex-col items-start p-4 pt-9 justify-start space-y-12">
+            <div className="col-span-10 flex flex-col items-start p-4 pt-8 justify-start space-y-6 md:space-y-12">
                 <Header />
                 <Banner page={page} />
             </div>

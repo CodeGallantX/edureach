@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/home";
+// import Home from "./pages/home";
 import SignUp from "./pages/auth/signup";
 import Login from "./pages/auth/login";
 import Verification from "./pages/auth/verification";
@@ -16,7 +16,8 @@ import Settings from "./pages/dashboard/settings"
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />}/>
+      {/* <Route path="/" element={<Home />}/> */}
+      <Route path="/" element={<Login />}/>
       <Route path="/auth/signup" element={<SignUp />}/>
       <Route path="/auth/login" element={<Login />}/>
       <Route path="/auth/verification" element={<Verification />}/>
