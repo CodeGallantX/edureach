@@ -7,7 +7,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-row items-center justify-between w-full">
+        <div className="relative flex flex-row items-center justify-between w-full bg-offWhite p-4">
             <SearchBox />
             <div className="flex flex-row items-center justify-start space-x-2 sm:space-x-3 md:space-x-4">
                 <div className="relative">

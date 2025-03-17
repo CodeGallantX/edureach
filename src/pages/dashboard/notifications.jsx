@@ -4,17 +4,16 @@ import Banner from "../../components/dashboard/Banner"
 
 const page = {
     title: "Notifications",
-    description: "Manage your alerts, keep your focus, and be updated"
+    description: "Manage your time, track your learning progress"
 }
-
 
 const App = () => {
     return (
-        <div className="grid md:grid-cols-12">
-            <div className="col-span-2">
+        <div className="flex flex-row">
+            <div className="">
                 <Sidebar />
             </div>
-            <div className="col-span-10 flex flex-col items-start p-4 pt-8 justify-start space-y-6 md:space-y-12">
+            <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
                 <Header />
                 <Banner page={page} />
             </div>
