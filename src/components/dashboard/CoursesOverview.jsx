@@ -1,22 +1,123 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { PiTrash, PiDotsThreeVertical } from "react-icons/pi"; // Import Phosphor icons
+import { useState } from "react";
 
 const CoursesOverview = () => {
-    const navigate = useNavigate();
-    return (
-        <section className="w-full">
-            <div className="flex flex-row items-center justify-between p-4">
-                <div className="">
-                    <h3 className="text-2xl font-bold text-left">My Ongoing Courses</h3>
-                    <p className="text-sm text-left">See your overall information regarding your courses and your activities</p>
-                </div>
-                <button onClick={() => navigate("/courses")} className="bg-blue py-2 px-6 rounded-full text-white">View All</button>
-            </div>
-            <section>
+  const navigate = useNavigate();
+  const [courses, setCourses] = useState([
+    {
+      id: 1,
+      title: "Fundamentals of UI/UX Design",
+      author: "Enoobong George",
+      progress: 85,
+      completed: 10,
+      total: 13,
+    },
+    {
+      id: 2,
+      title: "Learn Salsa Dancing in 3 weeks",
+      author: "Majekodunmi Smith",
+      progress: 45,
+      completed: 6,
+      total: 9,
+    },
+    {
+      id: 3,
+      title: "Become a Professional Data Analyst",
+      author: "Enoobong George",
+      progress: 85,
+      completed: 12,
+      total: 14,
+    },
+  ]);
 
-            </section>
+  const handleDelete = (courseId) => {
+    setCourses(courses.filter((course) => course.id !== courseId));
+  };
 
-        </section>
-    )
-}
+  return (
+    <section className="w-full">
+      <div className="flex flex-row items-center justify-between p-6">
+        <div>
+          <h3 className="text-2xl font-bold text-left">My Ongoing Courses</h3>
+          <p className="text-sm text-left text-gray-600 mt-1">
+            See your overall information regarding your courses and your activities
+          </p>
+        </div>
+        <button
+          onClick={() => navigate("/courses")}
+          className="bg-blue py-2 px-6 rounded-full text-white"
+        >
+          View All
+        </button>
+      </div>
+      <section className="overflow-x-auto">
+        <table className="min-w-full bg-white">
+          <thead>
+            <tr className="border-b border-gray-200">
+              <th className="text-left py-3 px-6 text-sm font-semibold text-gray-700">
+                Course Title / Author
+              </th>
+              <th className="text-left py-3 px-6 text-sm font-semibold text-gray-700">
+                Progress
+              </th>
+              <th className="text-left py-3 px-6 text-sm font-semibold text-gray-700">
+                Status
+              </th>
+              <th className="text-left py-3 px-6 text-sm font-semibold text-gray-700"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {courses.map((course, index) => (
+              <tr key={index} className="border-b border-gray-200">
+                <td className="py-4 px-6">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gray-200 rounded-md">
+                      {/* You can add course image here */}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">{course.title}</h4>
+                      <p className="text-sm text-gray-600">{course.author}</p>
+                    </div>
+                  </div>
+                </td>
+                <td className="py-4 px-6">
+                  <div className="flex flex-col">
+                    <p className="text-sm text-gray-700">
+                      {course.completed}/{course.total}
+                    </p>
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
+                      <div
+                        className="bg-green-500 h-2.5 rounded-full"
+                        style={{ width: `${course.progress}%` }}
+                      ></div>
+                    </div>
+                    <p className="text-sm mt-1 text-gray-700">{course.progress}%</p>
+                  </div>
+                </td>
+                <td className="py-4 px-6">
+                  <button className="bg-blue-100 text-blue-800 py-1 px-4 rounded-full text-sm">
+                    In Progress
+                  </button>
+                </td>
+                <td className="py-4 px-6 text-right">
+                  <div className="flex items-center justify-end space-x-2">
+                    <button onClick={() => handleDelete(course.id)}>
+                      <PiTrash className="text-lg text-gray-600" />
+                    </button>
+                    <button>
+                      <PiDotsThreeVertical className="text-lg text-gray-600"/>
+                    </button>
+                  </div>
 
-export default CoursesOverview
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    </section>
+  );
+};
+
+export default CoursesOverview;
