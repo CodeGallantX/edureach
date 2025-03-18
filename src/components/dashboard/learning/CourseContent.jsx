@@ -48,14 +48,14 @@ const CourseContents = () => {
       {modules.map((module) => (
         <div key={module.id} className="mb-6">
           <div
-            className="flex items-center justify-between p-4 bg-gray-200 rounded-t-lg cursor-pointer transition-shadow duration-300 hover:shadow-md"
+            className="flex items-start justify-between p-4 bg-gray-200 rounded-t-lg cursor-pointer transition-shadow duration-300 hover:shadow-md"
             onClick={() => toggleModule(module.id)}
           >
             <div className="flex items-center space-x-3">
               <PiFolder className="text-blue-500 text-xl" />
-              <span className="font-semibold text-lg text-gray-800">{module.title}</span>
+              <span className="font-semibold text-base md:text-lg text-gray-800">{module.title}</span>
             </div>
-            <div className="flex items-center space-x-3 text-gray-700">
+            <div className="flex items-center space-x-3 text-gray-700 text-sm md:text-base">
               <span>{module.videos.length} videos</span>
               {module.expanded ? (
                 <PiCaretUp className="text-gray-600 transition-transform duration-300 text-xl" />
@@ -74,9 +74,9 @@ const CourseContents = () => {
                 >
                   <div className="flex items-center space-x-3 text-gray-800">
                     <PiPlayCircle className="text-blue-500 text-xl" />
-                    <span>{video.title}</span>
+                    <span className="text-sm md:text-base">{video.title}</span>
                   </div>
-                  <span className="text-gray-700">{video.duration}</span>
+                  <span className="text-gray-700 text-sm md:text-base">{video.duration}</span>
                 </div>
               ))}
             </div>

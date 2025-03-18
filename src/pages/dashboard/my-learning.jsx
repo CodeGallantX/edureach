@@ -20,15 +20,15 @@ const App = () => {
             <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
                 <Header />
                 <Banner page={page} />
-                <div className="flex flex-row items-start justify-between w-full">
-                <section>
-                <CourseSummary />
-                <CourseContent />
-                </section>
-                <aside>
-                <CourseDetails />
-                <AuthorDetails />
-                </aside>
+                <div className="flex flex-col md:flex-row items-start justify-between w-full">
+                    <section>
+                        <CourseSummary />
+                        <CourseContent />
+                    </section>
+                    <aside className="p-4">
+                        <CourseDetails />
+                        <AuthorDetails />
+                    </aside>
                 </div>
             </div>
         </div>
