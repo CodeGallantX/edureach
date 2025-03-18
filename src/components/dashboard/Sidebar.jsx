@@ -24,7 +24,7 @@ const Sidebar = () => {
   return (
     <aside className="bg-offWhite">
       {/* Mobile Menu Button */}
-      <div className="md:hidden fixed top-5 left-4 z-50 ">
+      <div className="lg:hidden fixed top-5 left-4 z-50 ">
         <button
           onClick={toggleMobileMenu}
           className="p-2 text-gray-700 bg-gray-200 rounded-md"
@@ -35,10 +35,10 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`bg-gray-50 h-screen px-4 py-8 flex flex-col items-start gap-2 fixed top-0 left-0 z-40 transition-transform duration-300 ease-in-out w-64 md:relative md:translate-x-0 md:w-64
+        className={`bg-gray-50 h-screen px-4 py-8 flex flex-col items-start gap-2 fixed top-0 left-0 z-40 transition-transform duration-300 ease-in-out w-64 lg:relative lg:translate-x-0 lg:w-64
         ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
-        <img src="/logo-white.png" alt="logo" className="mt-12 md:mt-0 mb-12" />
+        <img src="/logo-white.png" alt="logo" className="mt-12 lg:mt-0 mb-12" />
 
         {/* Navigation Links */}
         {navLinks.map((link, index) => {
@@ -72,7 +72,7 @@ const Sidebar = () => {
       {/* Overlay when sidebar is open on mobile */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 md:hidden z-30"
+          className="fixed inset-0 bg-black/50 lg:hidden z-30"
           onClick={toggleMobileMenu}
         ></div>
       )}

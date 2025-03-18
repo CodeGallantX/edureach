@@ -15,7 +15,7 @@ const App = () => {
             <div className="">
                 <Sidebar />
             </div>
-            <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
+            <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash">
                 <Header />
                 <Banner page={page} />
                 <Card />

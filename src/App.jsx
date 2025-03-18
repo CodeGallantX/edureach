@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/auth/forgot-password";
 import ResetPassword from "./pages/auth/reset-password";
 import Dashboard from "./pages/dashboard/dashboard";
 import Courses from "./pages/dashboard/courses";
+import SingleCourse from "./pages/dashboard/courses/single-course";
 import MyLearning from "./pages/dashboard/my-learning"
 import MyLibrary from "./pages/dashboard/my-library"
 import Profile from "./pages/dashboard/profile"
@@ -25,6 +26,7 @@ const App = () => {
       <Route path="/auth/reset-password" element={<ResetPassword />}/>
       <Route path="/dashboard" element={<Dashboard />}/>
       <Route path="/courses" element={<Courses />}/>
+      <Route path="/courses/single-course" element={<SingleCourse />}/>
       <Route path="/my-learning" element={<MyLearning />}/>
       <Route path="/my-library" element={<MyLibrary />}/>
       <Route path="/notifications" element={<Notifications />}/>
