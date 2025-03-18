@@ -3,6 +3,7 @@ import Header from "../../components/dashboard/Header"
 import Banner from "../../components/dashboard/Banner"
 import Card from "../../components/dashboard/Card"
 import CoursesOverview from "../../components/dashboard/CoursesOverview"
+import RecommendedCourses from "../../components/dashboard/RecommendedCourses"
 
 const page = {
     title: "Dashboard",
@@ -20,6 +21,7 @@ const App = () => {
                 <Banner page={page} />
                 <Card />
                 <CoursesOverview />
+                <RecommendedCourses />
             </div>
         </div>
     )

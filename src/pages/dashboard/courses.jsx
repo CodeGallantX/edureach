@@ -2,6 +2,7 @@ import Sidebar from "../../components/dashboard/Sidebar"
 import Header from "../../components/dashboard/Header"
 import Banner from "../../components/dashboard/Banner"
 import OngoingCourses from "../../components/dashboard/OngoingCourses"
+import RecommendedCourses from "../../components/dashboard/RecommendedCourses"
 
 const page = {
     title: "All Courses",
@@ -18,6 +19,7 @@ const App = () => {
                 <Header />
                 <Banner page={page} />
                 <OngoingCourses />
+                <RecommendedCourses />
             </div>
         </div>
     )
