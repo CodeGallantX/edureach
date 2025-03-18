@@ -1,38 +1,46 @@
 import React from 'react';
+import {
+  PiGlobe,
+  PiFilmReel,
+  PiGauge,
+  PiTimer,
+  PiCertificate,
+  PiPlayCircle,
+} from 'react-icons/pi';
 
 const CourseDetails = () => {
   return (
-    <div className="w-full p-4">
-      {/* Image Section */}
-      <div className="relative mb-6">
-        <img
-          src="https://placehold.co/800x400" // Replace with your image URL
-          alt="Course Preview"
-          className="w-full rounded-lg"
-        />
-        {/* You can add an overlay or play button here if needed */}
+    <div className="bg-white rounded-2xl shadow-md p-6 mb-6">
+      <div className="space-y-4">
+        <div className="flex items-center space-x-3">
+          <PiGlobe className="text-xl text-blue-500" />
+          <span className="font-medium">Language:</span>
+          <span className="font-bold">English</span>
+        </div>
+        <div className="flex items-center space-x-3">
+          <PiFilmReel className="text-xl text-blue-500" />
+          <span className="font-medium">Lesson Count:</span>
+          <span className="font-bold">14</span>
+        </div>
+        <div className="flex items-center space-x-3">
+          <PiGauge className="text-xl text-blue-500" />
+          <span className="font-medium">Difficulty:</span>
+          <span className="font-bold">Advanced</span>
+        </div>
+        <div className="flex items-center space-x-3">
+          <PiTimer className="text-xl text-blue-500" />
+          <span className="font-medium">Duration:</span>
+          <span className="font-bold">7hrs 47 seconds</span>
+        </div>
+        <div className="flex items-start space-x-3 w-full">
+          <PiCertificate className="text-xl text-blue-500" />
+          <span className="font-medium">Certificate:</span>
+          <span className="font-bold">When the Course is Completed</span>
+        </div>
       </div>
-
-      {/* Title and Author */}
-      <h2 className="text-2xl font-semibold mb-1">
-        Learn UI/UX Design (International Standard)
-      </h2>
-      <p className="text-sm text-gray-600 mb-4">Enoobong George</p>
-
-      {/* Description */}
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-2">Description</h3>
-        <p className="text-gray-700">
-          Unlock the building blocks of the web with our "Learn the Fundamentals of HTML and CSS" course.
-          Whether you're a complete beginner or looking to solidify your foundational skills, this course will guide
-          you through the essentials of creating and styling web pages. You'll start by understanding the structure
-          of HTML, learning how to create elements like headings, paragraphs, images, and links. From there, you'll
-          dive into CSS to bring your pages to life with colors, layouts, and responsive designs that look great on any
-          device.
-        </p>
-      </div>
-
-      {/* Add more sections as needed (e.g., course content, instructor bio) */}
+      <button className="flex items-center justify-center bg-deepBlue text-white rounded-full py-3 px-6 mt-6 w-full">
+        Enroll <PiPlayCircle className="ml-2" />
+      </button>
     </div>
   );
 };

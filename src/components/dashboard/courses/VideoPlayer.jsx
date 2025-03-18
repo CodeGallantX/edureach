@@ -21,12 +21,12 @@ const VideoPlayer = () => {
           onClick={() => navigate("/courses")}
           className="px-4 py-3 rounded-xl border border-blue"
         >
-          <PiArrowLeft className="text-xl text-sm text-blue inline-block mr-1" />
+          <PiArrowLeft className="text-xl text-sm text-deepBlue inline-block mr-1" />
           Back
         </button>
         <button
           onClick={() => navigate("/dashboard")}
-          className="px-4 py-3 rounded-xl bg-blue text-white"
+          className="px-4 py-3 rounded-xl bg-deepBlue text-white"
         >
           <PiPlusCircle className="text-xl text-sm text-white inline-block mr-1" />
           Add
@@ -57,7 +57,7 @@ const VideoPlayer = () => {
               onClick={() => navigate("/courses")}
               className="px-4 py-2 rounded-l-xl border-t border-l border-b border-blue"
             >
-              <PiCaretLeft className="text-lg text-blue inline-block mr-2" />
+              <PiCaretLeft className="text-lg text-deepBlue inline-block mr-2" />
               Previous
             </button>
             <button
@@ -65,7 +65,7 @@ const VideoPlayer = () => {
               className="px-4 py-2 rounded-r-md border border-blue"
             >
               Next
-              <PiCaretRight className="text-lg text-blue inline-block ml-2" />
+              <PiCaretRight className="text-lg text-deepBlue inline-block ml-2" />
             </button>
           </div>
           <button

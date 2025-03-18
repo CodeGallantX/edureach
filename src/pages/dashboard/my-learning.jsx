@@ -1,7 +1,10 @@
 import Sidebar from "../../components/dashboard/Sidebar"
 import Header from "../../components/dashboard/Header"
 import Banner from "../../components/dashboard/Banner"
+import CourseContent from "../../components/dashboard/learning/CourseContent"
+import CourseSummary from "../../components/dashboard/learning/CourseSummary"
 import CourseDetails from "../../components/dashboard/learning/CourseDetails"
+import AuthorDetails from "../../components/dashboard/learning/AuthorDetails"
 
 const page = {
     title: "My Learning",
@@ -17,7 +20,16 @@ const App = () => {
             <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
                 <Header />
                 <Banner page={page} />
+                <div className="flex flex-row items-start justify-between w-full">
+                <section>
+                <CourseSummary />
+                <CourseContent />
+                </section>
+                <aside>
                 <CourseDetails />
+                <AuthorDetails />
+                </aside>
+                </div>
             </div>
         </div>
     )

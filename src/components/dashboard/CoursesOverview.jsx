@@ -46,7 +46,7 @@ const CoursesOverview = () => {
         </div>
         <button
           onClick={() => navigate("/courses")}
-          className="bg-blue py-2 px-6 rounded-full text-white"
+          className="bg-deepBlue py-2 px-6 rounded-full text-white"
         >
           View All
         </button>

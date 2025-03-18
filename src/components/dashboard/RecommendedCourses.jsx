@@ -57,7 +57,7 @@ const RecommendedCourses = () => {
         </div>
         <button
           onClick={() => navigate("/courses")}
-          className="bg-blue py-2 px-6 rounded-full text-white"
+          className="bg-deepBlue py-2 px-6 rounded-full text-white"
         >
           View All
         </button>
@@ -83,7 +83,7 @@ const RecommendedCourses = () => {
                   {renderStars(course.rating)}
                   <span className="text-xs text-gray-500">(91)</span>
                 </div>
-                <button className="flex items-center justify-center bg-blue text-white py-2 px-4 rounded-full mt-4 w-full">
+                <button className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
                   Enroll <PiPlayCircle className="ml-2" />
                 </button>
               </div>
@@ -111,7 +111,7 @@ const RecommendedCourses = () => {
                 {renderStars(course.rating)}
                 <span className="text-xs text-gray-500">(91)</span>
               </div>
-              <button className="flex items-center justify-center bg-blue text-white py-2 px-4 rounded-full mt-4 w-full">
+              <button className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
                 Enroll <PiPlayCircle className="ml-2" />
               </button>
             </div>

@@ -127,7 +127,7 @@ const LoginForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer bg-blue flex items-center justify-center"
+          className="mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer bg-deepBlue flex items-center justify-center"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

@@ -206,7 +206,7 @@ const SignUpForm = () => {
         <button
           type="submit"
           className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${
-            isSubmitting || !isFormValid ? "bg-gray-400 cursor-not-allowed" : "bg-blue"
+            isSubmitting || !isFormValid ? "bg-gray-400 cursor-not-allowed" : "bg-deepBlue"
           }`}
           disabled={!isFormValid || isSubmitting}
         >

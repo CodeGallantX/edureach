@@ -50,7 +50,7 @@ const OngoingCourses = () => {
 
             <button
               onClick={() => navigate(course.link)}
-              className="text-sm py-2 px-6 rounded-full bg-blue text-white"
+              className="text-sm py-2 px-6 rounded-full bg-deepBlue text-white"
             >
               Resume <PiPlayCircle className="text-2xl inline-block ml-1" />
             </button>

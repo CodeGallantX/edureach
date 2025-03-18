@@ -49,7 +49,7 @@ const Sidebar = () => {
               href={link.path}
               className={`flex items-center gap-3 text-xl py-2 px-4 rounded-md transition-colors duration-200 w-full ${
                 isActive
-                  ? "bg-blue text-white"
+                  ? "bg-deepBlue text-white"
                   : "text-gray-700 hover:bg-gray-200"
               }`}
             >

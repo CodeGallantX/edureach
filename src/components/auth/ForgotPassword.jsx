@@ -85,7 +85,7 @@ const ForgotPassword = () => {
         <button
           type="submit"
           className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${
-            isSubmitting || !isFormValid ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-blue"
+            isSubmitting || !isFormValid ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-deepBlue"
           }`}
           disabled={!isFormValid || isSubmitting}
         >
@@ -93,7 +93,7 @@ const ForgotPassword = () => {
             <div className="flex items-center justify-center gap-2">
               <div
                 className={`animate-spin rounded-full h-6 w-6 border-b-2 ${
-                  isSubmitting ? "border-b-blue" : "border-b-white"
+                  isSubmitting ? "border-b-deepBlue" : "border-b-white"
                 }`}
               ></div>
               <span>Sending Email...</span>
