@@ -15,8 +15,8 @@ const LoginForm = () => {
     checkbox: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false); 
-  const [passwordVisible, setPasswordVisible] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,27 +40,51 @@ const LoginForm = () => {
     return !Object.values(newErrors).some((error) => error);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
 
     if (isValid) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        console.log(formData)
+
+      try {
+        // Send login request to the API
+        const response = await fetch("https://e-sdg.onrender.com/create/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Login failed. Please check your credentials.");
+        }
+
+        const result = await response.json();
+        console.log("Login successful:", result);
+
+        // Redirect to dashboard on successful login
         navigate("/dashboard");
+      } catch (error) {
+        console.error("Error during login:", error);
+        setErrors((prev) => ({ ...prev, email: "Invalid email or password" }));
+      } finally {
         setIsSubmitting(false);
-      }, 2000); 
+      }
     }
   };
 
   return (
     <div className="px-10 py-16 md:px-14 lg:px-20 w-full flex flex-col justify-start md:justify-center">
-      <div 
-        onClick={() => navigate(-1)} 
-      className="block md:hidden font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
-        <FaArrowLeft 
-        />
+      <div
+        onClick={() => navigate(-1)}
+        className="block md:hidden font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20"
+      >
+        <FaArrowLeft />
         <span>Back</span>
       </div>
       <h2 className="text-2xl font-bold">Welcome, Please Login</h2>
@@ -161,10 +185,6 @@ const LoginForm = () => {
         <div className="flex flex-row items-center justify-center gap-2 py-3 w-full rounded-md border border-gray-400 cursor-pointer hover:bg-gray-100 transition-all duration-300 ease-in-out">
           <FaGoogle className="text-gray-600" />
           <span>Google</span>
-        </div>
-        <div className="flex flex-row items-center justify-center gap-2 py-3 w-full rounded-md border border-gray-400 cursor-pointer hover:bg-gray-100 transition-all duration-300 ease-in-out">
-          <FaFacebookF className="text-gray-600" />
-          <span>Facebook</span>
         </div>
       </div>
     </div>

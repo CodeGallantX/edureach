@@ -75,28 +75,53 @@ const SignUpForm = () => {
     formData.password &&
     formData.confirmPassword === formData.password;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const newErrors = {
-      fullName: formData.fullName ? "" : "Full Name is required",
-      email: formData.email ? "" : "Email is required",
-      phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
-      password: formData.password ? "" : "Password is required",
-      confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      const newErrors = {
+        fullName: formData.fullName ? "" : "Full Name is required",
+        email: formData.email ? "" : "Email is required",
+        phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
+        password: formData.password ? "" : "Password is required",
+        confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
+      };
+    
+      setErrors(newErrors);
+    
+      if (isFormValid) {
+        setIsSubmitting(true);
+    
+        try {
+          const response = await fetch("https://e-sdg.onrender.com/create/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              fullName: formData.fullName,
+              email: formData.email,
+              phoneNumber: formData.phoneNumber,
+              password: formData.password,
+            }),
+          });
+    
+          if (!response.ok) {
+            throw new Error("Sign-up failed");
+          }
+    
+          const result = await response.json();
+          console.log("Sign-up successful:", result);
+    
+          // Redirect to verification page or handle success
+          navigate("/auth/verification");
+        } catch (error) {
+          console.error("Error during sign-up:", error);
+          // Handle error (e.g., display error message to the user)
+        } finally {
+          setIsSubmitting(false);
+        }
+      }
     };
-
-    setErrors(newErrors);
-
-    if (isFormValid) {
-      setIsSubmitting(true);
-      setTimeout(() => {
-        console.log(formData);
-        navigate("/auth/verification");
-        setIsSubmitting(false); 
-      }, 2000);
-    }
-  };
 
   return (
     <div className="px-10 py-16 md:px-16 lg:px-20 w-full flex flex-col justify-start md:justify-center">
