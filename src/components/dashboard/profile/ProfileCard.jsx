@@ -28,9 +28,9 @@ const ProfileCard = () => {
   if (!profile) return <p>No profile data available.</p>;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 w-full flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
+    <div className="p-6 w-full flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
       {/* Image */}
-      <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-blue-500">
+      <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-blue">
         <img src={profile.imageUrl} alt={`${profile.name}'s profile`} className="object-cover w-full h-full" />
       </div>
 
@@ -48,10 +48,10 @@ const ProfileCard = () => {
           </div>
         </div>
         <div className="flex space-x-2">
-          <button className="bg-white text-blue-500 border border-blue-500 rounded-full px-4 py-2 text-sm hover:bg-blue-50 transition duration-300">
+          <button className="bg-white text-deepBlue border border-deepBlue rounded-full px-4 py-2 text-sm hover:bg-deepBlue transition duration-300">
             Share Profile
           </button>
-          <button className="bg-blue-500 text-white rounded-full px-4 py-2 text-sm hover:bg-blue-600 transition duration-300">
+          <button className="bg-deepBlue text-white rounded-full px-4 py-2 text-sm">
             Edit Profile
           </button>
         </div>

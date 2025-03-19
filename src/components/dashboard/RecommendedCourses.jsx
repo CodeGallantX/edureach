@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { PiStarFill, PiPlayCircle } from "react-icons/pi";
+import { PiStarFill, PiPlayCircle, PiCaretRightBold } from "react-icons/pi";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
@@ -48,7 +48,7 @@ const RecommendedCourses = () => {
 
   return (
     <section className="w-full">
-      <div className="flex flex-row items-center justify-between p-6">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 gap-3">
         <div>
           <h3 className="text-2xl font-bold text-left">Recommended Courses</h3>
           <p className="text-sm text-left text-gray-600 mt-1">
@@ -60,6 +60,7 @@ const RecommendedCourses = () => {
           className="bg-deepBlue py-2 px-6 rounded-full text-white"
         >
           View All
+          <PiCaretRightBold className="text-white inline-block ml-1" />
         </button>
       </div>
 

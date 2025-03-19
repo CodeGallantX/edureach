@@ -1,6 +1,6 @@
 const SideIll = () => {
     return (
-        <div className="hidden md:block h-[100vh] relative">
+        <div className="hidden md:block min-h-screen relative">
             <div className="w-full h-full">
                 <img src="/background.jpeg" alt="grainy background - EduReach" className="object-cover w-full h-full" />
             </div>

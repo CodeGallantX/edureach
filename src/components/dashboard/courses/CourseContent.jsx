@@ -8,13 +8,14 @@ const CourseContent = () => {
   };
 
   return (
-    <section className="w-full">
-      <div className="bg-white">
+    <div className="p-4 w-full">
+    <section className="w-full bg-white">
+      <div className="">
         <div className="flex flex-row items-center justify-start space-x-8 px-6 py-4 font-semibold text-gray-500 border-b border-b-gray-300">
           <button
             onClick={() => handleTabClick("Description")}
             className={`transition-colors duration-300 px-2 py-1 ${
-              activeTab === "Description" ? "text-blue-600 border-b-4 border-blue-600" : ""
+              activeTab === "Description" ? "text-blue-400 border-b-4 border-blue-400" : ""
             }`}
           >
             Description
@@ -22,8 +23,8 @@ const CourseContent = () => {
           <button
             onClick={() => handleTabClick("Course Content")}
             className={`transition-colors duration-300 px-2 py-1 ${
-              activeTab === "Course Content" ? "text-blue-600 border-b-4 border-blue-600" : ""
-            }`}
+              activeTab === "Course Content" ? "text-blue-400 border-b-4 border-blue-400" : ""
+            }`}  
           >
             Course Content
           </button>
@@ -49,6 +50,7 @@ const CourseContent = () => {
         )}
       </div>
     </section>
+  </div>
   );
 };
 

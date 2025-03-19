@@ -6,6 +6,7 @@ import {
   PiCaretRight,
   PiListBullets,
 } from "react-icons/pi";
+import BtnComp from "../BtnComp"
 
 const VideoPlayer = () => {
   const navigate = useNavigate();
@@ -16,22 +17,7 @@ const VideoPlayer = () => {
 
   return (
     <div className="w-full">
-      <div className="p-4 flex flex-row items-center justify-between">
-        <button
-          onClick={() => navigate("/courses")}
-          className="px-4 py-3 rounded-xl border border-blue"
-        >
-          <PiArrowLeft className="text-xl text-sm text-deepBlue inline-block mr-1" />
-          Back
-        </button>
-        <button
-          onClick={() => navigate("/dashboard")}
-          className="px-4 py-3 rounded-xl bg-deepBlue text-white"
-        >
-          <PiPlusCircle className="text-xl text-sm text-white inline-block mr-1" />
-          Add
-        </button>
-      </div>
+      <BtnComp />
       <section className="mt-4 p-4">
         <video src={videoSource} controls className="w-full h-full rounded-xl" />
       </section>
