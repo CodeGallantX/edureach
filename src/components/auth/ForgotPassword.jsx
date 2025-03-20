@@ -26,10 +26,9 @@ const ForgotPassword = () => {
     });
   };
 
-  // Modified isFormValid check
-  const isFormValid = formData.email && !errors.email; // Check for email and no error
+  const isFormValid = formData.email && !errors.email;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check for errors before submitting
@@ -39,18 +38,34 @@ const ForgotPassword = () => {
 
     setErrors(newErrors);
 
-    if (isFormValid) { // Only submit if the form is valid.
+    if (isFormValid) {
       setIsSubmitting(true);
-      setTimeout(() => {
-        console.log("Email Address:", formData);
-        // Simulate checking if email exists. Replace with your actual logic
-        if (formData.email === "test@example.com") { // example email for testing.
-          navigate("/auth/reset-password"); //replace with your success page.
+
+      try {
+        const response = await fetch("https://e-sdg.onrender.com/create/forgetPassword", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: formData.email }),
+        });
+
+        if (response.ok) {
+          // If the API call is successful, navigate to the reset password page
+          const result = await response.json();
+          const token = result.token; // Assuming the API returns a token
+          navigate(`/auth/reset-password/${token}`);
         } else {
-          setErrors({ ...errors, email: "No account registered with this email." }); // correct error message
+          // Handle API errors
+          const result = await response.json();
+          setErrors({ ...errors, email: result.message || "No account registered with this email." });
         }
+      } catch (error) {
+        console.error("Error:", error);
+        setErrors({ ...errors, email: "An error occurred. Please try again later." });
+      } finally {
         setIsSubmitting(false);
-      }, 2000);
+      }
     }
   };
 

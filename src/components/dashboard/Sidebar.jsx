@@ -5,7 +5,7 @@ import { useState } from "react";
 const navLinks = [
   { name: "Dashboard", icon: <PiHouseDuotone />, path: "/dashboard" },
   { name: "All Courses", icon: <PiVideoDuotone />, path: "/courses" },
-  { name: "My Library", icon: <PiBooksDuotone  />, path: "/my-library" },
+  { name: "My Library", icon: <PiBooksDuotone />, path: "/my-library" },
   { name: "My Learning", icon: <PiFolderSimpleDuotone />, path: "/my-learning" },
   { name: "Notifications", icon: <PiBellDuotone />, path: "/notifications" },
   { name: "Profile", icon: <PiUserCircle />, path: "/profile" },
@@ -21,10 +21,15 @@ const Sidebar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // Remove auth token
+    navigate("/auth/login"); // Redirect to login page
+};
+
   return (
     <aside className="bg-offWhite">
       {/* Mobile Menu Button */}
-      <div className="lg:hidden fixed top-5 left-4 z-50 ">
+      <div className="lg:hidden fixed top-5 left-4 z-50">
         <button
           onClick={toggleMobileMenu}
           className="p-2 text-gray-700 bg-gray-200 rounded-md"
@@ -62,7 +67,7 @@ const Sidebar = () => {
         {/* Logout Button */}
         <button
           className="gap-3 py-2 px-4 text-left rounded-md transition-colors duration-200 w-full text-gray-700 hover:bg-gray-200"
-          onClick={() => navigate("/auth/login")}
+          onClick={handleLogout}
         >
           <PiSignOut className="inline-block mr-2 text-xl" />
           Log out

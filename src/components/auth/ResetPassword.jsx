@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FaArrowLeft, FaEye, FaEyeSlash, FaXmark, FaCheck } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const SignUpForm = () => {
+const ResetPassword = () => {
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",
@@ -12,8 +12,10 @@ const SignUpForm = () => {
 
   const [passwordConditions, setPasswordConditions] = useState({
     minLength: false,
-    upperLower: false,
-    numberSpecial: false,
+    upper: false,
+    lower: false,
+    number: false,
+    special: false,
   });
 
   const [errors, setErrors] = useState({
@@ -21,9 +23,10 @@ const SignUpForm = () => {
     confirmPassword: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false); // For loader/spinner
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
+  const { token } = useParams(); // Extract token from URL params
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,8 +42,6 @@ const SignUpForm = () => {
       } else {
         setErrors((prev) => ({ ...prev, confirmPassword: "" }));
       }
-    } else {
-      setErrors((prev) => ({ ...prev, [name]: value ? "" : "This field is required" }));
     }
   };
 
@@ -50,7 +51,7 @@ const SignUpForm = () => {
       upper: /(?=.*[A-Z])/.test(password),
       lower: /(?=.*[a-z])/.test(password),
       number: /(?=.*\d)/.test(password),
-      special: /(?=.*[!@#$%*?&.])/.test(password), // Corrected special characters
+      special: /(?=.*[!@#$%*?&.])/.test(password),
     });
   };
 
@@ -66,7 +67,7 @@ const SignUpForm = () => {
     formData.password &&
     formData.confirmPassword === formData.password;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Check for errors before submitting
@@ -78,20 +79,40 @@ const SignUpForm = () => {
     setErrors(newErrors);
 
     if (isFormValid) {
-      setIsSubmitting(true); 
-      setTimeout(() => {
-        console.log(formData);
-        navigate("/auth/login");
-        setIsSubmitting(false); 
-      }, 2000); 
+      setIsSubmitting(true);
+
+      try {
+        const response = await fetch(`https://e-sdg.onrender.com/create/reset-password/${token}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ newPassword: formData.password }),
+        });
+
+        if (response.ok) {
+          // If the API call is successful, navigate to the login page
+          navigate("/auth/login");
+        } else {
+          // Handle API errors
+          const result = await response.json();
+          setErrors((prev) => ({ ...prev, password: result.message || "Failed to reset password. Please try again." }));
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setErrors((prev) => ({ ...prev, password: "An error occurred. Please try again later." }));
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
   return (
     <div className="px-10 py-16 md:px-16 lg:px-20 w-full flex flex-col justify-start md:justify-center">
-      <div 
-        onClick={() => navigate(-1)} 
-        className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
+      <div
+        onClick={() => navigate(-1)}
+        className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20"
+      >
         <FaArrowLeft />
         <span>Back</span>
       </div>
@@ -141,7 +162,7 @@ const SignUpForm = () => {
               }`}
             >
               1 Upper letter
-              {passwordConditions.upper ? <FaCheck  /> : <FaXmark />}
+              {passwordConditions.upper ? <FaCheck /> : <FaXmark />}
             </span>
             <span
               className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${
@@ -151,7 +172,7 @@ const SignUpForm = () => {
               }`}
             >
               1 Lowercase letter
-              {passwordConditions.lower ? <FaCheck  /> : <FaXmark />}
+              {passwordConditions.lower ? <FaCheck /> : <FaXmark />}
             </span>
             <span
               className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${
@@ -161,7 +182,7 @@ const SignUpForm = () => {
               }`}
             >
               <span>1 Number </span>
-              {passwordConditions.number ? <FaCheck  /> : <FaXmark />}
+              {passwordConditions.number ? <FaCheck /> : <FaXmark />}
             </span>
             <span
               className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${
@@ -171,7 +192,7 @@ const SignUpForm = () => {
               }`}
             >
               <span>1 Special character</span>
-              {passwordConditions.special ? <FaCheck  /> : <FaXmark />}
+              {passwordConditions.special ? <FaCheck /> : <FaXmark />}
             </span>
           </div>
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
@@ -224,4 +245,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default ResetPassword;

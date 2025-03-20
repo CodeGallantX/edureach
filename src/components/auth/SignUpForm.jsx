@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
     fullName: "",
+    username: "",
     email: "",
     phoneNumber: "",
     password: "",
@@ -27,7 +28,7 @@ const SignUpForm = () => {
     confirmPassword: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -75,58 +76,57 @@ const SignUpForm = () => {
     formData.password &&
     formData.confirmPassword === formData.password;
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-    
-      const newErrors = {
-        fullName: formData.fullName ? "" : "Full Name is required",
-        email: formData.email ? "" : "Email is required",
-        phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
-        password: formData.password ? "" : "Password is required",
-        confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
-      };
-    
-      setErrors(newErrors);
-    
-      if (isFormValid) {
-        setIsSubmitting(true);
-    
-        try {
-          const response = await fetch("https://e-sdg.onrender.com/create/signup", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              fullName: formData.fullName,
-              email: formData.email,
-              phoneNumber: formData.phoneNumber,
-              password: formData.password,
-            }),
-          });
-    
-          if (!response.ok) {
-            throw new Error("Sign-up failed");
-          }
-    
-          const result = await response.json();
-          console.log("Sign-up successful:", result);
-    
-          // Redirect to verification page or handle success
-          navigate("/auth/verification");
-        } catch (error) {
-          console.error("Error during sign-up:", error);
-          // Handle error (e.g., display error message to the user)
-        } finally {
-          setIsSubmitting(false);
-        }
-      }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const newErrors = {
+      fullName: formData.fullName ? "" : "Full Name is required",
+      email: formData.email ? "" : "Email is required",
+      phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
+      password: formData.password ? "" : "Password is required",
+      confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
     };
+
+    setErrors(newErrors);
+
+    if (isFormValid) {
+      setIsSubmitting(true);
+
+      try {
+        const response = await fetch("https://e-sdg.onrender.com/create/sign-up", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            phoneNumber: formData.phoneNumber,
+            password: formData.password,
+            username: formData.username, // Include username
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Sign-up failed");
+        }
+
+        const result = await response.json();
+        console.log("Sign-up successful:", result);
+
+        navigate("/auth/verification");
+      } catch (error) {
+        console.error("Error during sign-up:", error);
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
 
   return (
     <div className="px-4 py-10 md:px-16 lg:px-20 w-full flex flex-col justify-start md:justify-center">
-      <div 
-        onClick={() => navigate(-1)} 
+      <div
+        onClick={() => navigate(-1)}
         className="block md:hidden font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
         <FaChevronLeft />
         <span>Back</span>
@@ -149,6 +149,21 @@ const SignUpForm = () => {
             required
           />
           {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
+        </fieldset>
+
+        <fieldset className="space-y-1 flex flex-col items-start justify-start">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value={formData.username}
+            onChange={handleChange}
+            placeholder="Enter your Username"
+            className="w-full rounded-md border border-gray-500/50 text-sm py-3 px-3 outline-none focus:border-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 ease-in-out"
+            required
+          />
+          {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
         </fieldset>
 
         {/* Phone Number Field */}
@@ -208,54 +223,49 @@ const SignUpForm = () => {
           {/* Password Conditions */}
           <div className="flex flex-wrap gap-2 mt-2">
             <span
-              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${
-                passwordConditions.minLength
+              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.minLength
                   ? "bg-green-100 text-green-700 border border-green-500"
                   : "bg-red-100 text-red-700 border-red-400"
-              }`}
+                }`}
             >
               Minimum 8 characters
               {passwordConditions.minLength ? <FaCheck /> : <FaXmark />}
             </span>
             <span
-              className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${
-                passwordConditions.upper
+              className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${passwordConditions.upper
                   ? "bg-green-100 text-green-700 border-green-500"
                   : "bg-red-100 text-red-700 border-red-400"
-              }`}
+                }`}
             >
               1 Upper letter
-              {passwordConditions.upper ? <FaCheck  /> : <FaXmark />}
+              {passwordConditions.upper ? <FaCheck /> : <FaXmark />}
             </span>
             <span
-              className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${
-                passwordConditions.lower
+              className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${passwordConditions.lower
                   ? "bg-green-100 text-green-700 border-green-500"
                   : "bg-red-100 text-red-700 border-red-400"
-              }`}
+                }`}
             >
               1 Lowercase letter
-              {passwordConditions.lower ? <FaCheck  /> : <FaXmark />}
+              {passwordConditions.lower ? <FaCheck /> : <FaXmark />}
             </span>
             <span
-              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${
-                passwordConditions.number
+              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.number
                   ? "bg-green-100 text-green-700 border-green-500"
                   : "bg-red-100 text-red-700 border-red-400"
-              }`}
+                }`}
             >
               <span>1 Number </span>
-              {passwordConditions.number ? <FaCheck  /> : <FaXmark />}
+              {passwordConditions.number ? <FaCheck /> : <FaXmark />}
             </span>
             <span
-              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${
-                passwordConditions.special
+              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.special
                   ? "bg-green-100 text-green-700 border-green-500"
                   : "bg-red-100 text-red-700 border-red-400"
-              }`}
+                }`}
             >
               <span>1 Special character</span>
-              {passwordConditions.special ? <FaCheck  /> : <FaXmark />}
+              {passwordConditions.special ? <FaCheck /> : <FaXmark />}
             </span>
           </div>
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
@@ -289,9 +299,8 @@ const SignUpForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${
-            isSubmitting || !isFormValid ? "bg-gray-400 cursor-not-allowed" : "bg-deepBlue"
-          }`}
+          className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${isSubmitting || !isFormValid ? "bg-gray-400 cursor-not-allowed" : "bg-deepBlue"
+            }`}
           disabled={!isFormValid || isSubmitting}
         >
           {isSubmitting ? (

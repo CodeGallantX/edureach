@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FaArrowLeft, FaGoogle, FaFacebookF, FaEye, FaEyeSlash } from "react-icons/fa6";
+import { useState, useEffect } from "react";
+import { FaGoogle,  FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
@@ -19,6 +19,12 @@ const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) {
+        navigate("/dashboard"); // Redirect if already logged in
+    }
+}, [navigate]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -45,48 +51,49 @@ const LoginForm = () => {
     const isValid = validateForm();
 
     if (isValid) {
-      setIsSubmitting(true);
+        setIsSubmitting(true);
 
-      try {
-        // Send login request to the API
-        const response = await fetch("https://e-sdg.onrender.com/create/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            password: formData.password,
-          }),
-        });
+        try {
+            const response = await fetch("https://e-sdg.onrender.com/create/signIn", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    logInID: formData.email,
+                    password: formData.password,
+                }),
+            });
 
-        if (!response.ok) {
-          throw new Error("Login failed. Please check your credentials.");
+            if (!response.ok) {
+                throw new Error("Network error. Please try again.");
+            }
+
+            const result = await response.json();
+
+            if (result.success) {
+                console.log("Login successful:", result);
+
+                // Store user session/token in localStorage
+                localStorage.setItem("authToken", result.token);
+                
+                // Redirect to dashboard
+                navigate("/dashboard");
+            } else {
+                setErrors((prev) => ({ ...prev, email: result.message }));
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            setErrors((prev) => ({ ...prev, email: "An unexpected error occurred." }));
+        } finally {
+            setIsSubmitting(false);
         }
-
-        const result = await response.json();
-        console.log("Login successful:", result);
-
-        // Redirect to dashboard on successful login
-        navigate("/dashboard");
-      } catch (error) {
-        console.error("Error during login:", error);
-        setErrors((prev) => ({ ...prev, email: "Invalid email or password" }));
-      } finally {
-        setIsSubmitting(false);
-      }
     }
-  };
+};
+
 
   return (
     <div className="px-6 py-10 md:px-14 lg:px-20 w-full flex flex-col justify-center">
-      {/* <div
-        onClick={() => navigate(-1)}
-        className="hidden font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20"
-      >
-        <FaArrowLeft />
-        <span>Back</span>
-      </div> */}
       <h2 className="text-2xl font-bold">Welcome, Please Login</h2>
       <p className="text-gray-500 mt-1">Enter your credentials to access your account</p>
 
