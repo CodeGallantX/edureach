@@ -8,6 +8,7 @@ import ResetPassword from "./pages/auth/reset-password";
 import Dashboard from "./pages/dashboard/dashboard";
 import Courses from "./pages/dashboard/courses";
 import SingleCourse from "./pages/dashboard/courses/single-course";
+import CourseDetails from "./pages/dashboard/courses/course-details";
 import MyLearning from "./pages/dashboard/my-learning"
 import MyLibrary from "./pages/dashboard/my-library"
 import Profile from "./pages/dashboard/profile"
@@ -27,6 +28,7 @@ const App = () => {
       <Route path="/dashboard" element={<Dashboard />}/>
       <Route path="/courses" element={<Courses />}/>
       <Route path="/courses/single-course" element={<SingleCourse />}/>
+      <Route path="/courses/course-details" element={<CourseDetails />}/>
       <Route path="/my-learning" element={<MyLearning />}/>
       <Route path="/my-library" element={<MyLibrary />}/>
       <Route path="/notifications" element={<Notifications />}/>

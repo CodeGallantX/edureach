@@ -3,35 +3,109 @@ import { PiStarFill, PiPlayCircle, PiCaretRightBold } from "react-icons/pi";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
-const RecommendedCourses = () => {
-  const navigate = useNavigate();
+const courses = [
+  {
+    title: "Introduction to React Development",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Become a Salsa Dancer in just 3 weeks",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Become a Professional Data Analyst",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Fundamentals of Sales and Marketing",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Introduction to React Development",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Become a Salsa Dancer in just 3 weeks",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Become a Professional Data Analyst",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Fundamentals of Sales and Marketing",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Introduction to React Development",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Become a Salsa Dancer in just 3 weeks",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Become a Professional Data Analyst",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Fundamentals of Sales and Marketing",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Introduction to React Development",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Become a Salsa Dancer in just 3 weeks",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Become a Professional Data Analyst",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+  {
+    title: "Fundamentals of Sales and Marketing",
+    author: "Enoobong George",
+    rating: 5,
+    image: "https://placehold.co/200x120", // Replace with your image URL
+  },
+];
 
-  const courses = [
-    {
-      title: "Introduction to React Development",
-      author: "Enoobong George",
-      rating: 5,
-      image: "https://placehold.co/200x120", // Replace with your image URL
-    },
-    {
-      title: "Become a Salsa Dancer in just 3 weeks",
-      author: "Enoobong George",
-      rating: 5,
-      image: "https://placehold.co/200x120", // Replace with your image URL
-    },
-    {
-      title: "Become a Professional Data Analyst",
-      author: "Enoobong George",
-      rating: 5,
-      image: "https://placehold.co/200x120", // Replace with your image URL
-    },
-    {
-      title: "Fundamentals of Sales and Marketing",
-      author: "Enoobong George",
-      rating: 5,
-      image: "https://placehold.co/200x120", // Replace with your image URL
-    },
-  ];
+
+
+const RecommendedCourses = ({section}) => {
+  const navigate = useNavigate();
 
   const renderStars = (rating) => {
     const stars = [];
@@ -50,13 +124,11 @@ const RecommendedCourses = () => {
     <section className="w-full">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 gap-3">
         <div>
-          <h3 className="text-2xl font-bold text-left">Recommended Courses</h3>
-          <p className="text-sm text-left text-gray-600 mt-1">
-            See your overall information regarding your courses and your activities
-          </p>
+          <h3 className="text-2xl font-bold text-left">{section.title}</h3>
+          <p className="text-sm text-left text-gray-600 mt-1">{section.tagline}</p>
         </div>
         <button
-          onClick={() => navigate("/courses")}
+          onClick={() => navigate("/my-learning/courses-list")}
           className="bg-deepBlue py-2 px-6 rounded-full text-white"
         >
           View All
@@ -67,7 +139,7 @@ const RecommendedCourses = () => {
       {/* Mobile Slider */}
       <div className="md:hidden">
         <Carousel showThumbs={false} showStatus={false}>
-          {courses.map((course, index) => (
+          {courses.slice(0,3).map((course, index) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow overflow-hidden mx-4" // Added mx-4 for spacing
@@ -95,7 +167,7 @@ const RecommendedCourses = () => {
 
       {/* Desktop Grid */}
       <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-6">
-        {courses.map((course, index) => (
+        {courses.slice(0, 4).map((course, index) => (
           <div
             key={index}
             className="bg-white rounded-lg shadow overflow-hidden"

@@ -9,6 +9,11 @@ const page = {
     description: "Explore a variety of courses designed to enhance your skills and knowledge"
 }
 
+const section = {
+    title: "All Courses",
+    tagline: "Explore a variety of courses designed to enhance your skills and knowledge"
+}
+
 const App = () => {
     return (
         <div className="flex flex-row">
@@ -19,7 +24,7 @@ const App = () => {
                 <Header />
                 <Banner page={page} />
                 <OngoingCourses />
-                <RecommendedCourses />
+                <RecommendedCourses section={section} />
             </div>
         </div>
     )

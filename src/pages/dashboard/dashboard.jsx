@@ -12,6 +12,11 @@ const page = {
     description: "Manage your time, track your learning progress"
 };
 
+const section = {
+    title: "Recommended Courses",
+    tagline: "Manage your time, track your learning progress"
+};
+
 const Dashboard = () => {
     const navigate = useNavigate();
 
@@ -30,7 +35,7 @@ const Dashboard = () => {
                 <Banner page={page} />
                 <Card />
                 <CoursesOverview />
-                <RecommendedCourses />
+                <RecommendedCourses section={section} />
             </div>
         </div>
     );

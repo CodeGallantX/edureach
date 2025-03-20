@@ -1,4 +1,6 @@
-import React from 'react';
+import { useNavigate } from "react-router-dom"
+import Header from "../Header";
+
 import {
   PiGlobe,
   PiFilmReel,
@@ -9,6 +11,8 @@ import {
 } from 'react-icons/pi';
 
 const CourseDetails = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 mb-6">
       <div className="space-y-4">
@@ -38,8 +42,8 @@ const CourseDetails = () => {
           <span className="font-bold">When the Course is Completed</span>
         </div>
       </div>
-      <button className="flex items-center justify-center bg-deepBlue text-white rounded-full py-3 px-6 mt-6 w-full">
-        Enroll <PiPlayCircle className="ml-2" />
+      <button onClick={() => navigate("/courses/single-course")} className="flex items-center justify-center bg-deepBlue text-white rounded-full py-3 px-6 mt-6 w-full">
+        Enroll <PiPlayCircle className="ml-2 text-xl" />
       </button>
     </div>
   );

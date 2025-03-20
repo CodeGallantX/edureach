@@ -6,19 +6,19 @@ const ongoingCourses = [
     title: "Introduction to React Development",
     img: "",
     progress: 85,
-    link: "/courses/single-course",
+    link: "/courses/course-details",
   },
   {
     title: "Become a Salsa Dancer in 3 weeks",
     img: "",
     progress: 60,
-    link: "/courses/single-course",
+    link: "/courses/course-details",
   },
   {
     title: "Introduction to React Development",
     img: "",
     progress: 70,
-    link: "/courses/single-course",
+    link: "/courses/course-details",
   },
 ];
 
