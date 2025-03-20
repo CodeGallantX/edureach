@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <div className="relative flex flex-row items-center justify-between w-full bg-offWhite p-4">
             <SearchBox />
-            <div className="flex flex-row items-center justify-start space-x-2 sm:space-x-3 md:space-x-4">
+            <div className="flex flex-row items-center justify-start space-x-2 sm:space-x-3 md:space-x-4 px-2">
                 <div className="relative">
                     <PiBell className="text-3xl cursor-pointer text-blue" onClick={() => navigate("/notifications")}/>
                     <span className="w-3 h-3 bg-blue rounded-full absolute top-0 right-0.5"></span>

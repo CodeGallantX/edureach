@@ -37,7 +37,7 @@ const CoursesOverview = () => {
 
   return (
     <section className="w-full">
-      <div className="flex flex-row items-center justify-between p-6">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 space-y-2 md:space-y-0">
         <div>
           <h3 className="text-2xl font-bold text-left">My Ongoing Courses</h3>
           <p className="text-sm text-left text-gray-600 mt-1">
@@ -51,7 +51,7 @@ const CoursesOverview = () => {
           View All
         </button>
       </div>
-      <section className="overflow-x-auto">
+      <section className="w-full overflow-x-auto">
         <table className="min-w-full bg-white">
           <thead>
             <tr className="border-b border-gray-200">
@@ -71,22 +71,22 @@ const CoursesOverview = () => {
             {courses.map((course, index) => (
               <tr key={index} className="border-b border-gray-200">
                 <td className="py-4 px-6">
-                  <div className="flex items-center space-x-4">
+                  <div className="w-full flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gray-200 rounded-md">
                       {/* You can add course image here */}
                     </div>
-                    <div>
+                    <div className="w-full">
                       <h4 className="font-semibold">{course.title}</h4>
                       <p className="text-sm text-gray-600">{course.author}</p>
                     </div>
                   </div>
                 </td>
-                <td className="py-4 px-6">
+                <td className="w-1/3 py-4 px-6">
                   <div className="flex flex-col">
                     <p className="text-sm text-gray-700">
                       {course.completed}/{course.total}
                     </p>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
                       <div
                         className="bg-green-500 h-2.5 rounded-full"
                         style={{ width: `${course.progress}%` }}
@@ -95,8 +95,8 @@ const CoursesOverview = () => {
                     <p className="text-sm mt-1 text-gray-700">{course.progress}%</p>
                   </div>
                 </td>
-                <td className="py-4 px-6">
-                  <button className="bg-blue-100 text-blue-800 py-1 px-4 rounded-full text-sm">
+                <td className="px-4 px-6">
+                  <button className="bg-blue-100 text-blue-800 border border-blue-500 py-1 px-4 rounded-full text-sm w-full">
                     In Progress
                   </button>
                 </td>

@@ -4,7 +4,7 @@ import {
   PiPlusCircle,
   PiCaretLeft,
   PiCaretRight,
-  PiListBullets,
+  PiDotsThreeVertical,
 } from "react-icons/pi";
 import BtnComp from "../BtnComp"
 
@@ -58,7 +58,7 @@ const VideoPlayer = () => {
             onClick={() => navigate("#")}
             className="p-2 rounded-md border border-blue"
           >
-            <PiListBullets className="text-lg text-blue" />
+            <PiDotsThreeVertical className="text-lg text-blue" />
           </button>
         </div>
       </section>
