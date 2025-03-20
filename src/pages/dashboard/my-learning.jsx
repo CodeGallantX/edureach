@@ -1,17 +1,11 @@
 import Sidebar from "../../components/dashboard/Sidebar"
 import Header from "../../components/dashboard/Header"
 import Banner from "../../components/dashboard/Banner"
-import OngoingCourses from "../../components/dashboard/OngoingCourses"
-import AllCourses from "../../components/dashboard/RecommendedCourses"
+import LearningCourses from "../../components/dashboard/learning/LearningCourse"
 
 const page = {
     title: "My Learning",
     description: "Manage your time, track your learning progress"
-}
-
-const section = {
-    title: "My Learning",
-    tagline: "Manage your time, track your learning progress"
 }
 
 const App = () => {
@@ -23,8 +17,7 @@ const App = () => {
             <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
                 <Header />
                 <Banner page={page} />
-                <OngoingCourses />
-                <AllCourses section={section}/>
+                <LearningCourses />
             </div>
         </div>
     )
