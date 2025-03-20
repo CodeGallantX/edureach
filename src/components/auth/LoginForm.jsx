@@ -167,7 +167,7 @@ const LoginForm = () => {
               <span>Logging in...</span>
             </div>
           ) : (
-            "Login into your Account"
+            "Login"
           )}
         </button>
       </form>

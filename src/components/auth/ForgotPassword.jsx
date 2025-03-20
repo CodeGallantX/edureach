@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { FaArrowLeft } from "react-icons/fa6";
+import { PiArrowLeft, PiEnvelopeDuotone } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import aos from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
+import { useEffect } from "react";
+
 
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
@@ -12,8 +16,14 @@ const ForgotPassword = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showModal, setShowModal] = useState(false); // State for modal visibility
 
   const navigate = useNavigate();
+
+  // Initialize AOS
+  useEffect(() => {
+    aos.init({ duration: 300 });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,52 +40,45 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check for errors before submitting
-    const newErrors = {
-      email: formData.email ? "" : "Email address is required",
-    };
-
-    setErrors(newErrors);
-
-    if (isFormValid) {
-      setIsSubmitting(true);
-
-      try {
-        const response = await fetch("https://e-sdg.onrender.com/create/forgetPassword", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: formData.email }),
-        });
-
-        if (response.ok) {
-          // If the API call is successful, navigate to the reset password page
-          const result = await response.json();
-          const token = result.token; // Assuming the API returns a token
-          navigate(`/auth/reset-password/${token}`);
-        } else {
-          // Handle API errors
-          const result = await response.json();
-          setErrors({ ...errors, email: result.message || "No account registered with this email." });
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        setErrors({ ...errors, email: "An error occurred. Please try again later." });
-      } finally {
-        setIsSubmitting(false);
+  
+    // Basic validation
+    if (!formData.email) {
+      setErrors({ email: "Email address is required" });
+      return;
+    }
+  
+    setIsSubmitting(true);
+    setErrors({ email: "" }); // Clear previous errors
+  
+    try {
+      const response = await fetch("https://e-sdg.onrender.com/create/forgetPassword", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: formData.email }),
+      });
+  
+      if (response.ok) {
+        setShowModal(true); // Show success modal
+      } else {
+        const result = await response.json().catch(() => null); // Handle cases where response isn't JSON
+        setErrors({ email: result?.message || "No account registered with this email." });
       }
+    } catch (error) {
+      console.error("Error:", error);
+      setErrors({ email: "An error occurred. Please try again later." });
+    } finally {
+      setIsSubmitting(false);
     }
   };
+  
 
   return (
-    <div className="px-10 py-16 md:px-16 lg:px-20 justify-start md:justify-center">
+    <div className="px-6 py-16 md:px-10 lg:px-20 justify-start md:justify-center">
       <div
         onClick={() => navigate(-1)}
         className="font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20"
       >
-        <FaArrowLeft />
+        <PiArrowLeft />
         <span>Back</span>
       </div>
       <h2 className="text-3xl font-bold">Reset Password</h2>
@@ -118,6 +121,34 @@ const ForgotPassword = () => {
           )}
         </button>
       </form>
+
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="bg-white p-8 rounded-lg text-center max-w-md"
+            data-aos="zoom-in" // Add AOS animation
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
+          >
+            <div className="flex justify-center">
+              <PiEnvelopeDuotone className="text-6xl text-deepBlue" />
+            </div>
+            <h3 className="text-2xl font-bold mt-4">Email Sent</h3>
+            <p className="text-gray-600 mt-2">
+              We've sent an email to <strong>{formData.email}</strong>. Please follow the instructions in the email to reset your password.
+            </p>
+            <button
+              className="mt-6 px-6 py-2 bg-deepBlue text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+              onClick={() => setShowModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
