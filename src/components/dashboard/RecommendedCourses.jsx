@@ -128,7 +128,7 @@ const RecommendedCourses = ({section}) => {
           <p className="text-sm text-left text-gray-600 mt-1">{section.tagline}</p>
         </div>
         <button
-          onClick={() => navigate("/my-learning/courses-list")}
+          onClick={() => navigate("/my-learning")}
           className="bg-deepBlue py-2 px-6 rounded-full text-white"
         >
           View All
@@ -156,8 +156,8 @@ const RecommendedCourses = ({section}) => {
                   {renderStars(course.rating)}
                   <span className="text-xs text-gray-500">(91)</span>
                 </div>
-                <button className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
-                  Enroll <PiPlayCircle className="ml-2" />
+                <button onClick={() => navigate("/courses/course-details")} className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
+                  Enroll <PiPlayCircle className="ml-2 text-xl" />
                 </button>
               </div>
             </div>
