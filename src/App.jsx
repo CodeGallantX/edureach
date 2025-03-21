@@ -12,6 +12,7 @@ import CourseDetails from "./pages/dashboard/courses/course-details";
 import MyLearning from "./pages/dashboard/my-learning"
 import MyLibrary from "./pages/dashboard/my-library"
 import Profile from "./pages/dashboard/profile"
+import ProfileEdit from "./pages/dashboard/profile/edit-profile"
 import Notifications from "./pages/dashboard/notifications"
 import Settings from "./pages/dashboard/settings"
 
@@ -33,6 +34,7 @@ const App = () => {
       <Route path="/my-library" element={<MyLibrary />}/>
       <Route path="/notifications" element={<Notifications />}/>
       <Route path="/profile" element={<Profile />}/>
+      <Route path="/profile/edit" element={<ProfileEdit />}/>
       <Route path="/settings" element={<Settings />}/>
     </Routes>
   )
