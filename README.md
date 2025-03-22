@@ -202,6 +202,14 @@ The application uses **React Router DOM** for routing. Below are the defined rou
   - `/profile/edit` - Edit user profile.
   - `/settings` - User settings page.
 
+  **Teacher Dashboard Routes**
+  - `/teacher/dashboard` - Teacher dashboard page.
+  - `/teacher/courses` - Browse all courses.
+  - `/teacher/live` - View live courses.
+  - `/teacher/notifications` - View notifications.
+  - `/teacher/profile` - Teacher profile page.
+  - `/settings` - Teacher settings page.
+
 ---
 
 ## Acknowledgements

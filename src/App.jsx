@@ -19,7 +19,7 @@ import Settings from "./pages/dashboard/settings"
 // Teacher
 import TeacherDashboard from "./pages/teacher/dashboard";
 import TeacherCourses from "./pages/teacher/courses";
-import TeacherMyLibrary from "./pages/teacher/my-library"
+import TeacherLive from "./pages/teacher/live"
 import TeacherProfile from "./pages/teacher/profile"
 // import TeacherProfileEdit from "./pages/profile/edit-profile"
 import TeacherNotifications from "./pages/teacher/notifications"
@@ -50,7 +50,7 @@ const App = () => {
       {/* Teachers */}
       <Route path="/teacher/dashboard" element={<TeacherDashboard />}/>
       <Route path="/teacher/courses" element={<TeacherCourses />}/>
-      <Route path="/teacher/my-library" element={<TeacherMyLibrary />}/>
+      <Route path="/teacher/live" element={<TeacherLive />}/>
       <Route path="/teacher/notifications" element={<TeacherNotifications />}/>
       <Route path="/teacher/profile" element={<TeacherProfile />}/>
       {/* <Route path="/teacher/profile/edit" element={<TeacherProfileEdit />}/> */}
