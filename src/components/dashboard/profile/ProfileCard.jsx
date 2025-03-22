@@ -24,17 +24,19 @@ const ProfilePage = () => {
       case 'downloaded':
         return (
           <div className="p-8 w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((item) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
+              {[1, 2, 3, 4, 5, 6].map((item) => (
                 <div key={item} className="relative group">
+                  <div>
                   <img
                     src={`https://picsum.photos/300/200?random=${item}`}
                     alt={`Course ${item}`}
                     className="w-full h-48 object-cover rounded-lg"
-                  />
+                    />
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
                     <PiPlayCircleFill className="text-white text-5xl cursor-pointer" />
                   </div>
+                    </div>
                   <div className="mt-2">
                     <h3 className="text-lg font-semibold">Course Title {item}</h3>
                     <p className="text-sm text-gray-600">Course Description {item}</p>
@@ -47,8 +49,8 @@ const ProfilePage = () => {
       case 'watched':
         return (
           <div className="p-8 w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-              {[4, 5, 6].map((item) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full">
+              {[7, 8, 9, 10, 11, 12].map((item) => (
                 <div key={item} className="relative group">
                   <img
                     src={`https://picsum.photos/300/200?random=${item}`}
@@ -98,28 +100,28 @@ const ProfilePage = () => {
             </button>
           </div>
           <div className="block md:hidden flex space-x-4 mt-6 md:mt-0">
-            <button className="border border-deepBlue text-deepBlue hover:bg-deepBlue hover:text-white p-3 rounded-full transition-all duration-300 ease-in-out">
+            <button className="border border-deepBlue text-deepBlue hover:bg-deepBlue hover:text-white p-1 rounded-full transition-all duration-300 ease-in-out">
               <PiShareNetworkBold />
             </button>
-            <button className="bg-deepBlue text-white p-3 rounded-full transition-all duration-300 ease-in-out">
+            <button className="bg-deepBlue text-white p-1 rounded-full transition-all duration-300 ease-in-out">
               <PiPenNibBold onClick={() => navigate("/profile/edit")} className="inline-block mr-2" />
             </button>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-8 bg-gray-50 w-full">
+        <div className="grid grid-cols-3 sm:grid-cols-3 gap-6 p-8 bg-gray-50 w-full">
           <div className="text-center">
-            <h2 className="text-lg font-semibold text-gray-700">Videos</h2>
-            <p className="text-4xl font-bold text-blue-600">8</p>
+            <h2 className="text-base md:text-lg font-semibold text-gray-700">Videos</h2>
+            <p className="text-xl md:text-4xl font-bold text-blue-600">8</p>
           </div>
           <div className="text-center">
-            <h2 className="text-lg font-semibold text-gray-700">Total Students</h2>
-            <p className="text-4xl font-bold text-blue-600">120</p>
+            <h2 className="md:text-lg font-semibold text-gray-700">Total Students</h2>
+            <p className="text-xl md:text-4xl font-bold text-blue-600">120</p>
           </div>
           <div className="text-center">
-            <h2 className="text-lg font-semibold text-gray-700">Watched Videos</h2>
-            <p className="text-4xl font-bold text-blue-600">14</p>
+            <h2 className="text-base md:text-lg font-semibold text-gray-700">Watched Videos</h2>
+            <p className="text-xl md:text-4xl font-bold text-blue-600">14</p>
           </div>
         </div>
 

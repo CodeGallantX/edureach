@@ -104,6 +104,7 @@ const OTPForm = () => {
           )}
         </button>
       </form>
+        <p className="text-left text-sm mt-6 italic">Mock OTP: 123456</p>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { FaGoogle,  FaEye, FaEyeSlash } from "react-icons/fa6";
+import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode"; // Use named import
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -19,12 +21,13 @@ const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     if (authToken) {
-        navigate("/dashboard"); // Redirect if already logged in
+      navigate("/dashboard"); // Redirect if already logged in
     }
-}, [navigate]);
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -51,46 +54,96 @@ const LoginForm = () => {
     const isValid = validateForm();
 
     if (isValid) {
-        setIsSubmitting(true);
+      setIsSubmitting(true);
 
-        try {
-            const response = await fetch("https://e-sdg.onrender.com/create/signIn", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    logInID: formData.email,
-                    password: formData.password,
-                }),
-            });
+      try {
+        const response = await fetch("https://e-sdg.onrender.com/create/signIn", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            logInID: formData.email,
+            password: formData.password,
+          }),
+        });
 
-            if (!response.ok) {
-                throw new Error("Network error. Please try again.");
-            }
-
-            const result = await response.json();
-
-            if (result.success) {
-                console.log("Login successful:", result);
-
-                // Store user session/token in localStorage
-                localStorage.setItem("authToken", result.token);
-                
-                // Redirect to dashboard
-                navigate("/dashboard");
-            } else {
-                setErrors((prev) => ({ ...prev, email: result.message }));
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            setErrors((prev) => ({ ...prev, email: "An unexpected error occurred." }));
-        } finally {
-            setIsSubmitting(false);
+        if (!response.ok) {
+          throw new Error("Network error. Please try again.");
         }
-    }
-};
 
+        const result = await response.json();
+
+        if (result.success) {
+          console.log("Login successful:", result);
+
+          // Store user session/token in localStorage
+          localStorage.setItem("authToken", result.token);
+
+          // Fetch user data after successful login
+          const userResponse = await fetch(
+            `https://e-sdg.onrender.com/create/singleUser/${result.userId}` // Replace with the correct endpoint
+          );
+
+          if (!userResponse.ok) {
+            throw new Error("Failed to fetch user data.");
+          }
+
+          const userData = await userResponse.json();
+
+          // Store user data in localStorage
+          localStorage.setItem("userData", JSON.stringify(userData));
+
+          // Redirect to dashboard
+          navigate("/dashboard");
+        } else {
+          setErrors((prev) => ({ ...prev, email: result.message }));
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        setErrors((prev) => ({
+          ...prev,
+          email: "Unable to connect to the server. Please check your network connection.",
+        }));
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
+  const handleGoogleLoginSuccess = async (response) => {
+    const decoded = jwtDecode(response.credential); // Use jwtDecode instead of jwt_decode
+    try {
+      const googleResponse = await fetch("https://e-sdg.onrender.com/auth/google", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: response.credential }),
+      });
+  
+      if (!googleResponse.ok) {
+        throw new Error("Google login failed");
+      }
+  
+      const googleResult = await googleResponse.json();
+  
+      if (googleResult.success) {
+        localStorage.setItem("authToken", googleResult.token);
+        navigate("/dashboard");
+      } else {
+        setErrors((prev) => ({ ...prev, email: googleResult.message }));
+      }
+    } catch (error) {
+      console.error("Google login error", error);
+      setErrors((prev) => ({ ...prev, email: "Google login failed" }));
+    }
+  };
+
+  const handleGoogleLoginFailure = (error) => {
+    console.error("Google login failed:", error);
+    setErrors((prev) => ({ ...prev, email: "Google login failed." }));
+  };
 
   return (
     <div className="px-6 py-10 md:px-14 lg:px-20 w-full flex flex-col justify-center">
@@ -189,10 +242,11 @@ const LoginForm = () => {
 
       {/* Social Login Buttons */}
       <div className="flex flex-row items-center justify-between gap-6">
-        <div className="flex flex-row items-center justify-center gap-2 py-3 w-full rounded-md border border-gray-400 cursor-pointer hover:bg-gray-100 transition-all duration-300 ease-in-out">
-          <FaGoogle className="text-gray-600" />
-          <span>Google</span>
-        </div>
+        <GoogleLogin
+          onSuccess={handleGoogleLoginSuccess}
+          onError={handleGoogleLoginFailure}
+          className="w-full"
+        />
       </div>
     </div>
   );

@@ -70,10 +70,10 @@ const CourseDashboard = () => {
         <input
           type="text"
           placeholder="Search"
-          className="py-2 px-12 border rounded w-full"
+          className="py-2 px-12 border-2 rounded w-full focus:outline-none focus:border-gray-500 transition-all duration-300 ease-in-out"
           />
           </fieldset>
-        <div className="flex">
+        <div className="flex hidden md:block">
           <button
             onClick={toggleView}
             className={`py-2 px-3 md:px-4 rounded-l ${isGrid ? 'bg-deepBlue text-white' : 'text-deepBlue bg-white'}`}
