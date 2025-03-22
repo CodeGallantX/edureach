@@ -16,6 +16,15 @@ import ProfileEdit from "./pages/dashboard/profile/edit-profile"
 import Notifications from "./pages/dashboard/notifications"
 import Settings from "./pages/dashboard/settings"
 
+// Teacher
+import TeacherDashboard from "./pages/teacher/dashboard";
+import TeacherCourses from "./pages/teacher/courses";
+import TeacherMyLibrary from "./pages/teacher/my-library"
+import TeacherProfile from "./pages/teacher/profile"
+// import TeacherProfileEdit from "./pages/profile/edit-profile"
+import TeacherNotifications from "./pages/teacher/notifications"
+import TeacherSettings from "./pages/teacher/settings"
+
 const App = () => {
   return (
     <Routes>
@@ -36,6 +45,16 @@ const App = () => {
       <Route path="/profile" element={<Profile />}/>
       <Route path="/profile/edit" element={<ProfileEdit />}/>
       <Route path="/settings" element={<Settings />}/>
+
+
+      {/* Teachers */}
+      <Route path="/teacher/dashboard" element={<TeacherDashboard />}/>
+      <Route path="/teacher/courses" element={<TeacherCourses />}/>
+      <Route path="/teacher/my-library" element={<TeacherMyLibrary />}/>
+      <Route path="/teacher/notifications" element={<TeacherNotifications />}/>
+      <Route path="/teacher/profile" element={<TeacherProfile />}/>
+      {/* <Route path="/teacher/profile/edit" element={<TeacherProfileEdit />}/> */}
+      <Route path="/teacher/settings" element={<TeacherSettings />}/>
     </Routes>
   )
 }
