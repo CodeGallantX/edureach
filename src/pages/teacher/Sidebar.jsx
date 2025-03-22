@@ -13,25 +13,15 @@ const navLinks = [
     path: "/courses",
   },
   {
-    name: "My Library",
-    icon: <FaBook />,
-    path: "/library",
-  },
-  {
-    name: "My Learning",
-    icon: <FaChartBar />,
-    path: "/my-learning",
-  },
-  {
     name: "Notifications",
     icon: <FaChartBar />,
     path: "/notifications",
   },
-  {
-    name: "Profile",
-    icon: <FaUser />,
-    path: "/profile",
-  },
+  // {
+  //   name: "Profile",
+  //   icon: <FaUser />,
+  //   path: "/profile",
+  // },
   {
     name: "Settings",
     icon: <FaChartBar />,

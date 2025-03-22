@@ -1,8 +1,11 @@
+// src/components/auth/LoginForm.jsx
 import { useState, useEffect } from "react";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode"; // Use named import
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../redux/features/userSlice";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -21,11 +24,12 @@ const LoginForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     if (authToken) {
-      navigate("/dashboard"); // Redirect if already logged in
+      navigate("/dashboard");
     }
   }, [navigate]);
 
@@ -35,8 +39,6 @@ const LoginForm = () => {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
-
-    // Clear errors when user starts typing
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
@@ -75,14 +77,11 @@ const LoginForm = () => {
         const result = await response.json();
 
         if (result.success) {
-          console.log("Login successful:", result);
-
-          // Store user session/token in localStorage
           localStorage.setItem("authToken", result.token);
 
-          // Fetch user data after successful login
+          // Fetch user data
           const userResponse = await fetch(
-            `https://e-sdg.onrender.com/create/singleUser/${result.userId}` // Replace with the correct endpoint
+            `https://e-sdg.onrender.com/create/singleUser/${result.userId}`
           );
 
           if (!userResponse.ok) {
@@ -91,10 +90,9 @@ const LoginForm = () => {
 
           const userData = await userResponse.json();
 
-          // Store user data in localStorage
-          localStorage.setItem("userData", JSON.stringify(userData));
+          // Dispatch user data to Redux store
+          dispatch(setUserData(userData));
 
-          // Redirect to dashboard
           navigate("/dashboard");
         } else {
           setErrors((prev) => ({ ...prev, email: result.message }));
@@ -112,24 +110,28 @@ const LoginForm = () => {
   };
 
   const handleGoogleLoginSuccess = async (response) => {
-    const decoded = jwtDecode(response.credential); // Use jwtDecode instead of jwt_decode
+    const decoded = jwtDecode(response.credential);
     try {
       const googleResponse = await fetch("https://e-sdg.onrender.com/auth/google", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ token: response.credential }),
       });
-  
+
       if (!googleResponse.ok) {
         throw new Error("Google login failed");
       }
-  
+
       const googleResult = await googleResponse.json();
-  
+
       if (googleResult.success) {
         localStorage.setItem("authToken", googleResult.token);
+
+        // Dispatch user data to Redux store
+        dispatch(setUserData(googleResult.userData));
+
         navigate("/dashboard");
       } else {
         setErrors((prev) => ({ ...prev, email: googleResult.message }));

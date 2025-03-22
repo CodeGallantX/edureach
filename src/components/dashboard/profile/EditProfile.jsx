@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { PiUserCircleFill, PiPhoneFill, PiEnvelopeFill, PiBriefcaseFill, PiCalendarFill } from "react-icons/pi";
+import {
+  PiUserCircleFill,
+  PiPhoneFill,
+  PiEnvelopeFill,
+  PiBriefcaseFill,
+  PiCalendarFill,
+} from "react-icons/pi";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserData } from "../../../redux/features/userSlice";
 
 const EditProfile = () => {
   const [activeTab, setActiveTab] = useState("personal");
@@ -14,26 +22,26 @@ const EditProfile = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [message, setMessage] = useState("");
 
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
+
   useEffect(() => {
-    // Fetch user data from localStorage
-    const storedUserData = localStorage.getItem("userData");
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData);
+    if (userData) {
       setFullName(userData.fullName || "");
       setEmail(userData.email || "");
       setUsername(userData.username || "");
-      // Set other fields as needed
+      setPhoneNumber(userData.phoneNumber || "");
+      setProfessionalSummary(userData.professionalSummary || "");
+      setProfessionalTagline(userData.professionalTagline || "");
+      setYearsOfExperience(userData.yearsOfExperience || "");
+      setBiography(userData.biography || "");
+      setProfileImage(userData.profileImage || null);
     }
-  }, []);
-
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
+  }, [userData]);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file && file.size <= 2 * 1024 * 1024) {
-      // 2MB limit
       setProfileImage(URL.createObjectURL(file));
     } else {
       alert("Please upload an image less than 2MB.");
@@ -41,9 +49,20 @@ const EditProfile = () => {
   };
 
   const handleSaveChanges = () => {
-    // Simulate saving changes
+    const updatedData = {
+      fullName,
+      email,
+      username,
+      phoneNumber,
+      professionalSummary,
+      professionalTagline,
+      yearsOfExperience,
+      biography,
+      profileImage,
+    };
+    dispatch(updateUserData(updatedData));
     setMessage("Profile updated successfully!");
-    setTimeout(() => setMessage(""), 3000); // Hide message after 3 seconds
+    setTimeout(() => setMessage(""), 3000);
   };
 
   return (
@@ -52,20 +71,26 @@ const EditProfile = () => {
         {/* Header */}
         <div className="flex space-x-4 mb-6 border-b">
           <button
-            className={`border-b-2 ${activeTab === "personal" ? "border-blue-500 text-blue-500" : "text-gray-600"} px-4 py-2`}
-            onClick={() => handleTabClick("personal")}
+            className={`border-b-2 ${
+              activeTab === "personal" ? "border-blue-500 text-blue-500" : "text-gray-600"
+            } px-4 py-2`}
+            onClick={() => setActiveTab("personal")}
           >
             Personal Information
           </button>
           <button
-            className={`border-b-2 ${activeTab === "social" ? "border-blue-500 text-blue-500" : "text-gray-600"} px-4 py-2`}
-            onClick={() => handleTabClick("social")}
+            className={`border-b-2 ${
+              activeTab === "social" ? "border-blue-500 text-blue-500" : "text-gray-600"
+            } px-4 py-2`}
+            onClick={() => setActiveTab("social")}
           >
             Social Media
           </button>
           <button
-            className={`border-b-2 ${activeTab === "security" ? "border-blue-500 text-blue-500" : "text-gray-600"} px-4 py-2`}
-            onClick={() => handleTabClick("security")}
+            className={`border-b-2 ${
+              activeTab === "security" ? "border-blue-500 text-blue-500" : "text-gray-600"
+            } px-4 py-2`}
+            onClick={() => setActiveTab("security")}
           >
             Password & Security
           </button>
@@ -84,7 +109,12 @@ const EditProfile = () => {
               </div>
               <label className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">
                 Upload Picture (Max 2mb)
-                <input type="file" className="hidden" onChange={handleImageUpload} accept="image/*" />
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleImageUpload}
+                  accept="image/*"
+                />
               </label>
             </div>
 
@@ -139,7 +169,10 @@ const EditProfile = () => {
               </div>
             </div>
 
-            <button className="bg-blue-500 text-white px-4 py-2 rounded mb-6" onClick={handleSaveChanges}>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded mb-6"
+              onClick={handleSaveChanges}
+            >
               Save changes
             </button>
 
