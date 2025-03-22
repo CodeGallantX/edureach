@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PiFacebookLogoBold,
   PiInstagramLogoBold,
@@ -8,12 +8,19 @@ import {
   PiShareNetworkBold,
 } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("biography");
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+
+  useEffect(() => {
+    // Fetch user data from local storage
+    const storedUserData = localStorage.getItem("userData");
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    }
+  }, []);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -89,18 +96,18 @@ const ProfilePage = () => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="w-full overflow-hidden">
         {/* Header */}
-        <div className="flex flex-col md:flex-row items-center p-8 bg-white">
+        <div className="flex flex-col md:flex-row items-center justify-between p-8 bg-white w-full">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white">
             <img
-              src={userData.profileImage || "/default-profile.png"}
+              src={userData.profileImage || "/ariana-grande.png"}
               alt="Profile"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="flex-1 mt-6 md:mt-0 md:ml-8 text-center md:text-left">
-            <h1 className="text-3xl font-bold">{userData.fullName || "User Name"}</h1>
+            <h1 className="text-3xl font-bold">{userData.fullName || "Loading..."}</h1>
             <p className="text-sm text-gray-500 mt-2">
-              {userData.professionalTagline || "Professional UI/UX Designer"}
+              {userData.professionalTagline || "Professional Tagline"}
             </p>
           </div>
           <div className="hidden md:block flex flex-col lg:flex-row space-x-4 mt-6 md:mt-0">

@@ -1,11 +1,8 @@
-// src/components/auth/LoginForm.jsx
 import { useState, useEffect } from "react";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import { useDispatch } from "react-redux";
-import { setUserData } from "../../redux/features/userSlice";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -13,18 +10,14 @@ const LoginForm = () => {
     password: "",
     checkbox: false,
   });
-
   const [errors, setErrors] = useState({
     email: "",
     password: "",
     checkbox: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
@@ -90,8 +83,8 @@ const LoginForm = () => {
 
           const userData = await userResponse.json();
 
-          // Dispatch user data to Redux store
-          dispatch(setUserData(userData));
+          // Save user data to local storage
+          localStorage.setItem("userData", JSON.stringify(userData));
 
           navigate("/dashboard");
         } else {
@@ -101,7 +94,7 @@ const LoginForm = () => {
         console.error("Error during login:", error);
         setErrors((prev) => ({
           ...prev,
-          email: "Unable to connect to the server. Please check your network connection.",
+          email: "Unable to connect to the server. Please check your internet connection.",
         }));
       } finally {
         setIsSubmitting(false);
@@ -129,8 +122,8 @@ const LoginForm = () => {
       if (googleResult.success) {
         localStorage.setItem("authToken", googleResult.token);
 
-        // Dispatch user data to Redux store
-        dispatch(setUserData(googleResult.userData));
+        // Save user data to local storage
+        localStorage.setItem("userData", JSON.stringify(googleResult.userData));
 
         navigate("/dashboard");
       } else {
@@ -247,7 +240,7 @@ const LoginForm = () => {
         <GoogleLogin
           onSuccess={handleGoogleLoginSuccess}
           onError={handleGoogleLoginFailure}
-          className="w-full"
+          className="w-full text-center"
         />
       </div>
     </div>

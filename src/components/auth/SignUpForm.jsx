@@ -76,52 +76,56 @@ const SignUpForm = () => {
     formData.password &&
     formData.confirmPassword === formData.password;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const newErrors = {
-      fullName: formData.fullName ? "" : "Full Name is required",
-      email: formData.email ? "" : "Email is required",
-      phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
-      password: formData.password ? "" : "Password is required",
-      confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
-    };
-
-    setErrors(newErrors);
-
-    if (isFormValid) {
-      setIsSubmitting(true);
-
-      try {
-        const response = await fetch("https://e-sdg.onrender.com/create/sign-up", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fullName: formData.fullName,
-            email: formData.email,
-            phoneNumber: formData.phoneNumber,
-            password: formData.password,
-            username: formData.username, // Include username
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Sign-up failed");
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      const newErrors = {
+        fullName: formData.fullName ? "" : "Full Name is required",
+        email: formData.email ? "" : "Email is required",
+        phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
+        password: formData.password ? "" : "Password is required",
+        confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
+      };
+    
+      setErrors(newErrors);
+    
+      if (isFormValid) {
+        setIsSubmitting(true);
+    
+        try {
+          const response = await fetch("https://e-sdg.onrender.com/create/sign-up", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              fullName: formData.fullName,
+              email: formData.email,
+              phoneNumber: formData.phoneNumber,
+              password: formData.password,
+              username: formData.username,
+            }),
+          });
+    
+          if (!response.ok) {
+            throw new Error("Sign-up failed");
+          }
+    
+          const result = await response.json();
+          // console.log("Sign-up successful:", result);
+    
+          // Store user data in local storage
+          localStorage.setItem("userData", JSON.stringify(result.userData));
+    
+          // Navigate to verification page
+          navigate("/auth/verification");
+        } catch (error) {
+          console.error("Error during sign-up:", error);
+        } finally {
+          setIsSubmitting(false);
         }
-
-        const result = await response.json();
-        console.log("Sign-up successful:", result);
-
-        navigate("/auth/verification");
-      } catch (error) {
-        console.error("Error during sign-up:", error);
-      } finally {
-        setIsSubmitting(false);
       }
-    }
-  };
+    };
 
   return (
     <div className="px-4 py-10 md:px-16 lg:px-20 w-full flex flex-col justify-start md:justify-center">

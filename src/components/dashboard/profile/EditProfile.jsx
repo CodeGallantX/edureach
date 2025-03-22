@@ -6,8 +6,6 @@ import {
   PiBriefcaseFill,
   PiCalendarFill,
 } from "react-icons/pi";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUserData } from "../../../redux/features/userSlice";
 
 const EditProfile = () => {
   const [activeTab, setActiveTab] = useState("personal");
@@ -22,11 +20,11 @@ const EditProfile = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [message, setMessage] = useState("");
 
-  const dispatch = useDispatch();
-  const userData = useSelector((state) => state.user.userData);
-
   useEffect(() => {
-    if (userData) {
+    // Fetch user data from local storage
+    const storedUserData = localStorage.getItem("userData");
+    if (storedUserData) {
+      const userData = JSON.parse(storedUserData);
       setFullName(userData.fullName || "");
       setEmail(userData.email || "");
       setUsername(userData.username || "");
@@ -37,7 +35,7 @@ const EditProfile = () => {
       setBiography(userData.biography || "");
       setProfileImage(userData.profileImage || null);
     }
-  }, [userData]);
+  }, []);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -60,7 +58,9 @@ const EditProfile = () => {
       biography,
       profileImage,
     };
-    dispatch(updateUserData(updatedData));
+
+    // Save updated data to local storage
+    localStorage.setItem("userData", JSON.stringify(updatedData));
     setMessage("Profile updated successfully!");
     setTimeout(() => setMessage(""), 3000);
   };

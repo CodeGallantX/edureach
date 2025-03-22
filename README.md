@@ -54,7 +54,7 @@ The purpose of EduReach is to:
 The project follows a modular structure for better maintainability and scalability. Below is the file structure:
 
 ```
-├── .gitignore
+── .gitignore
 ├── README.md
 ├── eslint.config.js
 ├── index.html
@@ -62,72 +62,86 @@ The project follows a modular structure for better maintainability and scalabili
 ├── package.json
 ├── postcss.config.js
 ├── public
-│   ├── ariana-grande.png
-│   ├── background.jpeg
-│   ├── favicon.ico
-│   ├── logo-white.png
-│   ├── logo.png
-│   └── vite.svg
+    ├── ariana-grande.png
+    ├── background.jpeg
+    ├── favicon.ico
+    ├── logo-white.png
+    ├── logo.png
+    └── vite.svg
 ├── src
-│   ├── App.css
-│   ├── App.jsx
-│   ├── assets
-│   │   └── react.svg
-│   ├── components
-│   │   ├── auth
-│   │   │   ├── ForgotPassword.jsx
-│   │   │   ├── LoginForm.jsx
-│   │   │   ├── OTPForm.jsx
-│   │   │   ├── ResetPassword.jsx
-│   │   │   ├── SideIll.jsx
-│   │   │   └── SignUpForm.jsx
-│   │   └── dashboard
-│   │       ├── Banner.jsx
-│   │       ├── BtnComp.jsx
-│   │       ├── Card.jsx
-│   │       ├── CoursesOverview.jsx
-│   │       ├── Header.jsx
-│   │       ├── OngoingCourses.jsx
-│   │       ├── RecommendedCourses.jsx
-│   │       ├── SearchBox.jsx
-│   │       ├── Sidebar.jsx
-│   │       ├── courses
-│   │       │   ├── CourseContent.jsx
-│   │       │   └── VideoPlayer.jsx
-│   │       ├── learning
-│   │       │   ├── AuthorDetails.jsx
-│   │       │   ├── CourseContent.jsx
-│   │       │   ├── CourseDetails.jsx
-│   │       │   ├── CourseSummary.jsx
-│   │       │   └── LearningCourse.jsx
-│   │       └── profile
-│   │           └── ProfileCard.jsx
-│   ├── index.css
-│   ├── main.jsx
-│   └── pages
-│       ├── auth
-│       │   ├── forgot-password.jsx
-│       │   ├── login.jsx
-│       │   ├── reset-password.jsx
-│       │   ├── signup.jsx
-│       │   └── verification.jsx
-│       ├── dashboard
-│       │   ├── Sidebar.jsx
-│       │   ├── courses.jsx
-│       │   ├── courses
-│       │   │   ├── course-details.jsx
-│       │   │   └── single-course.jsx
-│       │   ├── dashboard.jsx
-│       │   ├── learning
-│       │   │   └── course-list.jsx
-│       │   ├── my-learning.jsx
-│       │   ├── my-library.jsx
-│       │   ├── notifications.jsx
-│       │   ├── profile.jsx
-│       │   ├── profile
-│       │   │   └── edit-profile.jsx
-│       │   └── settings.jsx
-│       └── home.jsx
+    ├── App.css
+    ├── App.jsx
+    ├── assets
+    │   └── react.svg
+    ├── components
+    │   ├── auth
+    │   │   ├── ForgotPassword.jsx
+    │   │   ├── LoginForm.jsx
+    │   │   ├── OTPForm.jsx
+    │   │   ├── ResetPassword.jsx
+    │   │   ├── SideIll.jsx
+    │   │   └── SignUpForm.jsx
+    │   └── dashboard
+    │   │   ├── Banner.jsx
+    │   │   ├── BtnComp.jsx
+    │   │   ├── Card.jsx
+    │   │   ├── CoursesOverview.jsx
+    │   │   ├── Header.jsx
+    │   │   ├── OngoingCourses.jsx
+    │   │   ├── RecommendedCourses.jsx
+    │   │   ├── SearchBox.jsx
+    │   │   ├── Sidebar.jsx
+    │   │   ├── courses
+    │   │       ├── CourseContent.jsx
+    │   │       └── VideoPlayer.jsx
+    │   │   ├── learning
+    │   │       ├── AuthorDetails.jsx
+    │   │       ├── CourseContent.jsx
+    │   │       ├── CourseDetails.jsx
+    │   │       ├── CourseSummary.jsx
+    │   │       └── LearningCourse.jsx
+    │   │   └── profile
+    │   │       ├── EditProfile.jsx
+    │   │       └── ProfileCard.jsx
+    ├── index.css
+    ├── main.jsx
+    ├── pages
+    │   ├── auth
+    │   │   ├── forgot-password.jsx
+    │   │   ├── login.jsx
+    │   │   ├── reset-password.jsx
+    │   │   ├── signup.jsx
+    │   │   └── verification.jsx
+    │   ├── dashboard
+    │   │   ├── Sidebar.jsx
+    │   │   ├── courses.jsx
+    │   │   ├── courses
+    │   │   │   ├── course-details.jsx
+    │   │   │   └── single-course.jsx
+    │   │   ├── dashboard.jsx
+    │   │   ├── learning
+    │   │   │   └── course-list.jsx
+    │   │   ├── my-learning.jsx
+    │   │   ├── my-library.jsx
+    │   │   ├── notifications.jsx
+    │   │   ├── profile.jsx
+    │   │   ├── profile
+    │   │   │   └── edit-profile.jsx
+    │   │   └── settings.jsx
+    │   ├── home.jsx
+    │   └── teacher
+    │   │   ├── Sidebar.jsx
+    │   │   ├── courses.jsx
+    │   │   ├── dashboard.jsx
+    │   │   ├── my-learning.jsx
+    │   │   ├── my-library.jsx
+    │   │   ├── notifications.jsx
+    │   │   ├── profile.jsx
+    │   │   └── settings.jsx
+    └── redux
+    │   ├── features
+    │       └── userSlice.js
+    │   └── store.js
 ├── tailwind.config.js
 ├── vercel.json
 └── vite.config.js
