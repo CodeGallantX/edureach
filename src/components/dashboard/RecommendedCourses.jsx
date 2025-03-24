@@ -44,19 +44,19 @@ const courses = [
     author: "Dr. Victoria Sanyaolu",
     rating: 3.9,
     raters: 115,
-    image: "/genetics.jpeg", // Replace with your image URL
+    image: "/genetics.jpeg", 
   },
   {
-    title: "Become a Professional Data Analyst",
-    author: "Enoobong George",
+    title: "Django for Beginners",
+    author: "Matthew Dorcas",
     rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
+    image: "/django-framework.jpeg",
   },
   {
-    title: "Fundamentals of Sales and Marketing",
+    title: "Introduction to Rocket Science",
     author: "Enoobong George",
     rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
+    image: "/introduction-to-rocket-science.jpeg",
   },
   {
     title: "Introduction to React Development",
