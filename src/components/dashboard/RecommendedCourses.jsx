@@ -58,54 +58,86 @@ const courses = [
     rating: 5,
     image: "/introduction-to-rocket-science.jpeg",
   },
-  {
-    title: "Introduction to React Development",
-    author: "Enoobong George",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
-  },
-  {
-    title: "Become a Salsa Dancer in just 3 weeks",
-    author: "Enoobong George",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
-  },
-  {
-    title: "Become a Professional Data Analyst",
-    author: "Enoobong George",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
-  },
-  {
-    title: "Fundamentals of Sales and Marketing",
-    author: "Enoobong George",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
-  },
-  {
-    title: "Introduction to React Development",
-    author: "Enoobong George",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
-  },
-  {
-    title: "Become a Salsa Dancer in just 3 weeks",
-    author: "Enoobong George",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
-  },
-  {
-    title: "Become a Professional Data Analyst",
-    author: "Enoobong George",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
-  },
-  {
-    title: "Fundamentals of Sales and Marketing",
-    author: "Enoobong George",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
-  },
+    {
+      title: "Mastering React: From Basics to Advanced",
+      author: "Sarah Johnson",
+      rating: 4.8,
+      students: 1245,
+      image: "https://placehold.co/200x120/4F46E5/FFFFFF?text=React",
+      category: "Web Development",
+      duration: "28 hours",
+      price: "$89.99"
+    },
+    {
+      title: "Salsa Dancing Pro: Zero to Performance in 3 Weeks",
+      author: "Carlos Mendez",
+      rating: 4.9,
+      students: 892,
+      image: "https://placehold.co/200x120/DC2626/FFFFFF?text=Salsa",
+      category: "Dance",
+      duration: "21 hours",
+      price: "$59.99"
+    },
+    {
+      title: "Data Analysis with Python: Complete Bootcamp",
+      author: "Dr. Priya Patel",
+      rating: 4.7,
+      students: 3560,
+      image: "https://placehold.co/200x120/059669/FFFFFF?text=Data+Science",
+      category: "Data Science",
+      duration: "42 hours",
+      price: "$99.99"
+    },
+    {
+      title: "Modern Digital Marketing Strategies 2023",
+      author: "Jamal Williams",
+      rating: 4.6,
+      students: 2103,
+      image: "https://placehold.co/200x120/9333EA/FFFFFF?text=Marketing",
+      category: "Business",
+      duration: "35 hours",
+      price: "$79.99"
+    },
+    {
+      title: "UI/UX Design Fundamentals with Figma",
+      author: "Emma Zhang",
+      rating: 4.9,
+      students: 1876,
+      image: "https://placehold.co/200x120/EA580C/FFFFFF?text=UX+Design",
+      category: "Design",
+      duration: "24 hours",
+      price: "$74.99"
+    },
+    {
+      title: "Blockchain & Cryptocurrency Fundamentals",
+      author: "David Chen",
+      rating: 4.5,
+      students: 3150,
+      image: "https://placehold.co/200x120/2563EB/FFFFFF?text=Blockchain",
+      category: "Finance",
+      duration: "18 hours",
+      price: "$69.99"
+    },
+    {
+      title: "Mobile App Development with Flutter",
+      author: "Maria Rodriguez",
+      rating: 4.7,
+      students: 1432,
+      image: "https://placehold.co/200x120/DB2777/FFFFFF?text=Flutter",
+      category: "Mobile Development",
+      duration: "32 hours",
+      price: "$84.99"
+    },
+    {
+      title: "Artificial Intelligence for Beginners",
+      author: "Dr. Alan Turing",
+      rating: 4.8,
+      students: 4987,
+      image: "https://placehold.co/200x120/0D9488/FFFFFF?text=AI",
+      category: "Computer Science",
+      duration: "40 hours",
+      price: "$94.99"
+    }
 ];
 
 
