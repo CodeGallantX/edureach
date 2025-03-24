@@ -41,12 +41,12 @@ The purpose of EduReach is to:
 - **Frontend Framework**: React (v19.0.0)
 - **Styling**: TailwindCSS
 - **Routing**: React Router DOM (v7.3.0)
-- **State Management**: React Context API (if needed)
+<!-- - **State Management**: React Context API, and Redux -->
 - **API Calls**: Axios (v1.8.3)
-- **Animation**: AOS (Animate On Scroll, v2.3.4)
+<!-- - **Animation**: AOS (Animate On Scroll, v2.3.4) -->
 - **Build Tool**: Vite (v6.2.0)
 - **Linting**: ESLint (v9.21.0)
-- **Version Control**: Git (GitHub/GitLab)
+- **Version Control**: Git (GitHub)
 
 ---
 
@@ -225,5 +225,3 @@ EduReach is designed to address the critical challenges in Nigeria's education s
 The project is **100% open-source**, meaning anyone can contribute to its development or adapt it for their own use. By focusing on **digital access**, **employability**, and **quality learning**, EduReach aims to empower millions of Nigerians with the skills they need to succeed in the modern world.
 
 ---
-
-For more information, visit the [EduReach GitHub Repository](https://github.com/your-repo/edureach) or contact the EduReach team.

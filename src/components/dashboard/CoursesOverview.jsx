@@ -8,7 +8,8 @@ const CoursesOverview = () => {
     {
       id: 1,
       title: "Fundamentals of UI/UX Design",
-      author: "Enoobong George",
+      img: "/UI_UX_Course.jpeg",
+      author: "Adams Joy",
       progress: 85,
       completed: 10,
       total: 13,
@@ -16,6 +17,7 @@ const CoursesOverview = () => {
     {
       id: 2,
       title: "Learn Salsa Dancing in 3 weeks",
+      img: "/salsa-dancing.jpg",
       author: "Majekodunmi Smith",
       progress: 45,
       completed: 6,
@@ -72,8 +74,12 @@ const CoursesOverview = () => {
               <tr key={index} className="border-b border-gray-200">
                 <td className="py-4 px-6">
                   <div className="w-full flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gray-200 rounded-md">
-                      {/* You can add course image here */}
+                    <div className="w-20 h-20 bg-gray-200 rounded-md overflow-hidden"> {/* added overflow hidden to clip any overflowing image portions */}
+                      <img
+                        src={course.img}
+                        alt={`${course.title} Edureach`}
+                        className="w-full h-full object-cover object-center" // added object-cover and object-center
+                      />
                     </div>
                     <div className="w-full">
                       <h4 className="font-semibold">{course.title}</h4>

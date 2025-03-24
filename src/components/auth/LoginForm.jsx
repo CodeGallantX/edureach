@@ -236,12 +236,14 @@ const LoginForm = () => {
       </div>
 
       {/* Social Login Buttons */}
-      <div className="flex flex-row items-center justify-between gap-6">
-        <GoogleLogin
-          onSuccess={handleGoogleLoginSuccess}
-          onError={handleGoogleLoginFailure}
-          className="w-full text-center"
-        />
+      <div className="flex flex-row items-center justify-center w-full">
+        <div className="w-full"> 
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={handleGoogleLoginFailure}
+            className="w-full"
+          />
+        </div>
       </div>
     </div>
   );
