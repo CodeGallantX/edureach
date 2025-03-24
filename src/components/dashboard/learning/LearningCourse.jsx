@@ -33,7 +33,7 @@ const LearningCourses = () => {
     {
       title: 'Advanced JavaScript Concepts',
       progress: 30,
-      image: 'https://via.placeholder.com/150',
+      image: '/advanced-javascript-concepts.png',
       link: '/courses/course-details',
     },
     {
