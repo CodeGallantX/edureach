@@ -10,13 +10,13 @@ const CourseDashboard = () => {
     {
       title: 'Introduction to React Development',
       progress: 70,
-      image: 'https://via.placeholder.com/150', // Replace with your image
+      image: '/introduction_to_react.png', // Replace with your image
       link: '/courses/course-details', // Placeholder link
     },
     {
       title: 'Become a Salsa Dancer in 3 weeks',
       progress: 70,
-      image: 'https://via.placeholder.com/150',
+      image: 'salsa-dancing.jpg',
       link: '/courses/course-details',
     },
     {
@@ -97,7 +97,7 @@ const CourseDashboard = () => {
               key={index}
               className="flex flex-col items-start justify-center bg-white p-4 rounded-xl space-y-3"
             >
-              <div className="w-full h-20 bg-gray-200 rounded-md">
+              <div className="w-full h-40 bg-gray-200 rounded-md">
                 <img
                   src={course.image}
                   alt={course.title}

@@ -6,21 +6,21 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carous
 const courses = [
   {
     title: "Introduction to React Development",
-    author: "Enoobong George",
+    author: "Akinyemi James",
     rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
+    image: "/introduction_to_react.png", // Replace with your image URL
   },
   {
     title: "Become a Salsa Dancer in just 3 weeks",
-    author: "Enoobong George",
+    author: "Luca Bernando",
     rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
+    image: "/salsa-dancing.jpg", // Replace with your image URL
   },
   {
     title: "Become a Professional Data Analyst",
     author: "Enoobong George",
     rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
+    image: "/data_analysis.jpeg", // Replace with your image URL
   },
   {
     title: "Fundamentals of Sales and Marketing",
@@ -29,10 +29,10 @@ const courses = [
     image: "https://placehold.co/200x120", // Replace with your image URL
   },
   {
-    title: "Introduction to React Development",
-    author: "Enoobong George",
+    title: "Principle of Quantum Computing",
+    author: "David J. Milan",
     rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
+    image: "/quantum-computing", // Replace with your image URL
   },
   {
     title: "Become a Salsa Dancer in just 3 weeks",

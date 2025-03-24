@@ -4,19 +4,19 @@ import { useNavigate } from "react-router-dom";
 const ongoingCourses = [
   {
     title: "Introduction to React Development",
-    img: "",
+    img: "/introduction_to_react.png",
     progress: 85,
     link: "/courses/course-details",
   },
   {
     title: "Become a Salsa Dancer in 3 weeks",
-    img: "",
+    img: "/salsa-dancing.jpg",
     progress: 60,
     link: "/courses/course-details",
   },
   {
-    title: "Introduction to React Development",
-    img: "",
+    title: "Bohr's Model of an Atom",
+    img: "/bohr's_model_of_an_atom",
     progress: 70,
     link: "/courses/course-details",
   },
@@ -37,7 +37,7 @@ const OngoingCourses = () => {
             className="flex flex-col items-start justify-center bg-white p-4 rounded-xl space-y-3"
           >
             {/* Replace this with your actual image */}
-            <div className="w-full h-20 bg-gray-200 rounded-md"></div>
+            <div className="w-full h-40 bg-gray-200 rounded-md"></div>
             <h3 className="text-xl font-bold text-blue">{course.title}</h3>
 
             {/* ReactProgress */}
