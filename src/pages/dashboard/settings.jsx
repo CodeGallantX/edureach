@@ -3,8 +3,8 @@ import Header from "../../components/dashboard/Header"
 import Banner from "../../components/dashboard/Banner"
 
 const page = {
-    title: "Dashboard",
-    description: "Manage your time, track your learning progress"
+    title: "Settings",
+    description: "Personalise your dashboard"
 }
 
 const App = () => {

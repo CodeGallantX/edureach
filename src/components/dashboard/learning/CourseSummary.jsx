@@ -1,16 +1,24 @@
-import React from 'react';
+import BtnComp from "../BtnComp";
+import { PiPlayFill } from "react-icons/pi";
 
 const CourseDetails = () => {
   return (
     <div className="w-full p-4">
-      {/* Image Section */}
-      <div className="relative mb-6">
+      {/* Image Section with Overlay */}
+      <BtnComp />
+      <div className="relative mb-6 group">
         <img
-          src="https://placehold.co/800x400" // Replace with your image URL
+          src="/UI_UX_Course.jpeg" 
           alt="Course Preview"
-          className="w-full rounded-lg"
+          className="w-full rounded-lg transition-opacity group-hover:opacity-90"
         />
-        {/* You can add an overlay or play button here if needed */}
+        
+        {/* Overlay with Play Button */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+          <button className="bg-white/90 p-4 rounded-full hover:bg-white transition-all transform hover:scale-105">
+            <PiPlayFill className="text-2xl text-blue-600" />
+          </button>
+        </div>
       </div>
 
       {/* Title and Author */}
@@ -31,8 +39,6 @@ const CourseDetails = () => {
           device.
         </p>
       </div>
-
-      {/* Add more sections as needed (e.g., course content, instructor bio) */}
     </div>
   );
 };

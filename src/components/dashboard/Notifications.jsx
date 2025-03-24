@@ -168,7 +168,7 @@ export default function Notifications({ onClose, onMarkAsRead }) {
               <p className="text-gray-600 pl-11 mb-6">
                 {selectedNotification.details}
               </p>
-              <div className="flex justify-end">
+              {/* <div className="flex justify-end">
                 <button
                   onClick={() => {
                     setSelectedNotification(null);
@@ -178,7 +178,7 @@ export default function Notifications({ onClose, onMarkAsRead }) {
                 >
                   Close
                 </button>
-              </div>
+              </div> */}
             </motion.div>
           </div>
         )}

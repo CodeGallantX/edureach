@@ -66,7 +66,6 @@ const courses = [
       image: "https://placehold.co/200x120/4F46E5/FFFFFF?text=React",
       category: "Web Development",
       duration: "28 hours",
-      price: "$89.99"
     },
     {
       title: "Salsa Dancing Pro: Zero to Performance in 3 Weeks",
@@ -76,7 +75,6 @@ const courses = [
       image: "https://placehold.co/200x120/DC2626/FFFFFF?text=Salsa",
       category: "Dance",
       duration: "21 hours",
-      price: "$59.99"
     },
     {
       title: "Data Analysis with Python: Complete Bootcamp",
@@ -86,7 +84,6 @@ const courses = [
       image: "https://placehold.co/200x120/059669/FFFFFF?text=Data+Science",
       category: "Data Science",
       duration: "42 hours",
-      price: "$99.99"
     },
     {
       title: "Modern Digital Marketing Strategies 2023",
@@ -96,7 +93,6 @@ const courses = [
       image: "https://placehold.co/200x120/9333EA/FFFFFF?text=Marketing",
       category: "Business",
       duration: "35 hours",
-      price: "$79.99"
     },
     {
       title: "UI/UX Design Fundamentals with Figma",
@@ -106,7 +102,6 @@ const courses = [
       image: "https://placehold.co/200x120/EA580C/FFFFFF?text=UX+Design",
       category: "Design",
       duration: "24 hours",
-      price: "$74.99"
     },
     {
       title: "Blockchain & Cryptocurrency Fundamentals",
@@ -116,7 +111,6 @@ const courses = [
       image: "https://placehold.co/200x120/2563EB/FFFFFF?text=Blockchain",
       category: "Finance",
       duration: "18 hours",
-      price: "$69.99"
     },
     {
       title: "Mobile App Development with Flutter",
@@ -126,7 +120,6 @@ const courses = [
       image: "https://placehold.co/200x120/DB2777/FFFFFF?text=Flutter",
       category: "Mobile Development",
       duration: "32 hours",
-      price: "$84.99"
     },
     {
       title: "Artificial Intelligence for Beginners",
@@ -136,10 +129,8 @@ const courses = [
       image: "https://placehold.co/200x120/0D9488/FFFFFF?text=AI",
       category: "Computer Science",
       duration: "40 hours",
-      price: "$94.99"
     }
 ];
-
 
 
 const RecommendedCourses = ({section}) => {
@@ -175,27 +166,34 @@ const RecommendedCourses = ({section}) => {
       </div>
 
       {/* Mobile Slider */}
-      <div className="md:hidden">
-        <Carousel showThumbs={false} showStatus={false}>
+      <div className="md:hidden pt-2 pb-6">
+        <Carousel 
+          showThumbs={false}
+          showStatus={false}
+          showIndicators={false}
+          autoplay={true} 
+          interval={3000} 
+          stopOnHover={true}
+          emulateTouch={true}>
           {courses.slice(0,6).map((course, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow overflow-hidden mx-4" // Added mx-4 for spacing
+              className="bg-white rounded-lg shadow overflow-hidden mx-4 group" // Added mx-4 for spacing
             >
               <img
                 src={course.image}
                 alt={course.title}
-                className="w-full h-36 object-cover"
+                className="w-full h-52 object-cover group-hover:scale-105 transition-all duration-300 ease-in-out"
               />
-              <div className="p-4">
-                <h4 className="font-semibold">{course.title}</h4>
+              <div className="p-4 text-left">
+                <h4 className="font-semibold text-xl">{course.title}</h4>
                 <p className="text-sm text-gray-600">{course.author}</p>
                 <div className="flex items-center mt-2 space-x-1">
                   {renderStars(course.rating)}
                   <span className="text-xs text-gray-500">{course.raters}</span>
                 </div>
                 <button onClick={() => navigate("/courses/course-details")} className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
-                  Enroll <PiPlayCircle className="ml-2 text-xl" />
+                  Enroll <PiPlayCircle className="ml-2 text-xl group-hover:scale-110 duration-200 ease-in-out" />
                 </button>
               </div>
             </div>

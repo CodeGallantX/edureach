@@ -39,7 +39,7 @@ const Dashboard = () => {
       <Sidebar />
       <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash">
         <Header userData={userData} />
-        <Banner page={page} />
+        <Banner class="hidden md:block" page={page} />
         <Card />
         <CoursesOverview />
         <RecommendedCourses section={section} />
