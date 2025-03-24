@@ -37,7 +37,7 @@ const courses = [
     author: "David J. Milan",
     rating: 5,
     raters: 53,
-    image: "/quantum-computing", // Replace with your image URL
+    image: "/principles-of-quantum-computing.jpeg", // Replace with your image URL
   },
   {
     title: "Genetics and Evolutionary Biology",
@@ -54,7 +54,7 @@ const courses = [
   },
   {
     title: "Introduction to Rocket Science",
-    author: "Enoobong George",
+    author: "Kim Bernard",
     rating: 5,
     image: "/introduction-to-rocket-science.jpeg",
   },

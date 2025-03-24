@@ -27,7 +27,7 @@ const LearningCourses = () => {
     {
       title: 'Become a Salsa Dancer in 3 weeks',
       progress: 70,
-      image: 'https://via.placeholder.com/150',
+      image: '/salsa-dancing.jpg',
       link: '/courses/course-details',
     },
     {
@@ -39,7 +39,7 @@ const LearningCourses = () => {
     {
       title: 'UX Design Fundamentals',
       progress: 70,
-      image: 'https://via.placeholder.com/150',
+      image: '/UI_UX_Course.jpeg',
       link: '/courses/course-details',
     },
   ];
