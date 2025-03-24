@@ -20,9 +20,9 @@ const CourseDashboard = () => {
       link: '/courses/course-details',
     },
     {
-      title: 'Become a Salsa Dancer in 3 weeks',
+      title: 'Fundamentals of Sales and Marketing',
       progress: 70,
-      image: 'https://via.placeholder.com/150',
+      image: '/sales-and-marketing.png',
       link: '/courses/course-details',
     },
     {

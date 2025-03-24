@@ -18,7 +18,7 @@ const courses = [
   },
   {
     title: "Become a Professional Data Analyst",
-    author: "Enoobong George",
+    author: "Dr. Arowolo",
     rating: 5,
     image: "/data_analysis.jpeg", // Replace with your image URL
   },
@@ -26,7 +26,7 @@ const courses = [
     title: "Fundamentals of Sales and Marketing",
     author: "Enoobong George",
     rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
+    image: "/sales-and-marketing.png", // Replace with your image URL
   },
   {
     title: "Principle of Quantum Computing",
@@ -35,8 +35,8 @@ const courses = [
     image: "/quantum-computing", // Replace with your image URL
   },
   {
-    title: "Become a Salsa Dancer in just 3 weeks",
-    author: "Enoobong George",
+    title: "Genetics and Evolutionary Biology",
+    author: "Dr. Victoria Sanyaolu",
     rating: 5,
     image: "https://placehold.co/200x120", // Replace with your image URL
   },
