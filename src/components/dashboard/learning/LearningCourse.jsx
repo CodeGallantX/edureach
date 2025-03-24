@@ -8,19 +8,19 @@ const CourseDashboard = () => {
   const [isGrid, setIsGrid] = useState(true);
   const courses = [
     {
-      title: 'Introduction to React Development',
+      title: 'Django Framework',
       progress: 70,
       image: '/introduction_to_react.png', // Replace with your image
       link: '/courses/course-details', // Placeholder link
     },
     {
-      title: 'Become a Salsa Dancer in 3 weeks',
+      title: 'Introduction to Rocket Science',
       progress: 70,
       image: 'salsa-dancing.jpg',
       link: '/courses/course-details',
     },
     {
-      title: 'Fundamentals of Sales and Marketing',
+      title: '',
       progress: 70,
       image: '/sales-and-marketing.png',
       link: '/courses/course-details',

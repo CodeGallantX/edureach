@@ -8,37 +8,43 @@ const courses = [
     title: "Introduction to React Development",
     author: "Akinyemi James",
     rating: 5,
+    raters: 189,
     image: "/introduction_to_react.png", // Replace with your image URL
   },
   {
     title: "Become a Salsa Dancer in just 3 weeks",
     author: "Luca Bernando",
-    rating: 5,
+    rating: 4,
+    raters: 86,
     image: "/salsa-dancing.jpg", // Replace with your image URL
   },
   {
     title: "Become a Professional Data Analyst",
     author: "Dr. Arowolo",
-    rating: 5,
+    rating: 4,
+    raters: 111,
     image: "/data_analysis.jpeg", // Replace with your image URL
   },
   {
     title: "Fundamentals of Sales and Marketing",
     author: "Enoobong George",
-    rating: 5,
+    rating: 4.1,
+    raters: 320,
     image: "/sales-and-marketing.png", // Replace with your image URL
   },
   {
     title: "Principle of Quantum Computing",
     author: "David J. Milan",
     rating: 5,
+    raters: 53,
     image: "/quantum-computing", // Replace with your image URL
   },
   {
     title: "Genetics and Evolutionary Biology",
     author: "Dr. Victoria Sanyaolu",
-    rating: 5,
-    image: "https://placehold.co/200x120", // Replace with your image URL
+    rating: 3.9,
+    raters: 115,
+    image: "/genetics.jpeg", // Replace with your image URL
   },
   {
     title: "Become a Professional Data Analyst",
@@ -139,7 +145,7 @@ const RecommendedCourses = ({section}) => {
       {/* Mobile Slider */}
       <div className="md:hidden">
         <Carousel showThumbs={false} showStatus={false}>
-          {courses.slice(0,3).map((course, index) => (
+          {courses.slice(0,6).map((course, index) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow overflow-hidden mx-4" // Added mx-4 for spacing
@@ -147,14 +153,14 @@ const RecommendedCourses = ({section}) => {
               <img
                 src={course.image}
                 alt={course.title}
-                className="w-full h-30 object-cover"
+                className="w-full h-36 object-cover"
               />
               <div className="p-4">
                 <h4 className="font-semibold">{course.title}</h4>
                 <p className="text-sm text-gray-600">{course.author}</p>
                 <div className="flex items-center mt-2 space-x-1">
                   {renderStars(course.rating)}
-                  <span className="text-xs text-gray-500">(91)</span>
+                  <span className="text-xs text-gray-500">{course.raters}</span>
                 </div>
                 <button onClick={() => navigate("/courses/course-details")} className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
                   Enroll <PiPlayCircle className="ml-2 text-xl" />
@@ -166,8 +172,8 @@ const RecommendedCourses = ({section}) => {
       </div>
 
       {/* Desktop Grid */}
-      <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-6">
-        {courses.slice(0, 4).map((course, index) => (
+      <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+        {courses.slice(0, 6).map((course, index) => (
           <div
             key={index}
             className="bg-white rounded-lg shadow overflow-hidden"
@@ -175,17 +181,17 @@ const RecommendedCourses = ({section}) => {
             <img
               src={course.image}
               alt={course.title}
-              className="w-full h-30 object-cover"
+              className="w-full h-44 object-cover"
             />
             <div className="p-4">
               <h4 className="font-semibold">{course.title}</h4>
               <p className="text-sm text-gray-600">{course.author}</p>
               <div className="flex items-center mt-2 space-x-1">
                 {renderStars(course.rating)}
-                <span className="text-xs text-gray-500">(91)</span>
+                <span className="text-xs text-gray-500">{course.raters}</span>
               </div>
               <button className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
-                Enroll <PiPlayCircle className="ml-2" />
+                Enroll <PiPlayCircle className="ml-2 text-xl" />
               </button>
             </div>
           </div>

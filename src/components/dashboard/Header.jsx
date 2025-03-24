@@ -1,6 +1,7 @@
 import SearchBox from "./SearchBox";
 import { PiBell } from "react-icons/pi"
 import { useNavigate } from "react-router-dom"
+import Notifications from "../../components/dashboard/Notifications"
 
 const Header = () => {
 
