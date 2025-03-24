@@ -26,6 +26,7 @@ const CoursesOverview = () => {
     {
       id: 3,
       title: "Become a Professional Data Analyst",
+      img: "/data_analysis.jpeg",
       author: "Enoobong George",
       progress: 85,
       completed: 12,

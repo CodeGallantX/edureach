@@ -1,6 +1,7 @@
 import Sidebar from "../../components/dashboard/Sidebar"
 import Header from "../../components/dashboard/Header"
 import Banner from "../../components/dashboard/Banner"
+import Notifications from "../../components/dashboard/Notifications"
 
 const page = {
     title: "Notifications",
@@ -16,6 +17,7 @@ const App = () => {
             <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
                 <Header />
                 <Banner page={page} />
+                <Notifications />
             </div>
         </div>
     )
