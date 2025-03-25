@@ -105,26 +105,26 @@ const LoginForm = () => {
   const handleGoogleLoginSuccess = async (response) => {
     const decoded = jwtDecode(response.credential);
     try {
-      const googleResponse = await fetch("https://e-sdg.onrender.com/auth/google", {
-        method: "POST",
+      // Using GET request with the token as a query parameter
+      const googleResponse = await fetch(`https://e-sdg.onrender.com/auth/google?token=${encodeURIComponent(response.credential)}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ token: response.credential }),
       });
-
+  
       if (!googleResponse.ok) {
         throw new Error("Google login failed");
       }
-
+  
       const googleResult = await googleResponse.json();
-
+  
       if (googleResult.success) {
         localStorage.setItem("authToken", googleResult.token);
-
+  
         // Save user data to local storage
         localStorage.setItem("userData", JSON.stringify(googleResult.userData));
-
+  
         navigate("/dashboard");
       } else {
         setErrors((prev) => ({ ...prev, email: googleResult.message }));
