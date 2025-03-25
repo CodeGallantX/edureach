@@ -244,7 +244,7 @@ const LoginForm = () => {
           width="100%"
           shape="rectangular"
           theme="filled_blue"
-          text="continue_with"
+          text="signin_with"
           size="large"
           logo_alignment="left"
           useOneTap 
