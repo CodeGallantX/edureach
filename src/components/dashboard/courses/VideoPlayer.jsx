@@ -67,7 +67,7 @@ const VideoPlayer = () => {
       <BtnComp />
       
       {/* Video Player Section */}
-      <section className="mt-4 bg-black rounded-xl overflow-hidden relative group">
+      <section className="mt-4 bg-black rounded-xl overflow-hidden relative group p-4">
         <ReactPlayer
           ref={playerRef}
           url={videoData.videoUrl}
