@@ -4,40 +4,5 @@
       "source": "/",
       "destination": "/index.html"
     },
-    {
-      "source": "/auth/google/callback",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/dashboard",
-      "destination": "/index.html"
-    }
   ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self' https://e-sdg.onrender.com https://accounts.google.com https://oauth2.googleapis.com; connect-src 'self' https://e-sdg.onrender.com https://accounts.google.com https://oauth2.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://oauth2.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; frame-src 'self' https://accounts.google.com;"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization, X-Requested-With"
-        },
-        {
-          "key": "Cross-Origin-Opener-Policy",
-          "value": "same-origin-allow-popups"
-        }
-      ]
-    }
-  ]
 }
