@@ -241,14 +241,14 @@ const LoginForm = () => {
         <GoogleLogin
           onSuccess={handleGoogleLoginSuccess}
           onError={handleGoogleLoginFailure}
-          width="100%"  // Makes button responsive
+          width="100%"
           shape="rectangular"
           theme="filled_blue"
           text="continue_with"
           size="large"
           logo_alignment="left"
-          useOneTap  // Enables Google's one-tap sign-in
-          auto_select  // Automatically signs in returning users
+          useOneTap 
+          auto_select  
         />
       </div>
     </div>
