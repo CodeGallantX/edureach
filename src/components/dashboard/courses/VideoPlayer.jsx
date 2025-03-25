@@ -25,13 +25,13 @@ const VideoPlayer = () => {
 
   // Video data - replace with your actual data
   const videoData = {
-    title: "Learn UI/UX Design (International Standard)",
+    title: "Learn UI/UX Design",
     instructor: {
-      name: "Emily Lawson",
+      name: "Bobby Michael",
       role: "UI/UX Professional",
-      image: "/ariana-grande.png"
+      image: "https://yt3.googleusercontent.com/sIkwkO7wfyO9uVAzMymeZGgkIU04uy3odDor8Yybc6vK4d4QDG629QtKMbNyYu8XK_X40M2w=s160-c-k-c0x00ffffff-no-rj"
     },
-    videoUrl: "https://example.com/video.mp4" // Replace with your video URL
+    videoUrl: "/videos/Using-Figma-as-aUI-UX-designer.mp4" // Replace with your video URL
   };
 
   const handlePlayPause = () => {

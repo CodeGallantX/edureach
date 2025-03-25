@@ -1,7 +1,25 @@
+import { useState, useRef } from 'react';
 import BtnComp from "../BtnComp";
-import { PiPlayFill } from "react-icons/pi";
+import { PiPlayFill, PiX } from "react-icons/pi";
+import ReactPlayer from 'react-player';
 
 const CourseDetails = () => {
+  const [showVideo, setShowVideo] = useState(false);
+  const playerRef = useRef(null);
+
+  const introVideoUrl = "/videos/Introduction to UI UX design.mp4"; // Replace with your actual video URL
+
+  const handlePlayClick = () => {
+    setShowVideo(true);
+  };
+
+  const handleCloseVideo = () => {
+    setShowVideo(false);
+    if (playerRef.current) {
+      playerRef.current.seekTo(0);
+    }
+  };
+
   return (
     <div className="w-full p-4">
       {/* Image Section with Overlay */}
@@ -14,7 +32,10 @@ const CourseDetails = () => {
         />
         
         {/* Overlay with Play Button */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
+        <div 
+          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg cursor-pointer"
+          onClick={handlePlayClick}
+        >
           <button className="bg-white/90 p-4 rounded-full hover:bg-white transition-all transform hover:scale-105">
             <PiPlayFill className="text-2xl text-blue-600" />
           </button>
@@ -39,6 +60,36 @@ const CourseDetails = () => {
           device.
         </p>
       </div>
+
+      {/* Video Modal */}
+      {showVideo && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-75 flex items-center justify-center p-4">
+          <div className="relative w-full max-w-4xl bg-black rounded-lg overflow-hidden">
+            <button 
+              onClick={handleCloseVideo}
+              className="absolute top-4 right-4 z-10 text-white hover:text-gray-300 transition-colors"
+            >
+              <PiX className="text-3xl" />
+            </button>
+            
+            <ReactPlayer
+              ref={playerRef}
+              url={introVideoUrl}
+              width="100%"
+              height="100%"
+              controls={true}
+              playing={true}
+              config={{
+                file: {
+                  attributes: {
+                    controlsList: 'nodownload'
+                  }
+                }
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

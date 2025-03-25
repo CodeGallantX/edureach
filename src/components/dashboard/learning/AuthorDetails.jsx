@@ -16,7 +16,7 @@ const AuthorDetails = () => {
     { icon: <PiInstagramLogo className="text-xl" />, url: "#", color: "bg-gradient-to-tr from-pink-500 to-yellow-400" },
     { icon: <PiLinkedinLogo className="text-xl" />, url: "#", color: "bg-blue-700" },
     { icon: <PiTwitterLogo className="text-xl" />, url: "#", color: "bg-sky-500" },
-    { icon: <PiGithubLogo className="text-xl" />, url: "#", color: "bg-gray-800" }
+    { icon: <PiGithubLogo className="text-xl" />, url: "http://www.youtube.com/@Real_bobbymichael", color: "bg-red-800" }
   ];
 
   return (
@@ -34,17 +34,17 @@ const AuthorDetails = () => {
           className="relative flex-shrink-0"
         >
           <img
-            src="/ariana-grande.png" 
-            alt="Ariana Grande"
-            className="w-20 h-20 sm:w-28 sm:h-28 rounded-full object-cover" /* Added object-cover */
+            src="/bobby-michael.jpg" 
+            alt="Bobby Michael"
+            className="w-20 h-20 sm:w-28 sm:h-28 rounded-full object-cover"
           />
           <div className="absolute bottom-0 right-0 bg-blue-500 text-white rounded-full p-1">
             <PiGlobe className="text-lg" />
           </div>
         </motion.div>
         <div className="flex-1 min-w-0"> 
-          <h3 className="text-xl font-bold text-gray-800 mb-2">Kia Smith</h3> 
-          <p className="text-gray-600 mb-3 text-sm truncate">UI/UX Designer & Frontend Developer</p>
+          <h3 className="text-xl font-bold text-gray-800 mb-2">Bobby Michael</h3> 
+          <p className="text-gray-600 mb-3 text-sm truncate">Product Designer</p>
           <div className="flex items-center space-x-2 text-sm text-gray-700 mb-4"> 
             <PiEnvelopeSimple className="text-gray-500 flex-shrink-0" />
             <a href="#" className="hover:text-blue-600 transition-colors truncate">
@@ -55,9 +55,7 @@ const AuthorDetails = () => {
       </div>
           
           <p className="text-gray-700">
-            Passionate designer and developer with 5+ years of experience creating beautiful, 
-            user-centered digital experiences. Specializes in React, Figma, and design systems. 
-            Open-source contributor and tech educator.
+          Bobby Michael is a passionate and highly creative Product Designer that seeks to empower and enlighten fellow youths about the power and value in the digital world. 
           </p>
           </div>
 
