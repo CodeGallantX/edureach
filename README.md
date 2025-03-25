@@ -43,7 +43,8 @@ The purpose of EduReach is to:
 - **Routing**: React Router DOM (v7.3.0)
 <!-- - **State Management**: React Context API, and Redux -->
 - **API Calls**: Axios (v1.8.3)
-<!-- - **Animation**: AOS (Animate On Scroll, v2.3.4) -->
+- **Animation**: Framer-Motion 
+- **Carousel**: React-Responsive-Carousel
 - **Build Tool**: Vite (v6.2.0)
 - **Linting**: ESLint (v9.21.0)
 - **Version Control**: Git (GitHub)
