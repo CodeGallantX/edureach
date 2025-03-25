@@ -23,11 +23,6 @@ const navLinks = [
     path: "/my-learning",
   },
   {
-    name: "Notifications",
-    icon: <FaChartBar />,
-    path: "/notifications",
-  },
-  {
     name: "Profile",
     icon: <FaUser />,
     path: "/profile",
