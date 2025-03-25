@@ -3,6 +3,15 @@ import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+
+// Create Axios instance with base configuration
+const api = axios.create({
+  baseURL: "https://e-sdg.onrender.com",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -52,49 +61,31 @@ const LoginForm = () => {
       setIsSubmitting(true);
 
       try {
-        const response = await fetch("https://e-sdg.onrender.com/create/signIn", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            logInID: formData.email,
-            password: formData.password,
-          }),
+        // Regular login with Axios
+        const response = await api.post("/create/signIn", {
+          logInID: formData.email,
+          password: formData.password,
         });
 
-        if (!response.ok) {
-          throw new Error("Network error. Please try again.");
-        }
+        if (response.data.success) {
+          localStorage.setItem("authToken", response.data.token);
 
-        const result = await response.json();
-
-        if (result.success) {
-          localStorage.setItem("authToken", result.token);
-
-          // Fetch user data
-          const userResponse = await fetch(
-            `https://e-sdg.onrender.com/create/singleUser/${result.userId}`
-          );
-
-          if (!userResponse.ok) {
-            throw new Error("Failed to fetch user data.");
-          }
-
-          const userData = await userResponse.json();
-
-          // Save user data to local storage
-          localStorage.setItem("userData", JSON.stringify(userData));
+          // Fetch user data with Axios
+          const userResponse = await api.get(`/create/singleUser/${response.data.userId}`);
+          localStorage.setItem("userData", JSON.stringify(userResponse.data));
 
           navigate("/dashboard");
         } else {
-          setErrors((prev) => ({ ...prev, email: result.message }));
+          setErrors((prev) => ({ ...prev, email: response.data.message }));
         }
       } catch (error) {
         console.error("Error during login:", error);
+        const errorMessage = error.response?.data?.message || 
+                           error.message || 
+                           "Unable to connect to the server. Please check your internet connection.";
         setErrors((prev) => ({
           ...prev,
-          email: "Unable to connect to the server. Please check your internet connection.",
+          email: errorMessage,
         }));
       } finally {
         setIsSubmitting(false);
@@ -103,41 +94,32 @@ const LoginForm = () => {
   };
 
   const handleGoogleLoginSuccess = async (response) => {
-    const decoded = jwtDecode(response.credential);
     try {
-      // Using GET request with the token as a query parameter
-      const googleResponse = await fetch(`https://e-sdg.onrender.com/auth/google?token=${encodeURIComponent(response.credential)}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const decoded = jwtDecode(response.credential);
+      
+      // Google login with Axios
+      const googleResponse = await api.get("/auth/google", {
+        params: { token: response.credential }
       });
-  
-      if (!googleResponse.ok) {
-        throw new Error("Google login failed");
-      }
-  
-      const googleResult = await googleResponse.json();
-  
-      if (googleResult.success) {
-        localStorage.setItem("authToken", googleResult.token);
-  
-        // Save user data to local storage
-        localStorage.setItem("userData", JSON.stringify(googleResult.userData));
-  
+
+      if (googleResponse.data.success) {
+        localStorage.setItem("authToken", googleResponse.data.token);
+        localStorage.setItem("userData", JSON.stringify(googleResponse.data.userData));
         navigate("/dashboard");
       } else {
-        setErrors((prev) => ({ ...prev, email: googleResult.message }));
+        setErrors((prev) => ({ ...prev, email: googleResponse.data.message }));
       }
     } catch (error) {
       console.error("Google login error", error);
-      setErrors((prev) => ({ ...prev, email: "Google login failed" }));
+      const errorMessage = error.response?.data?.message || 
+                         "Google login failed. Please try again.";
+      setErrors((prev) => ({ ...prev, email: errorMessage }));
     }
   };
 
   const handleGoogleLoginFailure = (error) => {
     console.error("Google login failed:", error);
-    setErrors((prev) => ({ ...prev, email: "Google login failed." }));
+    setErrors((prev) => ({ ...prev, email: "Google login failed. Please try again." }));
   };
 
   return (
@@ -237,21 +219,21 @@ const LoginForm = () => {
 
       {/* Social Login Buttons */}
       <div className="flex justify-center w-full max-w-md mx-auto">
-      <div className="w-full">
-        <GoogleLogin
-          onSuccess={handleGoogleLoginSuccess}
-          onError={handleGoogleLoginFailure}
-          width="100%"
-          shape="rectangular"
-          theme="filled_blue"
-          text="signin_with"
-          size="large"
-          logo_alignment="left"
-          useOneTap 
-          auto_select  
-        />
+        <div className="w-full">
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={handleGoogleLoginFailure}
+            width="100%"
+            shape="rectangular"
+            theme="filled_blue"
+            text="signin_with"
+            size="large"
+            logo_alignment="left"
+            useOneTap 
+            auto_select  
+          />
+        </div>
       </div>
-    </div>
     </div>
   );
 };
