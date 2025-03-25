@@ -9,8 +9,8 @@ import {
   PiDotsThreeVertical,
   PiPause,
   PiPlay,
-  PiVolumeHigh,
-  PiVolumeX
+  PiSpeakerHigh,
+  PiSpeakerSimpleSlash 
 } from "react-icons/pi";
 import BtnComp from "../BtnComp";
 
@@ -136,7 +136,7 @@ const VideoPlayer = () => {
               onClick={() => setMuted(!muted)}
               className="text-white hover:text-blue-400 transition-colors"
             >
-              {muted ? <PiVolumeX size={24} /> : <PiVolumeHigh size={24} />}
+              {muted ? <PiSpeakerSimpleSlash  size={24} /> : <PiSpeakerHigh size={24} />}
             </button>
             
             <input
