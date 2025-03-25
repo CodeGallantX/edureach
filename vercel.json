@@ -1,18 +1,45 @@
 {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/"
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/auth/google/callback",
+      "destination": "/index.html" 
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://apis.google.com; connect-src 'self' https://www.googleapis.com" },
+        { 
+          "key": "Access-Control-Allow-Origin", 
+          "value": "https://edureach-psi.vercel.app" 
+        },
+        { 
+          "key": "Access-Control-Allow-Methods", 
+          "value": "GET,OPTIONS,POST" 
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "/dashboard",
+      "dest": "/index.html",
+      "headers": {
+        "Cache-Control": "no-store"
       }
-    ],
-    "headers": [
-      {
-        "source": "/(.*)",
-        "headers": [
-          { "key": "Access-Control-Allow-Origin", "value": "*" },
-          { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
-          { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With, Content-Type, Authorization" }
-        ]
-      }
-    ]
-  }
+    }
+  ]
+}

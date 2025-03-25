@@ -236,15 +236,22 @@ const LoginForm = () => {
       </div>
 
       {/* Social Login Buttons */}
-      <div className="flex flex-row items-center justify-center w-full">
-        <div className="w-full"> 
-          <GoogleLogin
-            onSuccess={handleGoogleLoginSuccess}
-            onError={handleGoogleLoginFailure}
-            className="w-full"
-          />
-        </div>
+      <div className="flex justify-center w-full max-w-md mx-auto">
+      <div className="w-full">
+        <GoogleLogin
+          onSuccess={handleGoogleLoginSuccess}
+          onError={handleGoogleLoginFailure}
+          width="100%"  // Makes button responsive
+          shape="rectangular"
+          theme="filled_blue"
+          text="continue_with"
+          size="large"
+          logo_alignment="left"
+          useOneTap  // Enables Google's one-tap sign-in
+          auto_select  // Automatically signs in returning users
+        />
       </div>
+    </div>
     </div>
   );
 };
