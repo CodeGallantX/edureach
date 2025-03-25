@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import ReactPlayer from 'react-player';
 import {
@@ -9,19 +9,27 @@ import {
   PiDotsThreeVertical,
   PiPause,
   PiPlay,
-  // PiVolumeHigh,
-  // PiVolumeX
+  PiVolumeHigh,
+  PiVolumeX
 } from "react-icons/pi";
 import BtnComp from "../BtnComp";
 
 const VideoPlayer = () => {
   const navigate = useNavigate();
   const playerRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true); // Auto-play by default
   const [volume, setVolume] = useState(0.8);
   const [muted, setMuted] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [hasWindow, setHasWindow] = useState(false);
+
+  // Fix for SSR (Server-Side Rendering)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
+    }
+  }, []);
 
   // Video data - replace with your actual data
   const videoData = {
@@ -31,7 +39,7 @@ const VideoPlayer = () => {
       role: "UI/UX Professional",
       image: "https://yt3.googleusercontent.com/sIkwkO7wfyO9uVAzMymeZGgkIU04uy3odDor8Yybc6vK4d4QDG629QtKMbNyYu8XK_X40M2w=s160-c-k-c0x00ffffff-no-rj"
     },
-    videoUrl: "/videos/Using-Figma-as-aUI-UX-designer.mp4" // Replace with your video URL
+    videoUrl: "/videos/Using-Figma-as-aUI-UX-designer.mp4" // Ensure this path is correct
   };
 
   const handlePlayPause = () => {
@@ -39,7 +47,9 @@ const VideoPlayer = () => {
   };
 
   const handleVolumeChange = (e) => {
-    setVolume(parseFloat(e.target.value));
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    setMuted(newVolume === 0);
   };
 
   const handleProgress = (state) => {
@@ -48,6 +58,12 @@ const VideoPlayer = () => {
 
   const handleDuration = (duration) => {
     setDuration(duration);
+  };
+
+  const handleSeek = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    playerRef.current.seekTo(pos);
   };
 
   const formatTime = (seconds) => {
@@ -67,22 +83,33 @@ const VideoPlayer = () => {
       <BtnComp />
       
       {/* Video Player Section */}
-      <section className="mt-4 bg-black rounded-xl overflow-hidden relative group p-4">
-        <ReactPlayer
-          ref={playerRef}
-          url={videoData.videoUrl}
-          width="100%"
-          height="100%"
-          playing={playing}
-          volume={volume}
-          muted={muted}
-          onProgress={handleProgress}
-          onDuration={handleDuration}
-          controls={false}
-        />
+      <section className="mt-4 bg-black rounded-xl overflow-hidden relative group aspect-video">
+        {hasWindow && (
+          <ReactPlayer
+            ref={playerRef}
+            url={videoData.videoUrl}
+            width="100%"
+            height="100%"
+            playing={playing}
+            volume={volume}
+            muted={muted}
+            onProgress={handleProgress}
+            onDuration={handleDuration}
+            controls={false}
+            config={{
+              file: {
+                forceVideo: true,
+                attributes: {
+                  controlsList: 'nodownload',
+                  disablePictureInPicture: true
+                }
+              }
+            }}
+          />
+        )}
         
         {/* Custom Controls */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity">
           <div className="flex items-center space-x-4">
             <button 
               onClick={handlePlayPause}
@@ -91,7 +118,10 @@ const VideoPlayer = () => {
               {playing ? <PiPause size={24} /> : <PiPlay size={24} />}
             </button>
             
-            <div className="flex-1 h-1 bg-gray-600 rounded-full overflow-hidden">
+            <div 
+              className="flex-1 h-1 bg-gray-600 rounded-full overflow-hidden cursor-pointer"
+              onClick={handleSeek}
+            >
               <div 
                 className="h-full bg-blue-500" 
                 style={{ width: `${progress * 100}%` }}
@@ -106,7 +136,7 @@ const VideoPlayer = () => {
               onClick={() => setMuted(!muted)}
               className="text-white hover:text-blue-400 transition-colors"
             >
-              {/* {muted ? <PiVolumeX size={24} /> : <PiVolumeHigh size={24} />} */}
+              {muted ? <PiVolumeX size={24} /> : <PiVolumeHigh size={24} />}
             </button>
             
             <input
@@ -160,7 +190,7 @@ const VideoPlayer = () => {
               <div className="border-l border-gray-200" />
               
               <button
-                onClick={() => navigate("/next-lesson")} // Update with your next lesson path
+                onClick={() => navigate("/next-lesson")}
                 className="px-4 py-2 flex items-center gap-2 text-blue-600 hover:bg-blue-50 transition-colors"
               >
                 <span>Next</span>
