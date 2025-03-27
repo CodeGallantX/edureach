@@ -4,50 +4,73 @@ import { PiGridFourFill, PiListBullets, PiPlayCircle, PiMagnifyingGlassBold } fr
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LearningCourses = () => {
-  const [isGrid, setIsGrid] = useState(true);
-  const courses = [
+  const [courses, setCourses] = useState([
     {
-      title: 'Django Framework',
-      progress: 70,
-      image: '/django-framework.jpeg',
-      link: '/courses/course-details', 
+      title: 'SSS 3 Physics [WAEC syllabus]',
+      progress: 60,
+      image: '/waec-physics.jpeg',
+      link: '/courses/waec-physics',
+      // lecturer: 'Professor Okonjo Iweala',
     },
     {
-      title: 'Introduction to Rocket Science',
+      title: 'Organic Chemistry',
+      progress: 75,
+      image: 'jamb-chemistry.jpeg',
+      link: '/courses/jamb-chemistry',
+      // lecturer: 'Professor Miriam Omalu',
+    },
+    {
+      title: 'SSS 3 Mathematics',
+      progress: 25,
+      image: '/basic-mathematics.jpg',
+      link: '/courses/basic-mathematics',
+      // lecturer: 'Chike Obi',
+    },
+    {
+        title: 'Complex Numbers',
+        progress: 90,
+        image: '/complex-numbers.jpeg',
+        link: '/courses/waec-biology',
+        // lecturer: 'Professor Grace Oladapo',
+      },
+    {
+      title: 'Agricultural Science',
+      progress: 40,
+      image: '/agricultural-science.jpeg',
+      link: '/courses/agricultural-science',
+      // lecturer: 'Professor Akin Mabogunje',
+    },
+    {
+      title: 'Technical Drawing',
+      progress: 10,
+      image: '/technical-drawing.jpeg',
+      link: '/courses/technical-drawing',
+      // lecturer: 'Engineer Philip Emeagwali',
+    },
+    {
+      title: 'Further Mathematics',
+      progress: 50,
+      image: '/further-mathematics.jpeg',
+      link: '/courses/further-mathematics',
+      // lecturer: 'Professor James Ezeilo',
+    },
+    {
+      title: 'Use of English',
+      progress: 30,
+      image: '/use-of-english.jpeg',
+      link: '/courses/use-of-english',
+      // lecturer: 'Wole Soyinka',
+    },
+    {
+      title: 'Computer Science',
       progress: 80,
-      image: 'introduction-to-rocket-science.jpeg',
-      link: '/courses/course-details',
+      image: '/computer-science.jpeg',
+      link: '/courses/computer-science',
+      // lecturer: 'Professor Jelani Aliyu',
     },
-    {
-      title: 'Sales and Marketing',
-      progress: 30,
-      image: '/sales-and-marketing.png',
-      link: '/courses/course-details',
-    },
-    {
-      title: 'Become a Salsa Dancer in 3 weeks',
-      progress: 90,
-      image: '/salsa-dancing.jpg',
-      link: '/courses/course-details',
-    },
-    {
-      title: 'Advanced JavaScript Concepts',
-      progress: 30,
-      image: '/advanced-javascript-concepts.png',
-      link: '/courses/course-details',
-    },
-    {
-      title: 'UX Design Fundamentals',
-      progress: 20,
-      image: '/UI_UX_Course.jpeg',
-      link: '/courses/course-details',
-    },
-  ];
-
-  const toggleView = () => {
-    setIsGrid(!isGrid);
-  };
-
+  ]);
+  const [isGrid, setIsGrid] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   // Animation variants
@@ -56,31 +79,51 @@ const LearningCourses = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    show: { opacity: 1, y: 0 },
   };
 
   const viewChangeVariants = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
-    exit: { opacity: 0 }
+    exit: { opacity: 0 },
   };
+
+  // Function to toggle between grid and list view
+  const toggleView = () => {
+    setIsGrid(!isGrid);
+  };
+
+  // Function to handle search
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Filtered courses based on search term
+  const filteredCourses = courses.filter(
+    (course) =>
+      course.title.toLowerCase().includes(searchTerm.toLowerCase()) 
+    // ||
+      // course.lecturer.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="p-4 w-full">
       <div className="flex justify-between items-center mb-4 w-full">
         <fieldset className="relative flex flex-row items-center justify-start w-3/5 md:w-2/3">
-          <PiMagnifyingGlassBold className="absolute text-xl text-gray-500 translate-x-4"/>
+          <PiMagnifyingGlassBold className="absolute text-xl text-gray-500 translate-x-4" />
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search courses or lecturers..."
             className="py-2 px-12 border-2 rounded w-full focus:outline-none focus:border-gray-500 transition-all duration-300 ease-in-out"
+            onChange={handleSearch}
+            value={searchTerm}
           />
         </fieldset>
         <div className="flex hidden md:block">
@@ -90,7 +133,7 @@ const LearningCourses = () => {
               isGrid ? 'bg-deepBlue text-white' : 'text-deepBlue bg-white'
             }`}
           >
-            <PiGridFourFill size={20} className="inline-block mr-1"/>
+            <PiGridFourFill size={20} className="inline-block mr-1" />
           </button>
           <button
             onClick={toggleView}
@@ -120,14 +163,14 @@ const LearningCourses = () => {
               initial="hidden"
               animate="show"
             >
-              {courses.map((course, index) => (
+              {filteredCourses.map((course, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
                   whileHover={{ y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}
                   className="flex flex-col items-start justify-center bg-white p-4 rounded-xl space-y-3 shadow-md"
                 >
-                  <motion.div 
+                  <motion.div
                     className="w-full h-40 bg-gray-200 rounded-md overflow-hidden"
                     whileHover={{ scale: 1.03 }}
                   >
@@ -165,7 +208,7 @@ const LearningCourses = () => {
               initial="hidden"
               animate="show"
             >
-              {courses.map((course, index) => (
+              {filteredCourses.map((course, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}

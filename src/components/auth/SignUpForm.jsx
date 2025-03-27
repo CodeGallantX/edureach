@@ -17,6 +17,7 @@ const SignUpForm = () => {
 
   const [passwordConditions, setPasswordConditions] = useState({
     minLength: false,
+    maxLength: false,
     upperLower: false,
     numberSpecial: false,
   });
@@ -56,6 +57,7 @@ const SignUpForm = () => {
   const validatePassword = (password) => {
     setPasswordConditions({
       minLength: password.length >= 8,
+      maxLength: password.length <= 20,
       upper: /(?=.*[A-Z])/.test(password),
       lower: /(?=.*[a-z])/.test(password),
       number: /(?=.*\d)/.test(password),
@@ -65,6 +67,7 @@ const SignUpForm = () => {
 
   const isPasswordValid =
     passwordConditions.minLength &&
+    passwordConditions.maxLength &&
     passwordConditions.upper &&
     passwordConditions.lower &&
     passwordConditions.number &&
@@ -256,6 +259,15 @@ const SignUpForm = () => {
             >
               Minimum 8 characters
               {passwordConditions.minLength ? <FaCheck /> : <FaXmark />}
+            </span>
+            <span
+              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.maxLength
+                ? "bg-green-100 text-green-700 border border-green-500"
+                : "bg-red-100 text-red-700 border-red-400"
+                }`}
+            >
+              Maximum 20 characters
+              {passwordConditions.maxLength ? <FaCheck /> : <FaXmark />}
             </span>
             <span
               className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${passwordConditions.upper

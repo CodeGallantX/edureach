@@ -4,6 +4,11 @@ import Banner from "../../../components/dashboard/Banner"
 import EditProfile from "../../../components/dashboard/profile/EditProfile"
 
 
+const page = {
+    title: "Edit Profile",
+    description: "Manage your time, track your learning progress"
+}
+
 const App = () => {
     return (
         <div className="flex flex-row">

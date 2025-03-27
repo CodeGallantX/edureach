@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa6";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -102,44 +100,6 @@ const LoginForm = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = async (response) => {
-    const decoded = jwtDecode(response.credential);
-    try {
-      // Using GET request with the token as a query parameter
-      const googleResponse = await fetch(`https://e-sdg.onrender.com/auth/google?token=${encodeURIComponent(response.credential)}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
-      if (!googleResponse.ok) {
-        throw new Error("Google login failed");
-      }
-  
-      const googleResult = await googleResponse.json();
-  
-      if (googleResult.success) {
-        localStorage.setItem("authToken", googleResult.token);
-  
-        // Save user data to local storage
-        localStorage.setItem("userData", JSON.stringify(googleResult.userData));
-  
-        navigate("/dashboard");
-      } else {
-        setErrors((prev) => ({ ...prev, email: googleResult.message }));
-      }
-    } catch (error) {
-      console.error("Google login error", error);
-      setErrors((prev) => ({ ...prev, email: "Google login failed" }));
-    }
-  };
-
-  const handleGoogleLoginFailure = (error) => {
-    console.error("Google login failed:", error);
-    setErrors((prev) => ({ ...prev, email: "Google login failed." }));
-  };
-
   return (
     <div className="px-6 py-10 md:px-14 lg:px-20 w-full flex flex-col justify-center">
       <h2 className="text-2xl font-bold">Welcome, Please Login</h2>
@@ -229,29 +189,29 @@ const LoginForm = () => {
       </p>
 
       {/* Divider */}
-      <div className="mt-4 mb-4 flex flex-row items-center space-x-4 text-gray-500">
+      {/* <div className="mt-4 mb-4 flex flex-row items-center space-x-4 text-gray-500">
         <hr className="border-none bg-gray-300 w-full h-[2px]" />
         <span>Or</span>
         <hr className="border-none bg-gray-300 w-full h-[2px]" />
-      </div>
+      </div> */}
 
       {/* Social Login Buttons */}
-      <div className="flex justify-center w-full max-w-md mx-auto">
-      <div className="w-full">
-        <GoogleLogin
-          onSuccess={handleGoogleLoginSuccess}
-          onError={handleGoogleLoginFailure}
-          width="100%"
-          shape="rectangular"
-          theme="filled_blue"
-          text="signin_with"
-          size="large"
-          logo_alignment="left"
-          useOneTap 
-          auto_select  
-        />
-      </div>
-    </div>
+      {/* <div className="flex justify-center w-full max-w-md mx-auto">
+        <div className="w-full">
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={handleGoogleLoginFailure}
+            width="100%"
+            shape="rectangular"
+            theme="filled_blue"
+            text="signin_with"
+            size="large"
+            logo_alignment="left"
+            useOneTap 
+            auto_select  
+          />
+        </div>
+      </div> */}
     </div>
   );
 };

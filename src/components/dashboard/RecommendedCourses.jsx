@@ -5,43 +5,43 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carous
 
 const courses = [
   {
-    title: "Introduction to React Development",
+    title: "Environmental Science",
     author: "Akinyemi James",
     rating: 5,
     raters: 189,
-    image: "/introduction_to_react.png", // Replace with your image URL
+    image: "/environmental-science.png", // Replace with your image URL
   },
   {
-    title: "Become a Salsa Dancer in just 3 weeks",
-    author: "Luca Bernando",
-    rating: 4,
-    raters: 86,
-    image: "/salsa-dancing.jpg", // Replace with your image URL
+    title: "Mathematics",
+    author: "Mr Taylor",
+    rating: 5,
+    raters: 806,
+    image: "/mathematics.jpg", // Replace with your image URL
   },
   {
-    title: "Become a Professional Data Analyst",
-    author: "Dr. Arowolo",
+    title: "English Language (JAMB prep)",
+    author: "Mr. Arowolo",
     rating: 4,
     raters: 111,
     image: "/data_analysis.jpeg", // Replace with your image URL
   },
   {
-    title: "Fundamentals of Sales and Marketing",
+    title: "Literature-in-English",
     author: "Enoobong George",
-    rating: 4.1,
+    rating: 3.1,
     raters: 320,
     image: "/sales-and-marketing.png", // Replace with your image URL
   },
   {
-    title: "Principle of Quantum Computing",
+    title: "Computer Science",
     author: "David J. Milan",
     rating: 5,
     raters: 53,
     image: "/principles-of-quantum-computing.jpeg", // Replace with your image URL
   },
   {
-    title: "Genetics and Evolutionary Biology",
-    author: "Dr. Victoria Sanyaolu",
+    title: "Physics SS1",
+    author: "Dr. Oyeleke",
     rating: 3.9,
     raters: 115,
     image: "/genetics.jpeg", 
@@ -53,14 +53,14 @@ const courses = [
     image: "/django-framework.jpeg",
   },
   {
-    title: "Introduction to Rocket Science",
+    title: "",
     author: "Kim Bernard",
     rating: 5,
     image: "/introduction-to-rocket-science.jpeg",
   },
     {
-      title: "Mastering React: From Basics to Advanced",
-      author: "Sarah Johnson",
+      title: "Organic Chemistry",
+      author: "Mrs. Sarah Aribike",
       rating: 4.8,
       students: 1245,
       image: "https://placehold.co/200x120/4F46E5/FFFFFF?text=React",

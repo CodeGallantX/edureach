@@ -5,19 +5,19 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ongoingCourses = [
   {
-    title: "Introduction to React Development",
-    image: "/introduction_to_react.png",
+    title: "Organic Chemistry",
+    image: "/organic-chemistry.png",
     progress: 85,
     link: "/courses/course-details",
   },
   {
-    title: "Become a Salsa Dancer in 3 weeks",
-    image: "/salsa-dancing.jpg",
+    title: "Rules of concord",
+    image: "/rules-of-concord.jpg",
     progress: 60,
     link: "/courses/course-details",
   },
   {
-    title: "Atomic Models",
+    title: "Computer Science",
     image: "/atomic-models.jpeg",
     progress: 70,
     link: "/courses/course-details",
