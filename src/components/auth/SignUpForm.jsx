@@ -126,7 +126,7 @@ const SignUpForm = () => {
         localStorage.setItem("userData", JSON.stringify(result.userData));
 
         // Navigate to verification page
-        navigate("/auth/verification");
+        navigate("/auth/login");
       } catch (error) {
         console.error("Error during sign-up:", error);
       } finally {
