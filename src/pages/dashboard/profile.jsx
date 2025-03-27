@@ -3,18 +3,21 @@ import Header from "../../components/dashboard/Header"
 import Banner from "../../components/dashboard/Banner"
 import ProfileCard from "../../components/dashboard/profile/ProfileCard"
 
-const page = {
-    title: "Dashboard",
-    description: "Manage your time, track your learning progress"
-}
+// const page = {
+//     title: "Dashboard",
+//     description: "Manage your time, track your learning progress"
+// }
 
 const App = () => {
     return (
-        <div className="flex flex-row">
-            <div className="">
-                <Sidebar />
-            </div>
-            <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
+        <div className="flex">
+            {/* Fixed Sidebar */}
+      <div className="fixed h-full">
+        <Sidebar />
+      </div>
+      
+      {/* Main content with padding to account for the fixed sidebar */}
+      <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 md:ml-[250px]">
                 {/* <Header /> */}
                 {/* <Banner page={page} /> */}
                 <ProfileCard />

@@ -11,10 +11,13 @@ const page = {
 const App = () => {
     return (
         <div className="flex flex-row">
-            <div className="">
-                <Sidebar />
-            </div>
-            <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
+            {/* Fixed Sidebar */}
+                  <div className="fixed h-full">
+                    <Sidebar />
+                  </div>
+                  
+                  {/* Main content with padding to account for the fixed sidebar */}
+                  <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 md:ml-[250px]">
                 <Header />
                 <Banner page={page} />
                 <LearningCourses />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FaChevronLeft, FaEye, FaEyeSlash, FaXmark, FaCheck } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,7 @@ const SignUpForm = () => {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    role: "Student", // Default role is Student
     passwordVisible: false,
     confirmPasswordVisible: false,
   });
@@ -26,6 +27,7 @@ const SignUpForm = () => {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    role: "", // Error for role
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -74,58 +76,61 @@ const SignUpForm = () => {
     formData.phoneNumber &&
     isPasswordValid &&
     formData.password &&
-    formData.confirmPassword === formData.password;
+    formData.confirmPassword === formData.password &&
+    formData.role; // Ensure role is selected
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-    
-      const newErrors = {
-        fullName: formData.fullName ? "" : "Full Name is required",
-        email: formData.email ? "" : "Email is required",
-        phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
-        password: formData.password ? "" : "Password is required",
-        confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
-      };
-    
-      setErrors(newErrors);
-    
-      if (isFormValid) {
-        setIsSubmitting(true);
-    
-        try {
-          const response = await fetch("https://e-sdg.onrender.com/create/sign-up", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              fullName: formData.fullName,
-              email: formData.email,
-              phoneNumber: formData.phoneNumber,
-              password: formData.password,
-              username: formData.username,
-            }),
-          });
-    
-          if (!response.ok) {
-            throw new Error("Sign-up failed");
-          }
-    
-          const result = await response.json();
-          // console.log("Sign-up successful:", result);
-    
-          // Store user data in local storage
-          localStorage.setItem("userData", JSON.stringify(result.userData));
-    
-          // Navigate to verification page
-          navigate("/auth/verification");
-        } catch (error) {
-          console.error("Error during sign-up:", error);
-        } finally {
-          setIsSubmitting(false);
-        }
-      }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const newErrors = {
+      fullName: formData.fullName ? "" : "Full Name is required",
+      email: formData.email ? "" : "Email is required",
+      phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
+      password: formData.password ? "" : "Password is required",
+      confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
+      role: formData.role ? "" : "Role is required", // Validate role
     };
+
+    setErrors(newErrors);
+
+    if (isFormValid) {
+      setIsSubmitting(true);
+
+      try {
+        const response = await fetch("https://e-sdg.onrender.com/create/sign-up", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            phoneNumber: formData.phoneNumber,
+            password: formData.password,
+            username: formData.username,
+            role: formData.role, // Include role in the request
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Sign-up failed");
+        }
+
+        const result = await response.json();
+        // console.log("Sign-up successful:", result);
+
+        // Store user data in local storage
+        localStorage.setItem("userData", JSON.stringify(result.userData));
+
+        // Navigate to verification page
+        navigate("/auth/verification");
+      } catch (error) {
+        console.error("Error during sign-up:", error);
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
 
   return (
     <div className="px-4 py-10 md:px-16 lg:px-20 w-full flex flex-col justify-start md:justify-center">
@@ -202,6 +207,23 @@ const SignUpForm = () => {
           {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </fieldset>
 
+        {/* Role Field */}
+        <fieldset className="space-y-1 flex flex-col items-start justify-start">
+          <label htmlFor="role">Role</label>
+          <select
+            name="role"
+            id="role"
+            value={formData.role}
+            onChange={handleChange}
+            className="w-full rounded-md border border-gray-500/50 text-sm py-3 px-3 outline-none focus:border-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 ease-in-out"
+            required
+          >
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+          </select>
+          {errors.role && <p className="text-red-500 text-sm mt-1">{errors.role}</p>}
+        </fieldset>
+
         {/* Password Field */}
         <fieldset className="space-y-1 flex flex-col items-start justify-start">
           <label htmlFor="password">Password</label>
@@ -228,8 +250,8 @@ const SignUpForm = () => {
           <div className="flex flex-wrap gap-2 mt-2">
             <span
               className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.minLength
-                  ? "bg-green-100 text-green-700 border border-green-500"
-                  : "bg-red-100 text-red-700 border-red-400"
+                ? "bg-green-100 text-green-700 border border-green-500"
+                : "bg-red-100 text-red-700 border-red-400"
                 }`}
             >
               Minimum 8 characters
@@ -237,8 +259,8 @@ const SignUpForm = () => {
             </span>
             <span
               className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${passwordConditions.upper
-                  ? "bg-green-100 text-green-700 border-green-500"
-                  : "bg-red-100 text-red-700 border-red-400"
+                ? "bg-green-100 text-green-700 border border-green-500"
+                : "bg-red-100 text-red-700 border-red-400"
                 }`}
             >
               1 Upper letter
@@ -246,8 +268,8 @@ const SignUpForm = () => {
             </span>
             <span
               className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${passwordConditions.lower
-                  ? "bg-green-100 text-green-700 border-green-500"
-                  : "bg-red-100 text-red-700 border-red-400"
+                ? "bg-green-100 text-green-700 border border-green-500"
+                : "bg-red-100 text-red-700 border-red-400"
                 }`}
             >
               1 Lowercase letter
@@ -255,8 +277,8 @@ const SignUpForm = () => {
             </span>
             <span
               className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.number
-                  ? "bg-green-100 text-green-700 border-green-500"
-                  : "bg-red-100 text-red-700 border-red-400"
+                ? "bg-green-100 text-green-700 border-green-500"
+                : "bg-red-100 text-red-700 border-red-400"
                 }`}
             >
               <span>1 Number </span>
@@ -264,8 +286,8 @@ const SignUpForm = () => {
             </span>
             <span
               className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.special
-                  ? "bg-green-100 text-green-700 border-green-500"
-                  : "bg-red-100 text-red-700 border-red-400"
+                ? "bg-green-100 text-green-700 border border-green-500"
+                : "bg-red-100 text-red-700 border-red-400"
                 }`}
             >
               <span>1 Special character</span>
