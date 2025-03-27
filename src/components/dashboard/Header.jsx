@@ -20,7 +20,7 @@ const Header = () => {
     };
 
     return (
-        <div className="relative flex flex-row items-center justify-between w-full bg-offWhite p-4">
+        <div className="static lg:fixed flex flex-row items-center justify-between w-full bg-offWhite p-4">
             <SearchBox />
             <div className="flex flex-row items-center justify-start space-x-2 sm:space-x-3 md:space-x-4 px-2">
                 <div className="relative">
@@ -41,7 +41,7 @@ const Header = () => {
                 
                 {/* Notifications dropdown */}
                 {showNotifications && (
-                    <div className="absolute right-4 top-16 z-50">
+                    <div className="absolute right-4 top-16">
                         <Notifications 
                             onClose={() => setShowNotifications(false)}
                             onMarkAsRead={() => setHasUnreadNotifications(false)}
