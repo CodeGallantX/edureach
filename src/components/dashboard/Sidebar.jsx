@@ -28,7 +28,7 @@ const Sidebar = () => {
   return (
     <aside className="bg-offWhite">
       {/* Mobile Menu Button */}
-      <div className="lg:hidden fixed top-5 left-4 z-50">
+      <div className="lg:hidden fixed top-5 left-4">
         <button
           onClick={toggleMobileMenu}
           className="p-2 text-gray-700 bg-gray-200 rounded-md"
