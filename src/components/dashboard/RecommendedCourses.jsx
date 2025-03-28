@@ -50,16 +50,15 @@ const courses = [
     title: "Business Studies",
     author: "Matthew Dorcas",
     rating: 5,
+    raters: 215,
     image: "/business-studies.jpeg",
   },
-    {
-      title: "Organic Chemistry",
-      author: "Mrs. Sarah Aribike",
-      rating: 4.8,
-      students: 1245,
+  {
+    title: "Organic Chemistry",
+    author: "Mrs. Sarah Aribike",
+    rating: 4.8,
+    raters: 515,
       image: "organic-chemistry.jpeg",
-      category: "Web Development",
-      duration: "28 hours",
     }
 ];
 

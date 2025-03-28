@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const ongoingCourses = [
   {
     title: "Organic Chemistry",
-    image: "/organic-chemistry.png",
+    image: "/organic-chemistry.jpeg",
     progress: 85,
     link: "/courses/course-details",
   },
