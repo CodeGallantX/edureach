@@ -37,8 +37,8 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Menu Button - Placed outside the sidebar with higher z-index */}
-      <div className="fixed lg:hidden top-5 left-4 z-[101]"> {/* Increased z-index */}
+      {/* Mobile Menu Button */}
+      <div className="fixed lg:hidden top-5 left-4 z-[60]">
         <button
           onClick={toggleMobileMenu}
           className="p-2 text-gray-700 bg-gray-200 rounded-md"
@@ -50,7 +50,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`bg-gray-50 h-screen px-4 py-8 flex flex-col items-start gap-2 fixed top-0 left-0 z-[100] transition-transform duration-300 ease-in-out w-64 lg:relative lg:translate-x-0 lg:w-64 lg:z-0 ${
+        className={`bg-gray-50 h-screen px-4 py-8 flex flex-col items-start gap-2 fixed top-0 left-0 z-[50] transition-transform duration-300 ease-in-out w-64 lg:static lg:translate-x-0 ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -86,7 +86,7 @@ const Sidebar = () => {
       {/* Overlay when sidebar is open on mobile */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 lg:hidden z-[95]" // added z-index.
+          className="fixed inset-0 bg-black/50 lg:hidden z-[40]"
           onClick={toggleMobileMenu}
         ></div>
       )}

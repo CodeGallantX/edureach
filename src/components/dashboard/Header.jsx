@@ -34,15 +34,15 @@ const Header = () => {
     // Handle click outside for both dropdowns
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (showLanguageDropdown && 
-                languageDropdownRef.current && 
+            if (showLanguageDropdown &&
+                languageDropdownRef.current &&
                 !languageDropdownRef.current.contains(event.target) &&
                 !languageButtonRef.current.contains(event.target)) {
                 setShowLanguageDropdown(false);
             }
 
-            if (showNotifications && 
-                notificationsRef.current && 
+            if (showNotifications &&
+                notificationsRef.current &&
                 !notificationsRef.current.contains(event.target) &&
                 !notificationButtonRef.current.contains(event.target)) {
                 setShowNotifications(false);
@@ -86,26 +86,27 @@ const Header = () => {
             flag: `https://flagcdn.com/w20/${language.flagCode}.png`
         });
         setShowLanguageDropdown(false);
-        // Here you would typically implement language change logic
         console.log("Language changed to:", language.name);
     };
 
     return (
-        <div className="fixed top-0 left-0 right-0 flex flex-row items-center justify-between w-full bg-offWhite p-4 z-50">
-            <SearchBox />
+        <div className="fixed top-0 left-0 right-0 flex flex-row items-center justify-between w-full bg-offWhite p-4 z-[30] lg:pl-64">
+            <div className="z-10 w-3/4">
+                <SearchBox />
+            </div>
             <div className="flex flex-row items-center justify-end gap-4 md:gap-6 px-2">
                 {/* Language Dropdown */}
                 <div className="relative">
-                    <button 
+                    <button
                         ref={languageButtonRef}
                         onClick={toggleLanguageDropdown}
                         className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-gray-100 transition-colors border border-gray-300"
                         aria-label="Language selector"
                         aria-expanded={showLanguageDropdown}
                     >
-                        <img 
-                            src={selectedLanguage.flag} 
-                            alt={selectedLanguage.name} 
+                        <img
+                            src={selectedLanguage.flag}
+                            alt={selectedLanguage.name}
                             className="w-5 h-3.5 object-cover"
                         />
                         <span className="text-sm font-medium hidden sm:inline">
@@ -113,7 +114,7 @@ const Header = () => {
                         </span>
                         <PiCaretDown className={`transition-transform text-gray-600 ${showLanguageDropdown ? "rotate-180" : ""}`} />
                     </button>
-                    
+
                     <AnimatePresence>
                         {showLanguageDropdown && (
                             <motion.div
@@ -129,14 +130,13 @@ const Header = () => {
                                         <button
                                             key={language.code}
                                             onClick={() => selectLanguage(language)}
-                                            className={`flex items-center px-4 py-2 text-sm w-full text-left hover:bg-blue-50 ${
-                                                selectedLanguage.code === language.code ? "bg-blue-100" : ""
-                                            }`}
+                                            className={`flex items-center px-4 py-2 text-sm w-full text-left hover:bg-blue-50 ${selectedLanguage.code === language.code ? "bg-blue-100" : ""
+                                                }`}
                                             role="menuitem"
                                         >
-                                            <img 
-                                                src={`https://flagcdn.com/w20/${language.flagCode}.png`} 
-                                                alt={language.name} 
+                                            <img
+                                                src={`https://flagcdn.com/w20/${language.flagCode}.png`}
+                                                alt={language.name}
                                                 className="w-5 h-3.5 object-cover mr-3"
                                             />
                                             <span>{language.name}</span>
@@ -150,7 +150,7 @@ const Header = () => {
 
                 {/* Notification Bell */}
                 <div className="relative">
-                    <button 
+                    <button
                         ref={notificationButtonRef}
                         onClick={toggleNotifications}
                         className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
@@ -163,20 +163,20 @@ const Header = () => {
                         )}
                     </button>
                 </div>
-                
+
                 {/* Profile Image */}
-                <button 
+                <button
                     onClick={() => navigate("/profile")}
                     className="p-0.5 rounded-full hover:ring-2 ring-orange transition-all"
                     aria-label="User profile"
                 >
-                    <img 
-                        src="/ariana-grande.png" 
-                        alt="Profile" 
-                        className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover" 
+                    <img
+                        src="/ariana-grande.png"
+                        alt="Profile"
+                        className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover"
                     />
                 </button>
-                
+
                 {/* Notifications dropdown */}
                 <AnimatePresence>
                     {showNotifications && (
@@ -188,7 +188,7 @@ const Header = () => {
                             className="absolute right-4 top-16 md:top-20 z-50"
                             role="menu"
                         >
-                            <Notifications 
+                            <Notifications
                                 onClose={() => setShowNotifications(false)}
                                 onMarkAsRead={() => setHasUnreadNotifications(false)}
                             />
