@@ -16,14 +16,14 @@ const courses = [
     author: "Mr Taylor",
     rating: 5,
     raters: 806,
-    image: "/mathematics.jpg", // Replace with your image URL
+    image: "/mathematics.jpeg", // Replace with your image URL
   },
   {
     title: "English Language (JAMB prep)",
     author: "Mr. Arowolo",
     rating: 4,
     raters: 111,
-    image: "/data_analysis.jpeg", // Replace with your image URL
+    image: "/use-of-english.jpeg", // Replace with your image URL
   },
   {
     title: "Literature-in-English",
@@ -57,7 +57,7 @@ const courses = [
       author: "Mrs. Sarah Aribike",
       rating: 4.8,
       students: 1245,
-      image: "https://placehold.co/200x120/4F46E5/FFFFFF?text=React",
+      image: "organic-chemistry.jpeg",
       category: "Web Development",
       duration: "28 hours",
     }
