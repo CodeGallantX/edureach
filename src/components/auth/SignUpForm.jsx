@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
     fullName: "",
-    username: "",
     email: "",
     phoneNumber: "",
     password: "",
@@ -62,7 +61,7 @@ const SignUpForm = () => {
       upper: /(?=.*[A-Z])/.test(password),
       lower: /(?=.*[a-z])/.test(password),
       number: /(?=.*\d)/.test(password),
-      special: /(?=.*[!@#$%*?&.])/.test(password),
+      special: /(?=.*[!@#$%*?&._])/.test(password),
     });
   };
 
@@ -106,7 +105,6 @@ const SignUpForm = () => {
             email: formData.email,
             phoneNumber: formData.phoneNumber,
             password: formData.password,
-            username: formData.username,
             role: formData.role,
           }),
         });
@@ -118,7 +116,12 @@ const SignUpForm = () => {
         const signUpResult = await signUpResponse.json();
         
         // Store user data in local storage
-        localStorage.setItem("userData", JSON.stringify(signUpResult.userData));
+        if (signUpResult.userData) {
+          localStorage.setItem("userData", JSON.stringify(signUpResult.userData));
+        } else {
+          console.error("No userData in signUpResult");
+          // Handle this case appropriately
+        }
         localStorage.setItem("authToken", signUpResult.token);
 
         // Step 2: Create role-specific profile
@@ -198,21 +201,6 @@ const SignUpForm = () => {
             required
           />
           {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
-        </fieldset>
-
-        <fieldset className="space-y-1 flex flex-col items-start justify-start">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Enter your Username"
-            className="w-full rounded-md border border-gray-500/50 text-sm py-3 px-3 outline-none focus:border-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 ease-in-out"
-            required
-          />
-          {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
         </fieldset>
 
         {/* Phone Number Field */}
