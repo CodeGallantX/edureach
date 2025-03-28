@@ -9,7 +9,7 @@ const LearningCourses = () => {
       title: 'SSS 3 Physics',
       progress: 60,
       image: '/physics.jpeg',
-      link: '/courses/waec-physics',
+      link: '/courses/course-details',
       // lecturer: 'Professor Okonjo Iweala',
     },
     {
@@ -65,7 +65,7 @@ const LearningCourses = () => {
       title: 'Computer Science',
       progress: 80,
       image: '/computer-science.jpeg',
-      link: '/courses/computer-science',
+      link: '/courses/course-details',
       // lecturer: 'Professor Jelani Aliyu',
     },
   ]);

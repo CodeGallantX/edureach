@@ -11,8 +11,8 @@ const ongoingCourses = [
     link: "/courses/course-details",
   },
   {
-    title: "Rules of concord",
-    image: "/rules-of-concord.jpg",
+    title: "Mole Concept",
+    image: "/mole-concept.jpeg",
     progress: 60,
     link: "/courses/course-details",
   },

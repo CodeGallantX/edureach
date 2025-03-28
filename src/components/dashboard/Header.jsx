@@ -24,7 +24,7 @@ const Header = () => {
     const languages = [
         { code: "en-uk", name: "English (UK)", flagCode: "gb" },
         { code: "yo", name: "Yoruba", flagCode: "ng" },
-        { code: "en", name: "English", flagCode: "us" },
+        { code: "ig", name: "Igbo", flagCode: "ng" },
         { code: "ha", name: "Hausa", flagCode: "ng" },
         { code: "pcm", name: "Pidgin", flagCode: "ng" }
     ];

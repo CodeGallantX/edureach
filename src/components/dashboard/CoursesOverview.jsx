@@ -8,7 +8,7 @@ const CoursesOverview = () => {
     {
       id: 1,
       title: "Commerce",
-      img: "/biology.jpeg",
+      img: "https://media.istockphoto.com/id/468044606/photo/euro-coins-euro-money-euro-currency.jpg?s=612x612&w=0&k=20&c=kkBv3QsREv_CTmn5aH7NQMGG80vo69K9aJeOn6l1ojI=",
       author: "Miss. Adams Joy",
       progress: 85,
       completed: 10,

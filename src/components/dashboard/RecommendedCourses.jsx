@@ -30,14 +30,14 @@ const courses = [
     author: "Enoobong George",
     rating: 3.1,
     raters: 320,
-    image: "/sales-and-marketing.png", // Replace with your image URL
+    image: "/literature.jpeg",
   },
   {
     title: "Computer Science",
     author: "David J. Milan",
     rating: 5,
     raters: 53,
-    image: "/principles-of-quantum-computing.jpeg", // Replace with your image URL
+    image: "/principles-of-quantum-computing.jpeg", 
   },
   {
     title: "History",
