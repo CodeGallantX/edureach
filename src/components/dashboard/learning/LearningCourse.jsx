@@ -15,7 +15,7 @@ const LearningCourses = () => {
     {
       title: 'Organic Chemistry',
       progress: 75,
-      image: 'jamb-chemistry.jpeg',
+      image: 'organic-chemistry.jpeg',
       link: '/courses/jamb-chemistry',
       // lecturer: 'Professor Miriam Omalu',
     },
