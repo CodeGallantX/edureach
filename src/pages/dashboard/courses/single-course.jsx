@@ -14,8 +14,10 @@ const App = () => {
             {/* Main content with padding to account for the fixed sidebar */}
             <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 md:ml-[250px]">
                 <Header />
+                <div className="pt-20 w-full">
                 <VideoPlayer />
                 <CourseContent />
+                </div>
             </div>
         </section>
     )

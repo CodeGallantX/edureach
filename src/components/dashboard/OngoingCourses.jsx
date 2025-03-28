@@ -8,19 +8,19 @@ const ongoingCourses = [
     title: "Organic Chemistry",
     image: "/organic-chemistry.jpeg",
     progress: 85,
-    link: "/courses/course-details",
+    link: "/student/courses/course-details",
   },
   {
     title: "Mole Concept",
     image: "/mole-concept.jpeg",
     progress: 60,
-    link: "/courses/course-details",
+    link: "/student/courses/course-details",
   },
   {
     title: "Atomic Models - Chemistry",
     image: "/atomic-models.jpeg",
     progress: 70,
-    link: "/courses/course-details",
+    link: "/student/courses/course-details",
   },
 ];
 

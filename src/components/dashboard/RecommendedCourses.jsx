@@ -122,7 +122,7 @@ const RecommendedCourses = ({section}) => {
                   {renderStars(course.rating)}
                   <span className="text-xs text-gray-500">{course.raters}</span>
                 </div>
-                <button onClick={() => navigate("/courses/course-details")} className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
+                <button onClick={() => navigate("/student/courses/course-details")} className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
                   Enroll <PiPlayCircle className="ml-2 text-xl group-hover:scale-110 duration-200 ease-in-out" />
                 </button>
               </div>
@@ -150,7 +150,7 @@ const RecommendedCourses = ({section}) => {
                 {renderStars(course.rating)}
                 <span className="text-xs text-gray-500">{course.raters}</span>
               </div>
-              <button onClick={() => navigate('/courses/course-details')} className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
+              <button onClick={() => navigate('/student/courses/course-details')} className="flex items-center justify-center bg-deepBlue text-white py-2 px-4 rounded-full mt-4 w-full">
                 Enroll <PiPlayCircle className="ml-2 text-xl" />
               </button>
             </div>

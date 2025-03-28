@@ -73,7 +73,7 @@ const CourseDetails = () => {
       <motion.button 
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        onClick={() => navigate("/courses/single-course")}
+        onClick={() => navigate("/student/courses/single-course")}
         className="flex items-center justify-center bg-deepBlue text-white rounded-xl py-3 px-6 mt-8 w-full shadow-md transition-all duration-200"
       >
         <PiPlayCircle className="mr-2 text-xl" />
