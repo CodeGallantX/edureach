@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -87,49 +86,6 @@ const LoginForm = () => {
       }
     }
   }, [formData.email, formData.password, navigate, validateForm]);
-
-  const handleGoogleLoginSuccess = useCallback(
-    async (credentialResponse) => {
-      setIsSubmitting(true);
-      try {
-        const url = `https://e-sdg.onrender.com/auth/google?credential=${encodeURIComponent(
-          credentialResponse.credential
-        )}`;
-        const response = await fetch(url, {
-          method: "GET",
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData?.message || "Google login failed");
-        }
-
-        const googleResult = await response.json();
-
-        if (googleResult.success) {
-          localStorage.setItem("authToken", googleResult.token);
-          localStorage.setItem("userData", JSON.stringify(googleResult.userData));
-          navigate("/dashboard");
-        } else {
-          setErrors((prev) => ({ ...prev, email: googleResult.message }));
-        }
-      } catch (error) {
-        console.error("Google login error", error);
-        setErrors((prev) => ({
-          ...prev,
-          email: error.message || "Google login failed",
-        }));
-      } finally {
-        setIsSubmitting(false);
-      }
-    },
-    [navigate]
-  );
-
-  const handleGoogleLoginFailure = useCallback((error) => {
-    console.error("Google login failed:", error);
-    setErrors((prev) => ({ ...prev, email: "Google login failed." }));
-  }, []);
 
   return (
     <div className="px-6 py-10 md:px-14 lg:px-20 w-full flex flex-col justify-center">
@@ -229,31 +185,6 @@ const LoginForm = () => {
           Create Account
         </a>
       </p>
-
-      {/* Divider */}
-      <div className="mt-4 mb-4 flex flex-row items-center space-x-4 text-gray-500">
-        <hr className="border-none bg-gray-300 w-full h-[2px]" />
-        <span>Or</span>
-        <hr className="border-none bg-gray-300 w-full h-[2px]" />
-      </div>
-
-      {/* Social Login Buttons */}
-      <div className="flex justify-center w-full max-w-md mx-auto">
-        <div className="w-80">
-          <GoogleLogin
-            onSuccess={handleGoogleLoginSuccess}
-            onError={handleGoogleLoginFailure}
-            width="320px"
-            shape="rectangular"
-            theme="filled_blue"
-            text="signin_with"
-            size="large"
-            logo_alignment="left"
-            useOneTap={false}
-            auto_select={false}
-          />
-        </div>
-      </div>
     </div>
   );
 };

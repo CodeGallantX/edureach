@@ -15,8 +15,8 @@ import { useState } from "react";
 const navLinks = [
   { name: "Dashboard", icon: <PiHouseDuotone />, path: "/dashboard" },
   { name: "All Courses", icon: <PiVideoDuotone />, path: "/courses" },
-  { name: "My Library", icon: <PiBooksDuotone />, path: "/my-library" },
-  { name: "My Learning", icon: <PiFolderSimpleDuotone />, path: "/my-learning" },
+  { name: "My Library", icon: <PiFolderSimpleDuotone />, path: "/my-library" },
+  { name: "My Learning", icon: <PiBooksDuotone />, path: "/my-learning" },
   { name: "Profile", icon: <PiUserCircle />, path: "/profile" },
   { name: "Settings", icon: <PiGearDuotone />, path: "/settings" },
 ];

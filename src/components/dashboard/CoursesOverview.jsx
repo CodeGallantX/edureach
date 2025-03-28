@@ -17,7 +17,7 @@ const CoursesOverview = () => {
     {
       id: 2,
       title: "Business Studies",
-      img: "/business-studies.jpg",
+      img: "/business-studies.jpeg",
       author: "Ajayi Majekodunmi",
       progress: 45,
       completed: 6,

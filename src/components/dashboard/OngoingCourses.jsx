@@ -17,7 +17,7 @@ const ongoingCourses = [
     link: "/courses/course-details",
   },
   {
-    title: "Computer Science",
+    title: "Atomic Models - Chemistry",
     image: "/atomic-models.jpeg",
     progress: 70,
     link: "/courses/course-details",
