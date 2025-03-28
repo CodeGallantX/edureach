@@ -2,6 +2,7 @@ import Sidebar from "../../components/dashboard/Sidebar"
 import Header from "../../components/dashboard/Header"
 import Banner from "../../components/dashboard/Banner"
 import ProfileCard from "../../components/dashboard/profile/ProfileCard"
+import TawkToChat from "../../components/TawkToChat"
 
 // const page = {
 //     title: "Dashboard",
@@ -11,6 +12,7 @@ import ProfileCard from "../../components/dashboard/profile/ProfileCard"
 const App = () => {
     return (
         <div className="flex">
+            <TawkToChat />
             {/* Fixed Sidebar */}
       <div className="static lg:fixed h-full">
         <Sidebar />

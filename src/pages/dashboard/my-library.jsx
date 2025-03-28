@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "../../components/dashboard/Sidebar";
 import Header from "../../components/dashboard/Header";
 import Banner from "../../components/dashboard/Banner";
+import TawkToChat from "../../components/TawkToChat"
 import { FiUpload, FiEdit, FiTrash2, FiPlus } from "react-icons/fi";
 
 const page = {
@@ -31,7 +32,7 @@ const LibraryItem = ({ item, onEdit, onDelete }) => {
       <div className="flex space-x-2">
         <button 
           onClick={() => onEdit(item)}
-          className="p-2 bg-blue-100 text-blue-600 rounded-md hover:bg-blue-200 transition-colors"
+          className="p-2 bg-deepBlue text-white rounded-md scale transition-colors"
         >
           <FiEdit />
         </button>
@@ -172,7 +173,7 @@ const LibraryForm = ({ onClose, onSubmit, initialData }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-400"
+              className="px-4 py-2 bg-deepBlue text-white rounded-md disabled:bg-blue-400"
             >
               {isSubmitting ? "Processing..." : "Save"}
             </button>
@@ -271,14 +272,16 @@ const LibraryPage = () => {
 
   return (
     <div className="flex">
+        <TawkToChat />
       {/* Fixed Sidebar */}
       <div className="fixed h-full">
         <Sidebar />
       </div>
       
       {/* Main content with padding to account for the fixed sidebar */}
-      <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 lg:ml-[250px]">
+      <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 lg:ml-[250px] min-h-screen">
         <Header />
+        <div className="pt-20 w-full">        
         <Banner page={page} />
         
         <div className="w-full p-4 md:p-6">
@@ -289,7 +292,7 @@ const LibraryPage = () => {
                 setCurrentItem(null);
                 setIsFormOpen(true);
               }}
-              className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              className="flex items-center space-x-2 bg-deepBlue text-white px-4 py-2 rounded-md scale-110"
             >
               <FiPlus />
               <span>Add Resource</span>
@@ -298,7 +301,7 @@ const LibraryPage = () => {
           
           {isLoading ? (
             <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-deepBlue"></div>
             </div>
           ) : libraryItems.length === 0 ? (
             <div className="bg-white rounded-lg shadow-md p-8 text-center">
@@ -316,6 +319,7 @@ const LibraryPage = () => {
               ))}
             </div>
           )}
+        </div>
         </div>
       </div>
       
