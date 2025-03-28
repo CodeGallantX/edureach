@@ -16,7 +16,7 @@ const App = () => {
       </div>
       
       {/* Main content with padding to account for the fixed sidebar */}
-      <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 md:ml-[250px]">
+      <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 lg:ml-[250px]">
                 <Header />
                 <Banner page={page} />
             </div>

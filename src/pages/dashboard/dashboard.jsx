@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/dashboard/Sidebar";
 import Header from "../../components/dashboard/Header";
@@ -24,12 +24,21 @@ const Dashboard = () => {
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     if (!authToken) {
-      navigate("/auth/login"); // Redirect to login if no authToken is found
+      navigate("/auth/login");
     } else {
-      // Fetch user data from localStorage
-      const storedUserData = localStorage.getItem("userData");
-      if (storedUserData) {
-        setUserData(JSON.parse(storedUserData));
+      try {
+        const storedUserData = localStorage.getItem("userData");
+        if (storedUserData) {
+          setUserData(JSON.parse(storedUserData));
+        } else {
+          //  if there is no user data.
+          setUserData(null);
+        }
+      } catch (error) {
+        console.error("Error parsing userData from localStorage:", error);
+        // Handle the error, e.g., clear the invalid data and redirect to login
+        localStorage.removeItem("userData");
+        navigate("/auth/login");
       }
     }
   }, [navigate]);
@@ -40,7 +49,7 @@ const Dashboard = () => {
       <div className="static lg:fixed h-full">
         <Sidebar />
       </div>
-      
+
       {/* Main content with padding to account for the fixed sidebar */}
       <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 lg:ml-[250px]">
         <Header userData={userData} />
