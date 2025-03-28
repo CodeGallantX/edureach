@@ -54,7 +54,7 @@ const Sidebar = () => {
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
-        <img src="/logo-white.png" alt="logo" className="mt-12 lg:mt-0 mb-12 w-40" />
+        <img src="/logo-white.png" alt="logo" className="my-12 w-40" />
 
         {/* Navigation Links */}
         {navLinks.map((link, index) => {
