@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
     fullName: "",
+    username: "",
     email: "",
     phoneNumber: "",
     password: "",
@@ -25,6 +26,7 @@ const SignUpForm = () => {
 
   const [errors, setErrors] = useState({
     fullName: "",
+    username: "",
     email: "",
     phoneNumber: "",
     password: "",
@@ -33,7 +35,6 @@ const SignUpForm = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -69,6 +70,7 @@ const SignUpForm = () => {
 
   const isFormValid =
     formData.fullName &&
+    formData.username &&
     formData.email &&
     formData.phoneNumber &&
     isPasswordValid &&
@@ -81,6 +83,7 @@ const SignUpForm = () => {
 
     const newErrors = {
       fullName: formData.fullName ? "" : "Full Name is required",
+      username: formData.username ? "" : "Username is required",
       email: formData.email ? "" : "Email is required",
       phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
       password: formData.password ? "" : "Password is required",
@@ -94,14 +97,14 @@ const SignUpForm = () => {
       setIsSubmitting(true);
 
       try {
-        // Step 1: Register the user
-        const signUpResponse = await fetch("https://e-sdg.onrender.com/create/sign-up", {
+        const response = await fetch("https://e-sdg.onrender.com/create/sign-up", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
             fullName: formData.fullName,
+            username: formData.username,
             email: formData.email,
             phoneNumber: formData.phoneNumber,
             password: formData.password,
@@ -109,66 +112,30 @@ const SignUpForm = () => {
           }),
         });
 
-        if (!signUpResponse.ok) {
-          throw new Error("Sign-up failed");
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Sign-up failed");
         }
 
-        const signUpResult = await signUpResponse.json();
+        const result = await response.json();
         
-        // Store user data in local storage
-        if (signUpResult.userData) {
-          localStorage.setItem("userData", JSON.stringify(signUpResult.userData));
-        } else {
-          console.error("No userData in signUpResult");
-          // Handle this case appropriately
-        }
-        localStorage.setItem("authToken", signUpResult.token);
-
-        // Step 2: Create role-specific profile
-        const [firstName, ...lastNameParts] = formData.fullName.split(" ");
-        const lastName = lastNameParts.join(" ");
-
-        if (formData.role === "Teacher") {
-          // Create teacher profile with minimal required fields
-          const teacherFormData = new FormData();
-          teacherFormData.append("firstNmae", firstName);
-          teacherFormData.append("lastName", lastName);
-          teacherFormData.append("sex", ""); // Will be updated later
-          teacherFormData.append("role", "Teacher");
-          teacherFormData.append("subjectCreated", ""); // Will be updated later
-          teacherFormData.append("enrollStudent", "0"); // Default to 0
-          
-          await fetch("https://e-sdg.onrender.com/teacher/teacherProfile", {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${signUpResult.token}`,
-            },
-            body: teacherFormData,
+        if (result.success) {
+          // After successful signup, redirect to login
+          navigate("/auth/login", {
+            state: {
+              message: "Registration successful! Please login to continue",
+              email: formData.email
+            }
           });
         } else {
-          // Create student profile
-          await fetch("https://e-sdg.onrender.com/student/studentProfile", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${signUpResult.token}`,
-            },
-            body: JSON.stringify({
-              firstName,
-              lastName,
-              sex: "", // Will be updated later
-              role: "Student",
-              class: "", // Will be updated later
-              totalCourseEnroll: "0" // Default to 0
-            }),
-          });
+          throw new Error(result.message || "Registration failed");
         }
-
-        // Navigate to the appropriate dashboard based on role
-        navigate(`/${formData.role.toLowerCase()}/dashboard`);
-
       } catch (error) {
-        console.error("Error during sign-up:", error);
+        console.error("Sign-up error:", error);
+        setErrors(prev => ({
+          ...prev,
+          email: error.message || "Registration failed. Please try again."
+        }));
       } finally {
         setIsSubmitting(false);
       }
@@ -179,7 +146,8 @@ const SignUpForm = () => {
     <div className="px-4 py-10 md:px-16 lg:px-20 w-full flex flex-col justify-start md:justify-center">
       <div
         onClick={() => navigate(-1)}
-        className="block md:hidden font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20">
+        className="block md:hidden font-bold flex flex-row items-center space-x-1 border border-black p-2 rounded-md mb-6 cursor-pointer max-w-20"
+      >
         <FaChevronLeft />
         <span>Back</span>
       </div>
@@ -201,6 +169,22 @@ const SignUpForm = () => {
             required
           />
           {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
+        </fieldset>
+
+        {/* Username Field */}
+        <fieldset className="space-y-1 flex flex-col items-start justify-start">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value={formData.username}
+            onChange={handleChange}
+            placeholder="Enter your Username"
+            className="w-full rounded-md border border-gray-500/50 text-sm py-3 px-3 outline-none focus:border-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 ease-in-out"
+            required
+          />
+          {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
         </fieldset>
 
         {/* Phone Number Field */}
@@ -276,60 +260,19 @@ const SignUpForm = () => {
           </div>
           {/* Password Conditions */}
           <div className="flex flex-wrap gap-2 mt-2">
-            <span
-              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.minLength
-                ? "bg-green-100 text-green-700 border border-green-500"
-                : "bg-red-100 text-red-700 border-red-400"
+            {Object.entries(passwordConditions).map(([key, isValid]) => (
+              <span
+                key={key}
+                className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${
+                  isValid
+                    ? "bg-green-100 text-green-700 border border-green-500"
+                    : "bg-red-100 text-red-700 border-red-400"
                 }`}
-            >
-              Minimum 8 characters
-              {passwordConditions.minLength ? <FaCheck /> : <FaXmark />}
-            </span>
-            <span
-              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.maxLength
-                ? "bg-green-100 text-green-700 border border-green-500"
-                : "bg-red-100 text-red-700 border-red-400"
-                }`}
-            >
-              Maximum 20 characters
-              {passwordConditions.maxLength ? <FaCheck /> : <FaXmark />}
-            </span>
-            <span
-              className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${passwordConditions.upper
-                ? "bg-green-100 text-green-700 border border-green-500"
-                : "bg-red-100 text-red-700 border-red-400"
-                }`}
-            >
-              1 Upper letter
-              {passwordConditions.upper ? <FaCheck /> : <FaXmark />}
-            </span>
-            <span
-              className={`px-3 py-1 rounded-full text-sm border flex items-center gap-2 ${passwordConditions.lower
-                ? "bg-green-100 text-green-700 border border-green-500"
-                : "bg-red-100 text-red-700 border-red-400"
-                }`}
-            >
-              1 Lowercase letter
-              {passwordConditions.lower ? <FaCheck /> : <FaXmark />}
-            </span>
-            <span
-              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.number
-                ? "bg-green-100 text-green-700 border-green-500"
-                : "bg-red-100 text-red-700 border-red-400"
-                }`}
-            >
-              <span>1 Number </span>
-              {passwordConditions.number ? <FaCheck /> : <FaXmark />}
-            </span>
-            <span
-              className={`px-3 py-1 rounded-full text-sm flex border items-center gap-2 ${passwordConditions.special
-                ? "bg-green-100 text-green-700 border border-green-500"
-                : "bg-red-100 text-red-700 border-red-400"
-                }`}
-            >
-              <span>1 Special character</span>
-              {passwordConditions.special ? <FaCheck /> : <FaXmark />}
-            </span>
+              >
+                {getPasswordConditionText(key)}
+                {isValid ? <FaCheck /> : <FaXmark />}
+              </span>
+            ))}
           </div>
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
         </fieldset>
@@ -362,8 +305,9 @@ const SignUpForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${isSubmitting || !isFormValid ? "bg-gray-400 cursor-not-allowed" : "bg-deepBlue"
-            }`}
+          className={`mt-2 py-3 rounded-full text-white w-full text-center cursor-pointer flex items-center justify-center ${
+            isSubmitting || !isFormValid ? "bg-gray-400 cursor-not-allowed" : "bg-deepBlue"
+          }`}
           disabled={!isFormValid || isSubmitting}
         >
           {isSubmitting ? (
@@ -387,5 +331,17 @@ const SignUpForm = () => {
     </div>
   );
 };
+
+function getPasswordConditionText(key) {
+  const conditions = {
+    minLength: "Minimum 8 characters",
+    maxLength: "Maximum 20 characters",
+    upper: "1 Uppercase letter",
+    lower: "1 Lowercase letter",
+    number: "1 Number",
+    special: "1 Special character"
+  };
+  return conditions[key] || key;
+}
 
 export default SignUpForm;

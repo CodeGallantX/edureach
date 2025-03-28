@@ -20,7 +20,7 @@ const LoginForm = () => {
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     if (authToken) {
-      navigate("/dashboard");
+      navigate("/student/dashboard");
     }
   }, [navigate]);
 
@@ -70,7 +70,7 @@ const LoginForm = () => {
         if (result.success) {
           localStorage.setItem("authToken", result.token);
           localStorage.setItem("userData", JSON.stringify(result.userData));
-          navigate("/dashboard");
+          navigate("/student/dashboard");
         } else {
           setErrors((prev) => ({ ...prev, email: result.message }));
         }

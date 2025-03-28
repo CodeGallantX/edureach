@@ -5,32 +5,32 @@ const navLinks = [
   {
     name: "Home",
     icon: <FaHouse />,
-    path: "/dashboard",
+    path: "/student/dashboard",
   },
   {
     name: "All Courses",
     icon: <FaUser />,
-    path: "/courses",
+    path: "/student/courses",
   },
   {
     name: "My Library",
     icon: <FaBook />,
-    path: "/library",
+    path: "/student/library",
   },
   {
     name: "My Learning",
     icon: <FaChartBar />,
-    path: "/my-learning",
+    path: "/student/my-learning",
   },
   {
     name: "Profile",
     icon: <FaUser />,
-    path: "/profile",
+    path: "/student/profile",
   },
   {
     name: "Settings",
     icon: <FaChartBar />,
-    path: "/settings",
+    path: "/student/settings",
   },
   {
     name: "Logout",

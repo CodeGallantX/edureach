@@ -13,12 +13,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 const navLinks = [
-  { name: "Dashboard", icon: <PiHouseDuotone />, path: "/dashboard" },
-  { name: "All Courses", icon: <PiVideoDuotone />, path: "/courses" },
-  { name: "My Library", icon: <PiFolderSimpleDuotone />, path: "/my-library" },
-  { name: "My Learning", icon: <PiBooksDuotone />, path: "/my-learning" },
-  { name: "Profile", icon: <PiUserCircle />, path: "/profile" },
-  { name: "Settings", icon: <PiGearDuotone />, path: "/settings" },
+  { name: "Dashboard", icon: <PiHouseDuotone />, path: "/student/dashboard" },
+  { name: "All Courses", icon: <PiVideoDuotone />, path: "/student/courses" },
+  { name: "My Library", icon: <PiFolderSimpleDuotone />, path: "/student/my-library" },
+  { name: "My Learning", icon: <PiBooksDuotone />, path: "/student/my-learning" },
+  { name: "Profile", icon: <PiUserCircle />, path: "/student/profile" },
+  { name: "Settings", icon: <PiGearDuotone />, path: "/student/settings" },
 ];
 
 const Sidebar = () => {

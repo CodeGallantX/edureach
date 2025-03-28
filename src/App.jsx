@@ -34,15 +34,15 @@ const App = () => {
       <Route path="/auth/verification" element={<Verification />}/>
       <Route path="/auth/forgot-password" element={<ForgotPassword />}/>
       <Route path="/auth/reset-password/:token" element={<ResetPassword />}/>
-      <Route path="/dashboard" element={<Dashboard />}/>
-      <Route path="/courses" element={<Courses />}/>
-      <Route path="/courses/single-course" element={<SingleCourse />}/>
-      <Route path="/courses/course-details" element={<CourseDetails />}/>
-      <Route path="/my-learning" element={<MyLearning />}/>
-      <Route path="/my-library" element={<MyLibrary />}/>
-      <Route path="/profile" element={<Profile />}/>
-      <Route path="/profile/edit" element={<ProfileEdit />}/>
-      <Route path="/settings" element={<Settings />}/>
+      <Route path="/student/dashboard" element={<Dashboard />}/>
+      <Route path="/student/courses" element={<Courses />}/>
+      <Route path="/student/courses/single-course" element={<SingleCourse />}/>
+      <Route path="/student/courses/course-details" element={<CourseDetails />}/>
+      <Route path="/student/my-learning" element={<MyLearning />}/>
+      <Route path="/student/my-library" element={<MyLibrary />}/>
+      <Route path="/student/profile" element={<Profile />}/>
+      <Route path="/student/profile/edit" element={<ProfileEdit />}/>
+      <Route path="/student/settings" element={<Settings />}/>
 
 
       {/* Teachers */}
