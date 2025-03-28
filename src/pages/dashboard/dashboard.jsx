@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/dashboard/Sidebar";
 import Header from "../../components/dashboard/Header";
 import Banner from "../../components/dashboard/Banner";
+import TawkToChat from "../../components/TawkToChat";
 import Card from "../../components/dashboard/Card";
 import CoursesOverview from "../../components/dashboard/CoursesOverview";
 import RecommendedCourses from "../../components/dashboard/RecommendedCourses";
@@ -45,6 +46,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex">
+      <TawkToChat />
       {/* Fixed Sidebar */}
       <div className="static lg:fixed h-full">
         <Sidebar />
