@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const LearningCourses = () => {
   const [courses, setCourses] = useState([
     {
-      title: 'SSS 3 Physics [WAEC syllabus]',
+      title: 'SSS 3 Physics',
       progress: 60,
-      image: '/waec-physics.jpeg',
+      image: '/physics.jpeg',
       link: '/courses/waec-physics',
       // lecturer: 'Professor Okonjo Iweala',
     },
@@ -22,7 +22,7 @@ const LearningCourses = () => {
     {
       title: 'SSS 3 Mathematics',
       progress: 25,
-      image: '/basic-mathematics.jpg',
+      image: '/mathematics.jpeg',
       link: '/courses/basic-mathematics',
       // lecturer: 'Chike Obi',
     },

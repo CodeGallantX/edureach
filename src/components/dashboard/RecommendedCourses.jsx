@@ -9,7 +9,7 @@ const courses = [
     author: "Akinyemi James",
     rating: 5,
     raters: 189,
-    image: "/environmental-science.png", // Replace with your image URL
+    image: "/environmental-science.jpeg", // Replace with your image URL
   },
   {
     title: "Mathematics",
@@ -40,11 +40,11 @@ const courses = [
     image: "/principles-of-quantum-computing.jpeg", // Replace with your image URL
   },
   {
-    title: "Physics SS1",
-    author: "Dr. Oyeleke",
+    title: "History",
+    author: "Mr. Oyeleke",
     rating: 3.9,
     raters: 115,
-    image: "/genetics.jpeg", 
+    image: "/history.jpeg", 
   },
   {
     title: "Business Studies",

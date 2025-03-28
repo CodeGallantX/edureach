@@ -7,7 +7,7 @@ const CoursesOverview = () => {
   const [courses, setCourses] = useState([
     {
       id: 1,
-      title: "Commerce for SSS3",
+      title: "Commerce",
       img: "/biology.jpeg",
       author: "Miss. Adams Joy",
       progress: 85,
