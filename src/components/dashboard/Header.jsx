@@ -91,7 +91,7 @@ const Header = () => {
 
     return (
         <div className="fixed top-0 left-0 right-0 flex flex-row items-center justify-between w-full bg-offWhite p-4 z-[30] lg:pl-64">
-            <div className="z-10 w-3/4">
+            <div className="z-10">
                 <SearchBox />
             </div>
             <div className="flex flex-row items-center justify-end gap-4 md:gap-6 px-2">

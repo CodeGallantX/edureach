@@ -53,10 +53,12 @@ const Dashboard = () => {
       {/* Main content with padding to account for the fixed sidebar */}
       <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash ml-0 lg:ml-[250px]">
         <Header userData={userData} />
-        <Banner class="hidden md:block mt-40" page={page} />
-        <Card />
-        <CoursesOverview />
-        <RecommendedCourses section={section} />
+        <div className="pt-20 w-full">
+          <Banner class="hidden md:block" page={page} />
+          <Card />
+          <CoursesOverview />
+          <RecommendedCourses section={section} />
+        </div>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const SignUpForm = () => {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
-    role: "Student", // Default role is Student
+    role: "Student",
     passwordVisible: false,
     confirmPasswordVisible: false,
   });
@@ -18,8 +18,10 @@ const SignUpForm = () => {
   const [passwordConditions, setPasswordConditions] = useState({
     minLength: false,
     maxLength: false,
-    upperLower: false,
-    numberSpecial: false,
+    upper: false,
+    lower: false,
+    number: false,
+    special: false,
   });
 
   const [errors, setErrors] = useState({
@@ -28,7 +30,7 @@ const SignUpForm = () => {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
-    role: "", // Error for role
+    role: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,7 +41,6 @@ const SignUpForm = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // Validate fields on change
     if (name === "password") {
       validatePassword(value);
       setErrors((prev) => ({ ...prev, password: "" }));
@@ -65,13 +66,7 @@ const SignUpForm = () => {
     });
   };
 
-  const isPasswordValid =
-    passwordConditions.minLength &&
-    passwordConditions.maxLength &&
-    passwordConditions.upper &&
-    passwordConditions.lower &&
-    passwordConditions.number &&
-    passwordConditions.special;
+  const isPasswordValid = Object.values(passwordConditions).every(Boolean);
 
   const isFormValid =
     formData.fullName &&
@@ -80,7 +75,7 @@ const SignUpForm = () => {
     isPasswordValid &&
     formData.password &&
     formData.confirmPassword === formData.password &&
-    formData.role; // Ensure role is selected
+    formData.role;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,7 +86,7 @@ const SignUpForm = () => {
       phoneNumber: formData.phoneNumber ? "" : "Phone Number is required",
       password: formData.password ? "" : "Password is required",
       confirmPassword: formData.confirmPassword === formData.password ? "" : "Passwords do not match",
-      role: formData.role ? "" : "Role is required", // Validate role
+      role: formData.role ? "" : "Role is required",
     };
 
     setErrors(newErrors);
@@ -100,7 +95,8 @@ const SignUpForm = () => {
       setIsSubmitting(true);
 
       try {
-        const response = await fetch("https://e-sdg.onrender.com/create/sign-up", {
+        // Step 1: Register the user
+        const signUpResponse = await fetch("https://e-sdg.onrender.com/create/sign-up", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -111,22 +107,63 @@ const SignUpForm = () => {
             phoneNumber: formData.phoneNumber,
             password: formData.password,
             username: formData.username,
-            role: formData.role, // Include role in the request
+            role: formData.role,
           }),
         });
 
-        if (!response.ok) {
+        if (!signUpResponse.ok) {
           throw new Error("Sign-up failed");
         }
 
-        const result = await response.json();
-        // console.log("Sign-up successful:", result);
-
+        const signUpResult = await signUpResponse.json();
+        
         // Store user data in local storage
-        localStorage.setItem("userData", JSON.stringify(result.userData));
+        localStorage.setItem("userData", JSON.stringify(signUpResult.userData));
+        localStorage.setItem("authToken", signUpResult.token);
 
-        // Navigate to verification page
-        navigate("/auth/login");
+        // Step 2: Create role-specific profile
+        const [firstName, ...lastNameParts] = formData.fullName.split(" ");
+        const lastName = lastNameParts.join(" ");
+
+        if (formData.role === "Teacher") {
+          // Create teacher profile with minimal required fields
+          const teacherFormData = new FormData();
+          teacherFormData.append("firstNmae", firstName);
+          teacherFormData.append("lastName", lastName);
+          teacherFormData.append("sex", ""); // Will be updated later
+          teacherFormData.append("role", "Teacher");
+          teacherFormData.append("subjectCreated", ""); // Will be updated later
+          teacherFormData.append("enrollStudent", "0"); // Default to 0
+          
+          await fetch("https://e-sdg.onrender.com/teacher/teacherProfile", {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${signUpResult.token}`,
+            },
+            body: teacherFormData,
+          });
+        } else {
+          // Create student profile
+          await fetch("https://e-sdg.onrender.com/student/studentProfile", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${signUpResult.token}`,
+            },
+            body: JSON.stringify({
+              firstName,
+              lastName,
+              sex: "", // Will be updated later
+              role: "Student",
+              class: "", // Will be updated later
+              totalCourseEnroll: "0" // Default to 0
+            }),
+          });
+        }
+
+        // Navigate to the appropriate dashboard based on role
+        navigate(`/${formData.role.toLowerCase()}/dashboard`);
+
       } catch (error) {
         console.error("Error during sign-up:", error);
       } finally {

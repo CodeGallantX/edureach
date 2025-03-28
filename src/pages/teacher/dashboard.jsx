@@ -31,9 +31,11 @@ const Dashboard = () => {
     <div className="flex flex-row">
       <Sidebar />
       <div className="w-full flex flex-col items-start justify-start space-y-2 bg-ash">
+        <div classNAme="pt-20 w-full">
         <Header userData={userData} />
         <Banner page={page} />
         <Card />
+        </div>
       </div>
     </div>
   );

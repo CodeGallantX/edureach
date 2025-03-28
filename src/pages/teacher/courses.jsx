@@ -22,9 +22,11 @@ const App = () => {
             </div>
             <div className="w-full flex flex-col items-start justify-start space-y-4 bg-ash">
                 <Header />
+                <div className="pt-20 w-full">
                 <Banner page={page} />
                 <OngoingCourses />
                 <RecommendedCourses section={section} />
+                </div>
             </div>
         </div>
     )
