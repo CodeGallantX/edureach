@@ -19,6 +19,12 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <GoogleOAuthProvider 
         clientId={clientId}
+        onScriptLoadError={(error) => {
+          console.error("Google OAuth script load error:", error);
+        }}
+        onScriptLoadSuccess={() => {
+          console.log("Google OAuth script loaded successfully");
+        }}
       >
         <App />
       </GoogleOAuthProvider>

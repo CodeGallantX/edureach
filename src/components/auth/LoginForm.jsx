@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import GoogleAuthButton from "./GoogleAuthButton";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -177,6 +178,19 @@ const LoginForm = () => {
           )}
         </button>
       </form>
+
+      {/* Divider */}
+      <div className="relative my-6">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-300"></div>
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="px-2 bg-white text-gray-500">Or continue with</span>
+        </div>
+      </div>
+
+      {/* Google OAuth Button */}
+      <GoogleAuthButton />
 
       {/* Create Account Link */}
       <p className="text-center text-sm mt-6">
